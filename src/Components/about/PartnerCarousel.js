@@ -10,33 +10,33 @@ export default function PartnerCarousel() {
     { 
       name: 'National Institutes of Health', 
       abbreviation: 'NIH',
-      logo: '/images/partners/nih-logo.png' 
+      logo: '/acewebsite-frontend/images/partners/nih-logo.png' 
     },
     { 
       name: 'NIAID/OCICB',
-      logo: '/images/partners/niaid-logo.png'
+      logo: '/acewebsite-frontend/images/partners/niaid-logo.png'
     },
     { 
       name: 'Makerere University',
-      logo: '/images/partners/makerere-logo.png'
+      logo: '/acewebsite-frontend/images/partners/makerere-logo.png'
     },
     { 
       name: 'Infectious Diseases Institute',
       abbreviation: 'IDI',
-      logo: '/images/partners/idi-logo.png'
+      logo: '/acewebsite-frontend/images/partners/idi-logo.png'
     },
     { 
       name: 'CAfGEN Project',
-      logo: '/images/partners/cafgen-logo.png'
+      logo: '/acewebsite-frontend/images/partners/cafgen-logo.png'
     },
     { 
       name: 'RENU',
-      logo: '/images/partners/renu-logo.png'
+      logo: '/acewebsite-frontend/images/partners/renu-logo.png'
     },
     { 
       name: 'African Research Universities Alliance',
       abbreviation: 'ARUA',
-      logo: '/images/partners/arua-logo.png'
+      logo: '/acewebsite-frontend/images/partners/arua-logo.png'
     },
   ]
 

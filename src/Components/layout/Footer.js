@@ -40,7 +40,7 @@ export default function Footer() {
           <div className="space-y-8">
             <Link href="/">
               <Image
-                src="/images/ace-logo.png"
+                src="/acewebsite-frontend/images/ace-logo.png"
                 alt="ACE Uganda - African Center of Excellence"
                 width={240}
                 height={52}

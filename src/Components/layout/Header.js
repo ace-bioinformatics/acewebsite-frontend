@@ -35,7 +35,7 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/ace-logo.png"
+                src="/acewebsite-frontend/images/ace-logo.png"
                 alt="ACE Uganda - African Center of Excellence in Bioinformatics"
                 width={280}
                 height={60}
