@@ -1,18 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Required for static export
+  output: 'export',
+  basePath: '/acewebsite-frontend',
+  assetPrefix: '/acewebsite-frontend',
   
   webpack: (config, { isServer }) => {
-    // Exclude .d.ts files from being processed
     config.module.rules.push({
       test: /\.d\.ts$/,
       use: 'ignore-loader',
     });
 
-    // Alternative: exclude esbuild's TypeScript files
     config.resolve.alias = {
       ...config.resolve.alias,
-      // Prevent esbuild from being bundled on the client side
       ...(isServer ? {} : { esbuild: false }),
     };
 
@@ -20,11 +19,11 @@ const nextConfig = {
   },
   
   compiler: {
-    styledComponents: true, // Enable styled-components SWC transform
+    styledComponents: true,
   },
   
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
