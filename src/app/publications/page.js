@@ -11,11 +11,10 @@ export default async function PublicationsPage({
   searchParams,
 }) {
   const publications = await getPublications()
-    const params = await searchParams
 
   // Pagination settings
   const ITEMS_PER_PAGE = 10
-  const currentPage = Number( await params.page) || 1
+  const currentPage = Number( await searchParams.page) || 1
   const totalPages = Math.ceil((publications?.length || 0) / ITEMS_PER_PAGE)
   
   // Calculate pagination
