@@ -8,8 +8,8 @@ import Link from 'next/link'
 export async function generateStaticParams() {
   const people = await client.fetch(allStaffQuery)
   
-  return people.map((program) => ({
-    slug: program.slug.current,
+  return people.map((person) => ({
+    slug: person.slug.current,
   }))
 }
 

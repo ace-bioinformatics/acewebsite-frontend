@@ -9,8 +9,8 @@ import { PortableText } from '@portabletext/react'
 export async function generateStaticParams() {
   const projects = await client.fetch(allProjectsQuery)
   
-  return projects.map((program) => ({
-    slug: program.slug.current,
+  return projects.map((project) => ({
+    slug: project.slug.current,
   }))
 }
 
