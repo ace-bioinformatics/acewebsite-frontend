@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // Required for static export
+  
   webpack: (config, { isServer }) => {
     // Exclude .d.ts files from being processed
     config.module.rules.push({
@@ -16,14 +18,13 @@ const nextConfig = {
 
     return config;
   },
+  
   compiler: {
     styledComponents: true, // Enable styled-components SWC transform
   },
-  output: 'export',
-  basePath: '/acewebsite-frontend',
-  assetPrefix: '/acewebsite-frontend',
+  
   images: {
-    unoptimized: true,
+    unoptimized: true, // Required for static export
     remotePatterns: [
       {
         protocol: 'https',
