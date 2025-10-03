@@ -75,6 +75,8 @@ export default function PartnerCarousel() {
          <div className="mb-6 flex justify-center">
             {partners[currentIndex].logo ? (
               <Image
+                width={100}
+                height={100}
                 src={partners[currentIndex].logo}
                 alt={`${partners[currentIndex].name} logo`}
                 className="w-48 h-32 object-contain"
