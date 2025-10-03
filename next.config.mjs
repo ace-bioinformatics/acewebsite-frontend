@@ -19,7 +19,11 @@ const nextConfig = {
   compiler: {
     styledComponents: true, // Enable styled-components SWC transform
   },
+  output: 'export',
+  basePath: '/acewebsite-frontend',
+  assetPrefix: '/acewebsite-frontend',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
