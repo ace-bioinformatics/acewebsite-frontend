@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   const projects = await client.fetch(allProjectsQuery)
   
   return projects.map((project) => ({
-    slug: project.slug.current ? project.slug.current : 'projects-archive',
+    slug: project.slug.current,
   }))
 }
 
