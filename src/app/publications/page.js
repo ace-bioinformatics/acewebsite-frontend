@@ -1,20 +1,25 @@
-import Link from 'next/link'
+'use client'
+import { useState, useEffect } from 'react'
 import { client } from '@/lib/sanity'
 import { allPublicationsQuery } from '@/lib/queries'
 
-async function getPublications() {
-  const publications = await client.fetch(allPublicationsQuery)
-  return publications
-}
+export default function PublicationsPage() {
+  const [publications, setPublications] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(true)
 
-export default async function PublicationsPage({
-  searchParams,
-}) {
-  const publications = await getPublications()
+  useEffect(() => {
+    async function getPublications() {
+      const data = await client.fetch(allPublicationsQuery)
+      console.log(data)
+      setPublications(data)
+      setLoading(false)
+    }
+    getPublications()
+  }, [])
 
   // Pagination settings
   const ITEMS_PER_PAGE = 10
-  const currentPage = Number(searchParams.page) || 1
   const totalPages = Math.ceil((publications?.length || 0) / ITEMS_PER_PAGE)
   
   // Calculate pagination
@@ -53,6 +58,21 @@ export default async function PublicationsPage({
     
     return pages
   }
+   const handlePageChange = (page) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  if (loading) {
+    return (
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-700 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading publications...</p>
+        </div>
+      </div>
+    )
+  } 
 
   return (
     <div className="bg-white">
@@ -169,27 +189,20 @@ export default async function PublicationsPage({
             {totalPages > 1 && (
               <nav className="flex items-center justify-center gap-2 mt-12" aria-label="Pagination">
                 {/* Previous Button */}
-                {currentPage > 1 ? (
-                  <Link
-                    href={`?page=${currentPage - 1}`}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                  >
-                    <svg className="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Previous
-                  </Link>
-                ) : (
-                  <button
-                    disabled
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-md cursor-not-allowed"
-                  >
-                    <svg className="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Previous
-                  </button>
-                )}
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    currentPage === 1
+                      ? 'text-gray-400 bg-gray-100 border border-gray-300 cursor-not-allowed'
+                      : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <svg className="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Previous
+                </button>
 
                 {/* Page Numbers */}
                 <div className="hidden sm:flex gap-2">
@@ -202,21 +215,20 @@ export default async function PublicationsPage({
                       )
                     }
                     
-                    const pageNum = page 
-                    const isActive = pageNum === currentPage
+                    const isActive = page === currentPage
                     
                     return (
-                      <Link
-                        key={pageNum}
-                        href={`?page=${pageNum}`}
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
                         className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                           isActive
                             ? 'bg-red-700 text-white'
                             : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                         }`}
                       >
-                        {pageNum}
-                      </Link>
+                        {page}
+                      </button>
                     )
                   })}
                 </div>
@@ -227,27 +239,20 @@ export default async function PublicationsPage({
                 </div>
 
                 {/* Next Button */}
-                {currentPage < totalPages ? (
-                  <Link
-                    href={`?page=${currentPage + 1}`}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                  >
-                    Next
-                    <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                ) : (
-                  <button
-                    disabled
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 rounded-md cursor-not-allowed"
-                  >
-                    Next
-                    <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                )}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    currentPage === totalPages
+                      ? 'text-gray-400 bg-gray-100 border border-gray-300 cursor-not-allowed'
+                      : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  Next
+                  <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </nav>
             )}
           </>
