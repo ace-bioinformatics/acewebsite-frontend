@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   const people = await client.fetch(allStaffQuery)
   
   return people.map((program) => ({
-    slug: program.slug,
+    slug: program.slug.current,
   }))
 }
 
