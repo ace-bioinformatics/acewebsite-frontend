@@ -31,8 +31,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          clean: true
+      - name: Debug - Check files
+        run: |
+          echo "=== Working directory ==="
+          pwd
+          echo "=== List files ==="
+          ls -la
+          echo "=== Git status ==="
+          git status
+          echo "=== Current commit ==="
+          git log -1 --oneline
+          echo "=== package-lock.json info ==="
+          if [ -f package-lock.json ]; then
+            echo "File exists"
+            sha256sum package-lock.json
+            echo "=== Checking for react-is in lock file ==="
+            grep -A 3 '"react-is"' package-lock.json | head -20
+          else
+            echo "package-lock.json NOT FOUND"
+          fi
       - name: Detect package manager
         id: detect-package-manager
         run: |
