@@ -3,6 +3,14 @@ import { programBySlugQuery } from '@/lib/queries'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
+export async function generateStaticParams() {
+  const programs = await client.fetch(`*[_type == "program"]{ "slug": slug.current }`)
+  
+  return programs.map((program) => ({
+    slug: program.slug,
+  }))
+}
+
 async function getProgram(slug) {
   const program = await client.fetch(programBySlugQuery, { slug })
   return program
