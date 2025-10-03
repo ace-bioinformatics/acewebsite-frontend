@@ -1,11 +1,12 @@
 import { client } from '@/lib/sanity'
 import { personBySlugQuery } from '@/lib/queries'
+import { allStaffQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export async function generateStaticParams() {
-  const people = await client.fetch(`*[_type == "person"]{ "slug": slug.current }`)
+  const people = await client.fetch(allStaffQuery)
   
   return people.map((program) => ({
     slug: program.slug,

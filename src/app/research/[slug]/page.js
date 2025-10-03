@@ -1,12 +1,13 @@
 import { client } from '@/lib/sanity'
 import { projectBySlugQuery } from '@/lib/queries'
+import { allProjectsQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
 export async function generateStaticParams() {
-  const projects = await client.fetch(`*[_type == "project"]{ "slug": slug.current }`)
+  const projects = await client.fetch(allProjectsQuery)
   
   return projects.map((program) => ({
     slug: program.slug,

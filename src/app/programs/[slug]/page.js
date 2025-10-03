@@ -1,10 +1,11 @@
 import { client } from '@/lib/sanity'
 import { programBySlugQuery } from '@/lib/queries'
+import { allProgramsQuery } from '@/lib/queries'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
 export async function generateStaticParams() {
-  const programs = await client.fetch(`*[_type == "program"]{ "slug": slug.current }`)
+  const programs = await client.fetch(allProgramsQuery)
   
   return programs.map((program) => ({
     slug: program.slug,
