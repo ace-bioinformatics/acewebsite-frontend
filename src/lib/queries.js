@@ -138,3 +138,129 @@ export const programBySlugQuery = `
     requirements,
   }
 `
+
+// Query for all upcoming events
+export const upcomingEventsQuery = `
+  *[_type == "event" && isPast == false && date >= now()] | order(date asc) {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    isPast,
+    speakers,
+    topics,
+    capacity,
+    registrationLink,
+    "detailsLink": "/events/" + slug.current
+  }
+`
+
+// Query for all past events
+export const pastEventsQuery = `
+  *[_type == "event" && (isPast == true || date < now())] | order(date desc) {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    isPast,
+    speakers,
+    topics,
+    "detailsLink": "/events/" + slug.current
+  }
+`
+
+// Query for event highlights
+export const eventHighlightsQuery = `
+  *[_type == "eventHighlight"] | order(order asc, date desc) {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    badge,
+    "image": image.asset->url,
+    stats,
+    keyPoints
+  }
+`
+
+// Query for a single event by slug
+export const eventBySlugQuery = `
+  *[_type == "event" && slug.current == $slug][0] {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    isPast,
+    speakers,
+    topics,
+    capacity,
+    registrationLink,
+    "detailsLink": "/events/" + slug.current
+  }
+`
+
+// Query for featured events
+export const featuredEventsQuery = `
+  *[_type == "event" && featured == true && isPast == false] | order(date asc) [0...3] {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    speakers,
+    topics,
+    capacity,
+    registrationLink,
+    "detailsLink": "/events/" + slug.current
+  }
+`
+
+// Query for events by category
+export const eventsByCategoryQuery = `
+  *[_type == "event" && category == $category] | order(date desc) {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    isPast,
+    speakers,
+    topics,
+    capacity,
+    registrationLink,
+    "detailsLink": "/events/" + slug.current
+  }
+`
+
+// Query for all events (for filtering on client-side)
+export const allEventsQuery = `
+  *[_type == "event"] | order(date desc) {
+    _id,
+    title,
+    description,
+    date,
+    category,
+    location,
+    "image": image.asset->url,
+    isPast,
+    speakers,
+    topics,
+    capacity,
+    registrationLink,
+    "detailsLink": "/events/" + slug.current
+  }
+`

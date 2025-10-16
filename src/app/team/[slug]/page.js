@@ -40,7 +40,7 @@ export default async function StaffDetailPage({ params }) {
       <div className="bg-gradient-to-br from-red-700 to-red-900 py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Link 
-            href="/about#team" 
+            href="/team" 
             className="inline-flex items-center text-red-100 hover:text-white mb-8 transition-colors"
           >
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

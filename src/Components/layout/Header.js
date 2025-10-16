@@ -11,13 +11,7 @@ const navigation = [
   { name: 'Research', href: '/research' },
   { name: 'Programs', href: '/programs' },
   { name: 'Publications', href: '/publications' },
-  { 
-    name: 'Facilities', 
-    submenu: [
-      { name: 'HPC Cluster', href: '/hpc' },
-      { name: 'VR Lab', href: '/vr-lab' },
-    ]
-  },
+  { name: 'Events', href: '/events' },
   { name: 'Our Staff', href: '/team' },
   { name: 'Contact', href: '/contact' },
 ]
