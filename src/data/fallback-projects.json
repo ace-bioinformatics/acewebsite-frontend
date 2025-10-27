@@ -1,0 +1,131 @@
+[
+  {
+    "title": "COVID-19 Genomic Surveillance in Uganda",
+    "slug": "covid19-genomic-surveillance",
+    "excerpt": "Real-time genomic surveillance of SARS-CoV-2 variants circulating in Uganda to inform public health response and vaccination strategies.",
+    "description": "This project involves sequencing and analyzing SARS-CoV-2 genomes from clinical samples across Uganda. Using high-performance computing and bioinformatics pipelines, we track viral evolution, identify variants of concern, and assess their potential impact on vaccine effectiveness and disease transmission. Our findings directly inform national COVID-19 response policies.",
+    "category": "bioinformatics",
+    "status": "active",
+    "startDate": "2020-05-01",
+    "objectives": [
+      "Sequence SARS-CoV-2 genomes from diverse regions of Uganda",
+      "Identify and track variants of concern",
+      "Analyze viral evolution and transmission patterns",
+      "Provide data to support public health decision-making"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Machine Learning for Malaria Diagnosis",
+    "slug": "ml-malaria-diagnosis",
+    "excerpt": "Developing deep learning models to automatically detect malaria parasites in blood smear images, improving diagnostic accuracy and speed.",
+    "description": "This project applies computer vision and deep learning to automate malaria diagnosis from microscopy images. We are training convolutional neural networks on thousands of annotated blood smear images to detect and classify Plasmodium parasites. The goal is to develop a tool that can be deployed in resource-limited healthcare settings to improve diagnostic capacity.",
+    "category": "ai-ml",
+    "status": "active",
+    "startDate": "2021-01-15",
+    "objectives": [
+      "Develop accurate deep learning models for parasite detection",
+      "Create a user-friendly diagnostic tool",
+      "Validate models in clinical settings",
+      "Deploy solution in underserved health facilities"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Climate Impact on East African Agriculture",
+    "slug": "climate-agriculture-impact",
+    "excerpt": "Using climate models and agricultural data to predict and mitigate the impact of climate change on crop yields in East Africa.",
+    "description": "This project combines climate science, data analytics, and agricultural expertise to understand how changing climate patterns affect crop productivity in East Africa. We use HPC resources to run complex crop models and analyze decades of climate and yield data. Our findings help farmers and policymakers develop adaptation strategies.",
+    "category": "climate",
+    "status": "active",
+    "startDate": "2019-08-01",
+    "objectives": [
+      "Model climate change impacts on major crops",
+      "Identify vulnerable regions and farming systems",
+      "Develop data-driven adaptation strategies",
+      "Communicate findings to farmers and policymakers"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Genomic Analysis of Antimicrobial Resistance",
+    "slug": "amr-genomics",
+    "excerpt": "Tracking antimicrobial resistance genes in bacterial pathogens through whole-genome sequencing and bioinformatics analysis.",
+    "description": "Antimicrobial resistance is a growing threat to public health in Africa. This project uses whole-genome sequencing to identify resistance genes in bacterial pathogens isolated from clinical and environmental samples. Our analyses help understand the spread of resistance and inform antimicrobial stewardship programs.",
+    "category": "bioinformatics",
+    "status": "active",
+    "startDate": "2020-10-01",
+    "objectives": [
+      "Sequence genomes of resistant bacterial isolates",
+      "Identify and characterize resistance genes",
+      "Track transmission of resistant strains",
+      "Support antimicrobial stewardship efforts"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Big Data Analytics for Health Systems",
+    "slug": "health-systems-analytics",
+    "excerpt": "Analyzing large-scale health data to identify trends, improve service delivery, and support evidence-based health policy.",
+    "description": "This project leverages big data analytics to extract insights from health information systems across Uganda. We analyze data on disease patterns, healthcare utilization, and resource allocation to identify gaps and opportunities for improving health service delivery. Our work supports evidence-based decision-making in the health sector.",
+    "category": "data-science",
+    "status": "active",
+    "startDate": "2021-06-01",
+    "objectives": [
+      "Integrate and analyze health system data",
+      "Identify disease trends and risk factors",
+      "Optimize resource allocation",
+      "Support evidence-based health policy"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Bioinformatics Training Network for Africa",
+    "slug": "bioinformatics-training-network",
+    "excerpt": "Building a pan-African network to strengthen bioinformatics training and capacity across the continent.",
+    "description": "This collaborative project brings together institutions from across Africa to develop and deliver bioinformatics training programs. We create standardized curricula, organize workshops, and facilitate knowledge exchange to build a strong bioinformatics workforce in Africa.",
+    "category": "bioinformatics",
+    "status": "completed",
+    "startDate": "2018-01-01",
+    "endDate": "2023-12-31",
+    "objectives": [
+      "Develop standardized bioinformatics curricula",
+      "Train instructors across Africa",
+      "Organize regional workshops and courses",
+      "Create sustainable training network"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Crop Disease Detection Using Computer Vision",
+    "slug": "crop-disease-detection",
+    "excerpt": "Developing mobile applications that use computer vision to identify crop diseases, helping farmers protect their harvests.",
+    "description": "This project combines machine learning, computer vision, and agriculture to create tools that help farmers identify crop diseases early. Using smartphone cameras, farmers can take pictures of affected plants and receive instant diagnoses and treatment recommendations.",
+    "category": "ai-ml",
+    "status": "active",
+    "startDate": "2022-03-01",
+    "objectives": [
+      "Collect and annotate crop disease image datasets",
+      "Train computer vision models for disease detection",
+      "Develop user-friendly mobile application",
+      "Pilot with smallholder farmers"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Population Genomics of African Populations",
+    "slug": "african-population-genomics",
+    "excerpt": "Characterizing genetic diversity in African populations to improve understanding of disease susceptibility and personalized medicine.",
+    "description": "This project investigates genetic variation in African populations through large-scale genomic studies. Understanding African genetic diversity is crucial for developing effective precision medicine approaches and identifying disease-associated variants relevant to African populations.",
+    "category": "bioinformatics",
+    "status": "active",
+    "startDate": "2020-02-01",
+    "objectives": [
+      "Generate genomic data from diverse African populations",
+      "Characterize genetic diversity and population structure",
+      "Identify disease-associated genetic variants",
+      "Advance precision medicine for African populations"
+    ],
+    "featured": false
+  }
+]

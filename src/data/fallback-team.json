@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Prof. Sarah Namusisi",
+    "slug": "sarah-namusisi",
+    "role": "Director, ACE",
+    "department": "leadership",
+    "bio": "Prof. Sarah Namusisi is a renowned computational biologist with over 15 years of experience in bioinformatics and genomics research. She leads the strategic direction of ACE and oversees research, education, and capacity-building initiatives across Africa. Her research focuses on genomic epidemiology and infectious disease surveillance.",
+    "email": "s.namusisi@ace.mak.ac.ug",
+    "specializations": [
+      "Computational Biology",
+      "Genomic Epidemiology",
+      "Infectious Disease Research",
+      "Capacity Building"
+    ],
+    "order": 1,
+    "isActive": true
+  },
+  {
+    "name": "Dr. David Mukasa",
+    "slug": "david-mukasa",
+    "role": "Senior Research Scientist",
+    "department": "research",
+    "bio": "Dr. David Mukasa is a leading expert in data science and machine learning applications in health research. He coordinates major research projects at ACE and mentors graduate students. His work focuses on developing predictive models for disease surveillance and healthcare optimization.",
+    "email": "d.mukasa@ace.mak.ac.ug",
+    "specializations": [
+      "Machine Learning",
+      "Health Data Science",
+      "Predictive Modeling",
+      "Public Health"
+    ],
+    "order": 2,
+    "isActive": true
+  },
+  {
+    "name": "Dr. Grace Nakato",
+    "slug": "grace-nakato",
+    "role": "Head of Academic Programs",
+    "department": "education",
+    "bio": "Dr. Grace Nakato oversees all academic programs at ACE, including the MSc and PhD programs. She is passionate about developing curricula that prepare students for careers in computational sciences. Her research interests include bioinformatics education and genome analysis.",
+    "email": "g.nakato@ace.mak.ac.ug",
+    "specializations": [
+      "Bioinformatics Education",
+      "Curriculum Development",
+      "Genome Analysis",
+      "Student Mentorship"
+    ],
+    "order": 3,
+    "isActive": true
+  },
+  {
+    "name": "Dr. John Okello",
+    "slug": "john-okello",
+    "role": "Research Scientist - Bioinformatics",
+    "department": "research",
+    "bio": "Dr. John Okello specializes in computational genomics and metagenomics. He leads several research projects focused on understanding microbial communities and their roles in health and disease. He is also actively involved in training students in next-generation sequencing data analysis.",
+    "email": "j.okello@ace.mak.ac.ug",
+    "specializations": [
+      "Computational Genomics",
+      "Metagenomics",
+      "Next-Generation Sequencing",
+      "Microbial Ecology"
+    ],
+    "order": 4,
+    "isActive": true
+  },
+  {
+    "name": "Dr. Agnes Namuli",
+    "slug": "agnes-namuli",
+    "role": "Research Scientist - Climate Data Science",
+    "department": "research",
+    "bio": "Dr. Agnes Namuli applies data science and computational methods to climate research and environmental studies. Her work focuses on understanding climate change impacts on agriculture and developing data-driven adaptation strategies for East African farmers.",
+    "email": "a.namuli@ace.mak.ac.ug",
+    "specializations": [
+      "Climate Data Science",
+      "Environmental Modeling",
+      "Agricultural Systems",
+      "Climate Adaptation"
+    ],
+    "order": 5,
+    "isActive": true
+  },
+  {
+    "name": "Mr. Samuel Wanyama",
+    "slug": "samuel-wanyama",
+    "role": "HPC Systems Administrator",
+    "department": "technology",
+    "bio": "Samuel Wanyama manages ACE's high-performance computing infrastructure and provides technical support to researchers. He ensures optimal performance of the HPC cluster and conducts training sessions on cluster usage and parallel computing.",
+    "email": "s.wanyama@ace.mak.ac.ug",
+    "specializations": [
+      "HPC Administration",
+      "Linux Systems",
+      "Parallel Computing",
+      "Technical Training"
+    ],
+    "order": 6,
+    "isActive": true
+  },
+  {
+    "name": "Ms. Rebecca Nalubega",
+    "slug": "rebecca-nalubega",
+    "role": "Training Coordinator",
+    "department": "education",
+    "bio": "Rebecca Nalubega coordinates all training programs, workshops, and capacity-building activities at ACE. She works with faculty and external partners to organize impactful learning experiences for students and researchers across Africa.",
+    "email": "r.nalubega@ace.mak.ac.ug",
+    "specializations": [
+      "Training Coordination",
+      "Workshop Organization",
+      "Capacity Building",
+      "Program Management"
+    ],
+    "order": 7,
+    "isActive": true
+  },
+  {
+    "name": "Dr. Paul Ssemakula",
+    "slug": "paul-ssemakula",
+    "role": "Lecturer - Bioinformatics",
+    "department": "education",
+    "bio": "Dr. Paul Ssemakula teaches bioinformatics courses and supervises graduate students. His research focuses on structural bioinformatics and drug discovery. He is committed to making computational biology accessible to students from diverse backgrounds.",
+    "email": "p.ssemakula@ace.mak.ac.ug",
+    "specializations": [
+      "Structural Bioinformatics",
+      "Drug Discovery",
+      "Protein Modeling",
+      "Molecular Dynamics"
+    ],
+    "order": 8,
+    "isActive": true
+  },
+  {
+    "name": "Ms. Christine Nabirye",
+    "slug": "christine-nabirye",
+    "role": "Administrative Officer",
+    "department": "administration",
+    "bio": "Christine Nabirye manages the administrative operations of ACE, including student admissions, financial management, and event coordination. She ensures smooth day-to-day operations and supports the center's mission.",
+    "email": "c.nabirye@ace.mak.ac.ug",
+    "specializations": [
+      "Administration",
+      "Student Services",
+      "Financial Management",
+      "Event Coordination"
+    ],
+    "order": 9,
+    "isActive": true
+  },
+  {
+    "name": "Mr. Isaac Kiprotich",
+    "slug": "isaac-kiprotich",
+    "role": "Data Science Instructor",
+    "department": "education",
+    "bio": "Isaac Kiprotich teaches data science courses and conducts training workshops. He specializes in machine learning, statistical analysis, and data visualization. He is passionate about empowering researchers with data science skills.",
+    "email": "i.kiprotich@ace.mak.ac.ug",
+    "specializations": [
+      "Data Science",
+      "Machine Learning",
+      "Statistical Analysis",
+      "Data Visualization"
+    ],
+    "order": 10,
+    "isActive": true
+  }
+]

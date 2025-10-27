@@ -1,4 +1,11 @@
-export default function StatsSection({ stats }) {
+import { client } from '@/lib/sanity'
+import { fetchWithFallback } from '@/lib/fallback'
+
+export default async function StatsSection({ stats }) {
+  const homeData = await fetchWithFallback(
+      () => client.fetch(`*[_type == "homePage"][0]`),
+      'home'
+    )
   const defaultStats = {
     publications: stats?.publications || 50,
     projects: stats?.projects || 10,
@@ -38,19 +45,19 @@ export default function StatsSection({ stats }) {
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Our Impact in Numbers
+              {homeData.statsSection.sectionTitle}
             </h2>
             <p className="mt-4 text-lg leading-8 text-red-100">
               Building capacity and advancing science across Africa
             </p>
           </div>
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-            {displayStats.map((stat) => (
+            {homeData.statsSection.stats.map((stat) => (
               <div
-                key={stat.id}
+                key={stat._key}
                 className="flex flex-col items-center justify-center gap-y-2 bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all group"
               >
-                <dt className="text-base leading-7 text-red-100">{stat.name}</dt>
+                <dt className="text-base leading-7 text-red-100">{stat.label}</dt>
                 <dd className="text-5xl font-bold tracking-tight text-white group-hover:scale-110 transition-transform">
                   {stat.value}
                 </dd>

@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import AnimatedTimeline from '@/Components/about/AnimatedTimeline'
 import PartnerCarousel from '@/Components/about/PartnerCarousel'
+import { client } from '@/lib/sanity'
+import { fetchWithFallback } from '@/lib/fallback'
+import aboutPage from '../../../sanity/schemaTypes/aboutPage'
 
 export default async function AboutPage() {
+  const aboutData = await fetchWithFallback(
+      () => client.fetch(`*[_type == "aboutPage"][0]`),
+      'about'
+    )
+  console.log(aboutData)
   const milestones = [
     { year: '2015', event: 'ACE Uganda Established', description: 'Center founded through partnership with NIH/NIAID/OCICB' },
     { year: '2017', event: 'HPC Cluster Deployed', description: '56-node high-performance computing infrastructure installed' },
@@ -50,39 +58,6 @@ export default async function AboutPage() {
     },
   ]
 
-  const services = [
-    {
-      title: 'High-Performance Computing',
-      description: 'Infrastructure as a Service (IaaS) with 56-node HPC cluster',
-      icon: '🖥️'
-    },
-    {
-      title: 'Degree Level Training',
-      description: 'Masters and Ph.D. programs in Bioinformatics & Data Science',
-      icon: '🎓'
-    },
-    {
-      title: 'Research & Development',
-      description: 'Support for private researchers and research institutions',
-      icon: '🔬'
-    },
-    {
-      title: 'DNA Sequencing',
-      description: 'Human and pathogen DNA sequencing services',
-      icon: '🧬'
-    },
-    {
-      title: 'Specialized Training',
-      description: 'Bioinformatics, Biostatistics, and image processing courses',
-      icon: '📊'
-    },
-    {
-      title: 'Virtual Reality Lab',
-      description: 'State-of-the-art VR infrastructure and services',
-      icon: '🥽'
-    },
-  ]
-
   return (
     <div className="bg-white">
       {/* Header */}
@@ -90,10 +65,10 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              About ACE Uganda
+              {aboutData.introSection.heading}
             </h1>
             <p className="mt-6 text-lg leading-8 text-red-100">
-              One of only two African Centers of Excellence in Bioinformatics & Data Sciences on the continent
+              {aboutData.introSection.description}
             </p>
           </div>
         </div>
@@ -123,17 +98,17 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              ACE Services
+              {aboutData.servicesSection.sectionTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              A specialized bioinformatics and genomics node providing comprehensive services
+              {aboutData.servicesSection.sectionDescription}
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
+            {aboutData.servicesSection.services.map((service) => (
               <div
-                key={service.title}
+                key={service._key}
                 className="relative flex flex-col p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="text-4xl mb-4">{service.icon}</div>
@@ -153,24 +128,16 @@ export default async function AboutPage() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">
-            Education and Training
+            {aboutData.educationSection.sectionTitle}
           </h2>
           <div className="prose prose-lg text-gray-600 space-y-4">
             <p>
-              The ACE has been designed to support the Colleges of Health Sciences and Computing in the delivery of Masters, PhD and Post doctoral level training in Bioinformatics & Data science. 
-              The degree level training focuses on the following core competency levels:
+              {aboutData.educationSection.description}
             </p>
             <ol className="list-decimal list-inside space-y-2 text-gray-600">
-              <li>Molecular Biology</li>
-              <li>Biological Data Generation Technologies (DNA sequencing, microarrays, PCR, ChIP-seq, and medical imaging)</li>
-              <li>Machine learning & Artificial Intelligence</li>
-              <li>Bioinformatics programming</li>
-              <li>Sequence analysis</li>
-              <li>Functional genomics and transcriptomics</li>
-              <li>Population genomics</li>
-              <li>Geoinformatics and Biostatistics</li>
-              <li>Professional, ethical, legal, and social issues</li>
-              <li>Communication and teamwork</li>
+              {aboutData.educationSection.programs.map(program => (
+                <li key={program._key}>{program.title}</li>
+              ))}
             </ol>
           </div>
         </div>
@@ -190,9 +157,7 @@ export default async function AboutPage() {
                 Our Mission
               </h2>
               <p className="text-lg text-gray-600">
-                To be a sustainable center of excellence that leverages High Performance Computing, 
-                Bioinformatics, Data science and Enhanced Visualization capabilities to support 
-                Research and Training that enhances health in Africa.
+                {aboutData.missionVision.mission}
               </p>
             </div>
 
@@ -207,9 +172,7 @@ export default async function AboutPage() {
                 Our Vision
               </h2>
               <p className="text-lg text-gray-600">
-                To become Africa's leading center for computational biology and data science, 
-                recognized globally for innovative research, exceptional training, and 
-                transformative impact on health outcomes across the continent.
+                {aboutData.missionVision.vision}
               </p>
             </div>
           </div>
@@ -221,7 +184,7 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Our Core Values
+              {aboutData.coreValues.sectionTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Guiding principles that shape our work and culture
@@ -229,13 +192,15 @@ export default async function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((value) => (
+            {aboutData.coreValues.values.map((value) => (
               <div
                 key={value.title}
                 className="relative flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-50 text-red-700 mb-4">
-                  {value.icon}
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d={value.icon} />
+                  </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {value.title}
@@ -254,14 +219,14 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-20">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Our Journey
+              {aboutData.timelineSection.sectionTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Key milestones in our growth and development
             </p>
           </div>
 
-          <AnimatedTimeline milestones={milestones} />
+          <AnimatedTimeline milestones={aboutData.timelineSection.milestones} />
         </div>
       </div>
 

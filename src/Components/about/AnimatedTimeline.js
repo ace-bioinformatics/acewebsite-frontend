@@ -74,7 +74,7 @@ export default function AnimatedTimeline({ milestones }) {
 
                   {/* Event Title */}
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-700 transition-colors">
-                    {milestone.event}
+                    {milestone.title}
                   </h3>
 
                   {/* Description */}

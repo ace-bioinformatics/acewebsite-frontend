@@ -1,0 +1,235 @@
+{
+  "introSection": {
+    "heading": "About ACE",
+    "subheading": "Driving Excellence in Computational Sciences",
+    "description": "The African Center of Excellence in Bioinformatics and Data-Intensive Sciences is dedicated to advancing computational research, building capacity, and fostering innovation across Africa. Established to address the growing need for expertise in bioinformatics, data science, and high-performance computing, we train world-class researchers and tackle critical challenges in health, agriculture, and climate."
+  },
+  "missionVision": {
+    "mission": "To advance computational research and capacity building in bioinformatics, data science, and high-performance computing across Africa, fostering innovation and addressing critical challenges in health, agriculture, and climate.",
+    "vision": "To be a leading center of excellence in computational sciences, driving transformative research and producing world-class graduates who contribute to sustainable development in Africa and beyond."
+  },
+  "coreValues": {
+    "sectionTitle": "Our Core Values",
+    "values": [
+      {
+        "title": "Excellence",
+        "description": "We strive for the highest standards in research, education, and innovation, ensuring our work meets international quality benchmarks.",
+        "icon": "⭐"
+      },
+      {
+        "title": "Collaboration",
+        "description": "We believe in the power of partnerships and work closely with institutions, researchers, and communities to achieve shared goals.",
+        "icon": "🤝"
+      },
+      {
+        "title": "Innovation",
+        "description": "We embrace creativity and cutting-edge approaches to solve complex problems and advance the frontiers of knowledge.",
+        "icon": "💡"
+      },
+      {
+        "title": "Capacity Building",
+        "description": "We are committed to developing the next generation of African scientists and empowering communities through knowledge transfer.",
+        "icon": "🎓"
+      },
+      {
+        "title": "Impact",
+        "description": "We focus on research and training that makes a tangible difference in addressing Africa's most pressing challenges.",
+        "icon": "🎯"
+      }
+    ]
+  },
+  "servicesSection": {
+    "sectionTitle": "What We Offer",
+    "sectionDescription": "We provide a comprehensive range of services to support computational research and capacity building across Africa.",
+    "services": [
+      {
+        "title": "Graduate Education",
+        "description": "We offer MSc and PhD programs in Bioinformatics and Data-Intensive Sciences, providing rigorous training and research opportunities for the next generation of computational scientists.",
+        "icon": "academic-cap",
+        "features": [
+          "MSc in Bioinformatics",
+          "PhD in Data-Intensive Sciences",
+          "Interdisciplinary curriculum",
+          "Research-focused training"
+        ]
+      },
+      {
+        "title": "Research Support",
+        "description": "We facilitate cutting-edge research in bioinformatics, genomics, data science, and related fields through state-of-the-art infrastructure and expert guidance.",
+        "icon": "beaker",
+        "features": [
+          "Access to HPC cluster",
+          "Expert consultation",
+          "Collaborative projects",
+          "Research funding opportunities"
+        ]
+      },
+      {
+        "title": "Training & Workshops",
+        "description": "We conduct regular training programs, workshops, and short courses to build capacity in computational methods and data analysis across Africa.",
+        "icon": "presentation",
+        "features": [
+          "Bioinformatics workshops",
+          "Data science bootcamps",
+          "HPC training sessions",
+          "Custom training programs"
+        ]
+      },
+      {
+        "title": "High-Performance Computing",
+        "description": "Our HPC cluster provides researchers with the computational power needed for data-intensive analyses and simulations.",
+        "icon": "server",
+        "features": [
+          "48-core processing power",
+          "Large memory capacity",
+          "GPU acceleration",
+          "Technical support"
+        ]
+      },
+      {
+        "title": "Collaboration & Networking",
+        "description": "We facilitate partnerships between researchers, institutions, and industry partners to advance computational sciences in Africa.",
+        "icon": "users",
+        "features": [
+          "International partnerships",
+          "Regional networks",
+          "Industry collaborations",
+          "Joint research projects"
+        ]
+      },
+      {
+        "title": "Data Science Consulting",
+        "description": "We offer expert consulting services in data analysis, bioinformatics, and computational methods for research projects and organizations.",
+        "icon": "chart",
+        "features": [
+          "Statistical analysis",
+          "Genomic data analysis",
+          "Machine learning applications",
+          "Custom software development"
+        ]
+      }
+    ]
+  },
+  "educationSection": {
+    "sectionTitle": "Education & Training",
+    "description": "Our education and training programs are designed to equip students and researchers with the skills needed to excel in computational sciences. We offer degree programs, short courses, and workshops that combine theoretical knowledge with hands-on practical experience. Our graduates go on to make significant contributions to research, industry, and policy-making across Africa and globally.",
+    "programs": [
+      {
+        "title": "MSc in Bioinformatics",
+        "description": "A comprehensive two-year program covering computational biology, genomics, and data analysis"
+      },
+      {
+        "title": "PhD in Data-Intensive Sciences",
+        "description": "Advanced research training in data science, bioinformatics, and computational methods"
+      },
+      {
+        "title": "Professional Development Courses",
+        "description": "Short courses and workshops in specialized topics for working professionals"
+      }
+    ]
+  },
+  "timelineSection": {
+    "sectionTitle": "Our Journey",
+    "milestones": [
+      {
+        "year": "2015",
+        "title": "Center Established",
+        "description": "The African Center of Excellence in Bioinformatics and Data-Intensive Sciences was officially established at Makerere University with support from the World Bank.",
+        "category": "establishment"
+      },
+      {
+        "year": "2016",
+        "title": "First Graduate Cohort",
+        "description": "We admitted our first cohort of MSc and PhD students, marking the beginning of our graduate education programs.",
+        "category": "achievement"
+      },
+      {
+        "year": "2018",
+        "title": "HPC Cluster Launch",
+        "description": "We launched our state-of-the-art High-Performance Computing cluster, providing researchers with powerful computational resources.",
+        "category": "innovation"
+      },
+      {
+        "year": "2020",
+        "title": "International Partnerships",
+        "description": "We established formal partnerships with leading universities in Europe and North America, expanding our collaborative research network.",
+        "category": "partnership"
+      },
+      {
+        "year": "2023",
+        "title": "Research Excellence",
+        "description": "Our center surpassed 200 peer-reviewed publications and trained over 150 graduate students, cementing our position as a regional leader in computational sciences.",
+        "category": "achievement"
+      }
+    ]
+  },
+  "partnersSection": {
+    "sectionTitle": "Partners & Collaborations",
+    "description": "We work with leading institutions worldwide to advance computational research and training in Africa. Our partnerships enable us to provide world-class education, conduct cutting-edge research, and build sustainable capacity.",
+    "partnerTypes": [
+      {
+        "category": "International Academic Partners",
+        "description": "Leading universities and research institutions worldwide",
+        "partners": [
+          {
+            "name": "University of Cambridge",
+            "description": "Collaborative research and student exchange programs",
+            "country": "United Kingdom"
+          },
+          {
+            "name": "Uppsala University",
+            "description": "Joint research projects and training programs",
+            "country": "Sweden"
+          },
+          {
+            "name": "University of Toronto",
+            "description": "Bioinformatics research collaboration",
+            "country": "Canada"
+          }
+        ]
+      },
+      {
+        "category": "Regional Partners",
+        "description": "African universities and research networks",
+        "partners": [
+          {
+            "name": "Makerere University",
+            "description": "Host institution and primary partner",
+            "country": "Uganda"
+          },
+          {
+            "name": "African Research Universities Alliance",
+            "description": "Regional research collaboration network",
+            "country": "Pan-African"
+          },
+          {
+            "name": "H3Africa Consortium",
+            "description": "Human heredity and health research network",
+            "country": "Pan-African"
+          }
+        ]
+      },
+      {
+        "category": "Funding & Development Partners",
+        "description": "Organizations supporting our mission and programs",
+        "partners": [
+          {
+            "name": "World Bank",
+            "description": "Primary funding for infrastructure and capacity building",
+            "country": "International"
+          },
+          {
+            "name": "Wellcome Trust",
+            "description": "Research funding for health-related projects",
+            "country": "United Kingdom"
+          },
+          {
+            "name": "NIH Fogarty International Center",
+            "description": "Support for training and research programs",
+            "country": "United States"
+          }
+        ]
+      }
+    ]
+  }
+}

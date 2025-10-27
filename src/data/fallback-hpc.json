@@ -1,0 +1,248 @@
+{
+  "heroSection": {
+    "heading": "High-Performance Computing Cluster",
+    "subheading": "Powering Data-Intensive Research Across Africa",
+    "description": "Our state-of-the-art HPC cluster provides researchers with the computational power needed for complex analyses, simulations, and data-intensive research. With 48 cores, large memory capacity, and specialized software, we enable cutting-edge research in bioinformatics, climate science, data analytics, and more."
+  },
+  "clusterSpecs": {
+    "sectionTitle": "Cluster Specifications",
+    "specs": [
+      {
+        "label": "Processing Power",
+        "value": "48 Cores",
+        "description": "High-performance processors for parallel computing",
+        "icon": "cpu"
+      },
+      {
+        "label": "Memory",
+        "value": "512 GB RAM",
+        "description": "Large memory capacity for data-intensive analyses",
+        "icon": "memory"
+      },
+      {
+        "label": "Storage",
+        "value": "100 TB",
+        "description": "High-speed storage for large datasets",
+        "icon": "database"
+      },
+      {
+        "label": "GPU Nodes",
+        "value": "4 GPUs",
+        "description": "GPU acceleration for machine learning and simulations",
+        "icon": "gpu"
+      }
+    ]
+  },
+  "hardwareDetails": {
+    "sectionTitle": "Hardware Configuration",
+    "description": "Our HPC cluster is built with enterprise-grade hardware optimized for scientific computing and data analysis workloads.",
+    "components": [
+      {
+        "component": "Compute Nodes",
+        "specifications": "12 compute nodes, each with Intel Xeon processors (4 cores per node), 32 GB RAM, and high-speed interconnects",
+        "quantity": "12 nodes"
+      },
+      {
+        "component": "Master Node",
+        "specifications": "Dual Intel Xeon processors, 128 GB RAM, for job scheduling and cluster management",
+        "quantity": "1 node"
+      },
+      {
+        "component": "GPU Nodes",
+        "specifications": "NVIDIA Tesla GPUs for accelerated computing and deep learning workloads",
+        "quantity": "4 GPUs"
+      },
+      {
+        "component": "Storage System",
+        "specifications": "High-performance parallel file system with 100 TB capacity and redundancy",
+        "quantity": "1 system"
+      },
+      {
+        "component": "Network Infrastructure",
+        "specifications": "High-speed InfiniBand interconnect for low-latency communication between nodes",
+        "quantity": "Full cluster"
+      }
+    ]
+  },
+  "researchCapabilities": {
+    "sectionTitle": "Research Capabilities",
+    "description": "Our HPC cluster supports a wide range of computational research applications across multiple disciplines.",
+    "capabilities": [
+      {
+        "title": "Bioinformatics & Genomics",
+        "description": "Analyze large-scale genomic datasets, perform sequence alignments, variant calling, and phylogenetic analyses. Support for genome assembly, annotation, and comparative genomics studies.",
+        "applications": [
+          "Whole genome sequencing analysis",
+          "RNA-seq data processing",
+          "Metagenomics studies",
+          "Molecular dynamics simulations",
+          "Protein structure prediction"
+        ],
+        "icon": "dna"
+      },
+      {
+        "title": "Machine Learning & AI",
+        "description": "Train complex machine learning models and deep neural networks for predictive analytics, image analysis, and natural language processing using GPU acceleration.",
+        "applications": [
+          "Deep learning model training",
+          "Computer vision applications",
+          "Natural language processing",
+          "Predictive modeling",
+          "Data mining and pattern recognition"
+        ],
+        "icon": "brain"
+      },
+      {
+        "title": "Climate & Environmental Modeling",
+        "description": "Run complex climate simulations, weather forecasting models, and environmental impact assessments using parallel computing capabilities.",
+        "applications": [
+          "Climate change modeling",
+          "Weather prediction",
+          "Hydrological modeling",
+          "Land use change analysis",
+          "Environmental risk assessment"
+        ],
+        "icon": "globe"
+      },
+      {
+        "title": "Statistical Analysis & Data Science",
+        "description": "Perform large-scale statistical analyses, data mining, and advanced analytics on big datasets from health, agriculture, and social sciences.",
+        "applications": [
+          "Big data analytics",
+          "Statistical modeling",
+          "Data visualization",
+          "Population health studies",
+          "Agricultural data analysis"
+        ],
+        "icon": "chart"
+      }
+    ]
+  },
+  "softwareTools": {
+    "sectionTitle": "Available Software & Tools",
+    "description": "Our cluster is equipped with a comprehensive suite of software tools and libraries for scientific computing and data analysis.",
+    "categories": [
+      {
+        "category": "Bioinformatics Tools",
+        "tools": [
+          {
+            "name": "BLAST",
+            "version": "2.13+",
+            "description": "Sequence alignment and database searching"
+          },
+          {
+            "name": "BWA",
+            "version": "0.7.17",
+            "description": "Burrows-Wheeler Aligner for sequence mapping"
+          },
+          {
+            "name": "GATK",
+            "version": "4.2",
+            "description": "Genome Analysis Toolkit for variant discovery"
+          },
+          {
+            "name": "SAMtools",
+            "version": "1.15",
+            "description": "Tools for manipulating sequencing data"
+          }
+        ]
+      },
+      {
+        "category": "Machine Learning Frameworks",
+        "tools": [
+          {
+            "name": "TensorFlow",
+            "version": "2.10",
+            "description": "Deep learning framework"
+          },
+          {
+            "name": "PyTorch",
+            "version": "1.12",
+            "description": "Machine learning library"
+          },
+          {
+            "name": "scikit-learn",
+            "version": "1.1",
+            "description": "Machine learning toolkit for Python"
+          }
+        ]
+      },
+      {
+        "category": "Statistical & Data Analysis",
+        "tools": [
+          {
+            "name": "R",
+            "version": "4.2",
+            "description": "Statistical computing and graphics"
+          },
+          {
+            "name": "Python",
+            "version": "3.10",
+            "description": "General-purpose programming with data science libraries"
+          },
+          {
+            "name": "MATLAB",
+            "version": "R2022b",
+            "description": "Numerical computing environment"
+          }
+        ]
+      },
+      {
+        "category": "Development Tools",
+        "tools": [
+          {
+            "name": "GCC",
+            "version": "11.2",
+            "description": "GNU Compiler Collection"
+          },
+          {
+            "name": "OpenMPI",
+            "version": "4.1",
+            "description": "Message Passing Interface for parallel computing"
+          },
+          {
+            "name": "Singularity",
+            "version": "3.8",
+            "description": "Container platform for scientific computing"
+          }
+        ]
+      }
+    ]
+  },
+  "accessInfo": {
+    "sectionTitle": "How to Access the HPC Cluster",
+    "description": "The HPC cluster is available to researchers, graduate students, and partners working on computational research projects. Access is granted based on project requirements and resource availability.",
+    "eligibility": [
+      "MSc and PhD students enrolled at ACE and partner institutions",
+      "Faculty members and researchers at Makerere University",
+      "Collaborating researchers from partner institutions",
+      "Approved external researchers with relevant projects"
+    ],
+    "applicationProcess": "To request access to the HPC cluster, submit a project proposal outlining your research objectives, computational requirements, and expected resource usage. Applications are reviewed by our technical team, and approved users receive login credentials and training on cluster usage.",
+    "contactEmail": "hpc@ace.mak.ac.ug",
+    "additionalInfo": "We provide technical support, user training, and consultation services to help researchers make the most of the HPC resources. Regular training sessions and workshops are conducted to build capacity in high-performance computing."
+  },
+  "useCases": {
+    "sectionTitle": "Success Stories",
+    "cases": [
+      {
+        "title": "COVID-19 Genomic Surveillance",
+        "description": "Researchers used the HPC cluster to analyze thousands of SARS-CoV-2 genome sequences from across Uganda, tracking viral evolution and identifying variants of concern. This work contributed to national public health responses and informed vaccination strategies.",
+        "researcher": "Dr. John Doe, Department of Infectious Diseases",
+        "outcome": "Published in leading journals and informed national COVID-19 response policy"
+      },
+      {
+        "title": "Climate Change Impact on Agriculture",
+        "description": "A team of climate scientists ran complex crop models to predict the impact of climate change on agricultural productivity in East Africa. The HPC cluster enabled them to process decades of climate data and run thousands of simulations.",
+        "researcher": "Prof. Jane Smith, Climate Research Unit",
+        "outcome": "Findings presented to policymakers and helped shape agricultural adaptation strategies"
+      },
+      {
+        "title": "Machine Learning for Disease Diagnosis",
+        "description": "Graduate students developed deep learning models to detect diseases from medical images. Using GPU acceleration on the HPC cluster, they trained models on thousands of images, achieving high diagnostic accuracy.",
+        "researcher": "MSc Students, Bioinformatics Program",
+        "outcome": "Models are being piloted in local health facilities to improve diagnostic capacity"
+      }
+    ]
+  }
+}

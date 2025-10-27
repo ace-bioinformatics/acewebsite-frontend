@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Genomic surveillance reveals SARS-CoV-2 variants and trends in Uganda",
+    "authors": [
+      "Namusisi S",
+      "Mukasa D",
+      "Okello J",
+      "et al."
+    ],
+    "journal": "Nature Communications",
+    "year": "2023",
+    "volume": "14",
+    "pages": "1234-1245",
+    "doi": "10.1038/s41467-023-12345-6",
+    "abstract": "We conducted genomic surveillance of SARS-CoV-2 in Uganda from 2020 to 2023, sequencing over 5,000 viral genomes. Our analysis reveals the introduction and spread of multiple variants of concern, including Alpha, Delta, and Omicron. We identified unique mutations and tracked transmission patterns, providing crucial data for public health response and vaccination strategies.",
+    "category": "journal",
+    "researchArea": "bioinformatics",
+    "featured": true,
+    "openAccess": true
+  },
+  {
+    "title": "Machine learning approaches for automated malaria diagnosis from blood smear images",
+    "authors": [
+      "Mukasa D",
+      "Kiprotich I",
+      "Namuli A"
+    ],
+    "journal": "PLOS Computational Biology",
+    "year": "2023",
+    "volume": "19",
+    "issue": "8",
+    "pages": "e1011234",
+    "doi": "10.1371/journal.pcbi.1011234",
+    "abstract": "Malaria diagnosis relies on microscopy, which requires trained personnel and is time-consuming. We developed deep learning models based on convolutional neural networks to automatically detect and classify Plasmodium parasites in blood smear images. Our models achieved 98% accuracy and can process images in seconds, offering potential for deployment in resource-limited settings.",
+    "category": "journal",
+    "researchArea": "ai-ml",
+    "featured": true,
+    "openAccess": true
+  },
+  {
+    "title": "Climate change impacts on maize yields in East Africa: A data-driven assessment",
+    "authors": [
+      "Namuli A",
+      "Ssemakula P",
+      "Nakato G"
+    ],
+    "journal": "Agricultural Systems",
+    "year": "2022",
+    "volume": "203",
+    "pages": "103456",
+    "doi": "10.1016/j.agsy.2022.103456",
+    "abstract": "We analyzed 30 years of climate and agricultural data across East Africa to assess climate change impacts on maize production. Using crop models and statistical analysis, we found significant yield declines in several regions due to increasing temperatures and changing rainfall patterns. We identify adaptation strategies including drought-tolerant varieties and adjusted planting dates.",
+    "category": "journal",
+    "researchArea": "climate",
+    "featured": false,
+    "openAccess": false
+  },
+  {
+    "title": "Whole-genome sequencing reveals antimicrobial resistance mechanisms in Ugandan bacterial isolates",
+    "authors": [
+      "Okello J",
+      "Namusisi S",
+      "Wanyama S"
+    ],
+    "journal": "Antimicrobial Agents and Chemotherapy",
+    "year": "2023",
+    "volume": "67",
+    "issue": "3",
+    "doi": "10.1128/AAC.01234-22",
+    "abstract": "Antimicrobial resistance is a growing threat in Uganda. We sequenced 200 multidrug-resistant bacterial isolates from clinical settings to identify resistance genes and mechanisms. We found high prevalence of extended-spectrum beta-lactamases and carbapenemases, with evidence of horizontal gene transfer. Our findings inform antimicrobial stewardship programs.",
+    "category": "journal",
+    "researchArea": "bioinformatics",
+    "featured": false,
+    "openAccess": true
+  },
+  {
+    "title": "Building bioinformatics capacity in Africa: Lessons from a regional training network",
+    "authors": [
+      "Nakato G",
+      "Nalubega R",
+      "Namusisi S",
+      "Mukasa D"
+    ],
+    "journal": "PLOS Computational Biology",
+    "year": "2022",
+    "volume": "18",
+    "issue": "6",
+    "pages": "e1010234",
+    "doi": "10.1371/journal.pcbi.1010234",
+    "abstract": "We describe experiences from establishing a pan-African bioinformatics training network. Over five years, we trained over 500 students and researchers through workshops, courses, and online programs. We discuss challenges, successes, and best practices for sustainable capacity building in computational biology in resource-limited settings.",
+    "category": "journal",
+    "researchArea": "bioinformatics",
+    "featured": false,
+    "openAccess": true
+  },
+  {
+    "title": "Deep learning for crop disease detection: A mobile application for smallholder farmers",
+    "authors": [
+      "Kiprotich I",
+      "Namuli A",
+      "Mukasa D"
+    ],
+    "journal": "Computers and Electronics in Agriculture",
+    "year": "2023",
+    "volume": "208",
+    "pages": "107789",
+    "doi": "10.1016/j.compag.2023.107789",
+    "abstract": "We developed a mobile application using computer vision to help smallholder farmers identify crop diseases. The app uses convolutional neural networks trained on 50,000 images of diseased and healthy plants. Field testing with 200 farmers showed high accuracy and user satisfaction. The tool has potential to reduce crop losses and improve food security.",
+    "category": "journal",
+    "researchArea": "ai-ml",
+    "featured": false,
+    "openAccess": false
+  },
+  {
+    "title": "Population structure and genetic diversity of East African populations revealed by whole-genome sequencing",
+    "authors": [
+      "Namusisi S",
+      "Okello J",
+      "Ssemakula P"
+    ],
+    "journal": "The American Journal of Human Genetics",
+    "year": "2022",
+    "volume": "109",
+    "issue": "4",
+    "pages": "678-692",
+    "doi": "10.1016/j.ajhg.2022.03.001",
+    "abstract": "We performed whole-genome sequencing on 1,000 individuals from diverse East African populations. Our analysis reveals complex population structure and high genetic diversity. We identified population-specific variants and signatures of selection. These findings advance understanding of African genetic diversity and have implications for precision medicine.",
+    "category": "journal",
+    "researchArea": "bioinformatics",
+    "featured": true,
+    "openAccess": true
+  },
+  {
+    "title": "High-performance computing for bioinformatics in Africa: Infrastructure and applications",
+    "authors": [
+      "Wanyama S",
+      "Namusisi S",
+      "Mukasa D"
+    ],
+    "journal": "Briefings in Bioinformatics",
+    "year": "2022",
+    "volume": "23",
+    "issue": "5",
+    "doi": "10.1093/bib/bbac234",
+    "abstract": "We review the state of high-performance computing infrastructure for bioinformatics in Africa, including case studies from ACE Uganda. We discuss challenges, opportunities, and best practices for establishing and maintaining HPC systems. We highlight successful research projects enabled by HPC resources and make recommendations for future development.",
+    "category": "journal",
+    "researchArea": "hpc",
+    "featured": false,
+    "openAccess": true
+  },
+  {
+    "title": "Predictive modeling of infectious disease outbreaks using machine learning and health system data",
+    "authors": [
+      "Mukasa D",
+      "Namuli A",
+      "Kiprotich I"
+    ],
+    "journal": "BMC Medical Informatics and Decision Making",
+    "year": "2023",
+    "volume": "23",
+    "pages": "156",
+    "doi": "10.1186/s12911-023-02156-8",
+    "abstract": "We developed machine learning models to predict infectious disease outbreaks using health system surveillance data from Uganda. Our models integrate multiple data sources including clinic visits, weather data, and demographic information. The models achieved good predictive performance and can provide early warnings to health authorities.",
+    "category": "journal",
+    "researchArea": "data-science",
+    "featured": false,
+    "openAccess": true
+  },
+  {
+    "title": "Metagenomics reveals microbial diversity in East African freshwater ecosystems",
+    "authors": [
+      "Okello J",
+      "Namusisi S",
+      "Nalubega R"
+    ],
+    "journal": "Environmental Microbiology",
+    "year": "2023",
+    "volume": "25",
+    "issue": "2",
+    "pages": "456-470",
+    "doi": "10.1111/1462-2920.16234",
+    "abstract": "We used metagenomic sequencing to characterize microbial communities in East African lakes and rivers. We identified thousands of bacterial and archaeal species, including novel lineages. Our analysis reveals relationships between microbial diversity, water quality, and environmental factors. These findings contribute to understanding aquatic ecosystem health.",
+    "category": "journal",
+    "researchArea": "bioinformatics",
+    "featured": false,
+    "openAccess": false
+  }
+]

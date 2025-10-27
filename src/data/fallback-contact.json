@@ -1,0 +1,83 @@
+{
+  "heroSection": {
+    "heading": "Get in Touch",
+    "subheading": "We're here to answer your questions and connect you with our team"
+  },
+  "contactInfo": {
+    "generalEmail": "info@ace.mak.ac.ug",
+    "supportEmail": "support@ace.mak.ac.ug",
+    "admissionsEmail": "admissions@ace.mak.ac.ug",
+    "phoneNumber": "+256 414 123 456",
+    "alternatePhone": "+256 414 123 457",
+    "faxNumber": "+256 414 123 458"
+  },
+  "address": {
+    "buildingName": "ACE Building",
+    "streetAddress": "Makerere University Campus, College of Computing and Information Sciences",
+    "city": "Kampala",
+    "region": "Central Region",
+    "postalCode": "P.O. Box 7062",
+    "country": "Uganda",
+    "fullAddress": "African Center of Excellence in Bioinformatics and Data-Intensive Sciences\nCollege of Computing and Information Sciences\nMakerere University\nP.O. Box 7062, Kampala, Uganda"
+  },
+  "officeHours": {
+    "weekdayHours": "Monday - Friday: 8:00 AM - 5:00 PM",
+    "weekendHours": "Saturday: 9:00 AM - 1:00 PM",
+    "holidayNote": "Closed on Sundays and public holidays",
+    "additionalInfo": "For urgent matters outside office hours, please email us and we will respond as soon as possible."
+  },
+  "socialMedia": {
+    "facebook": "https://facebook.com/ace.mak",
+    "twitter": "https://twitter.com/ace_mak",
+    "linkedin": "https://linkedin.com/company/ace-mak",
+    "youtube": "https://youtube.com/@ace-mak"
+  },
+  "mapInfo": {
+    "latitude": 0.3301,
+    "longitude": 32.5714,
+    "directionsText": "From Kampala city center, take Bombo Road heading north. Turn right at the Makerere University Main Gate. Proceed to the College of Computing and Information Sciences. The ACE building is located within the college premises.\n\nPublic transport: Take any taxi or bus heading to Makerere University. Ask for the College of Computing (CoCS) or ACE building."
+  },
+  "departments": [
+    {
+      "name": "Admissions Office",
+      "email": "admissions@ace.mak.ac.ug",
+      "phone": "+256 414 123 460",
+      "location": "ACE Building, Ground Floor, Room 101",
+      "contactPerson": "Ms. Grace Nakato"
+    },
+    {
+      "name": "Research Coordination",
+      "email": "research@ace.mak.ac.ug",
+      "phone": "+256 414 123 461",
+      "location": "ACE Building, First Floor, Room 201",
+      "contactPerson": "Dr. David Mukasa"
+    },
+    {
+      "name": "HPC Support",
+      "email": "hpc@ace.mak.ac.ug",
+      "phone": "+256 414 123 462",
+      "location": "ACE Building, Second Floor, Room 301",
+      "contactPerson": "Mr. Samuel Okello"
+    },
+    {
+      "name": "Training & Capacity Building",
+      "email": "training@ace.mak.ac.ug",
+      "phone": "+256 414 123 463",
+      "location": "ACE Building, First Floor, Room 205",
+      "contactPerson": "Dr. Sarah Namukasa"
+    }
+  ],
+  "formSettings": {
+    "formTitle": "Send Us a Message",
+    "formDescription": "Have a question or inquiry? Fill out the form below and our team will get back to you within 24-48 hours.",
+    "submitButtonText": "Send Message",
+    "successMessage": "Thank you for your message! We have received your inquiry and will respond within 24-48 hours.",
+    "recipientEmail": "info@ace.mak.ac.ug"
+  },
+  "additionalInfo": {
+    "emergencyContact": "For emergencies, call +256 414 123 499",
+    "parkingInfo": "Visitor parking is available at the main university parking lot near the College of Computing. Please obtain a visitor's pass at the main gate.",
+    "accessibilityInfo": "The ACE building is wheelchair accessible with ramps and elevators. Accessible restrooms are available on each floor.",
+    "visitorsNote": "Visitors are welcome during office hours. Please check in at the reception desk on the ground floor. For scheduled meetings, please arrive 10 minutes early."
+  }
+}

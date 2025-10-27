@@ -1,0 +1,115 @@
+{
+  "heroSection": {
+    "heading": "African Center of Excellence in Bioinformatics and Data-Intensive Sciences",
+    "subheading": "Advancing computational research and data science across Africa",
+    "ctaText": "Explore Our Programs",
+    "ctaLink": "/programs"
+  },
+  "missionSection": {
+    "sectionTitle": "Our Mission & Vision",
+    "mission": "To be a sustainable center of excellence that leverages High Performance Computing, Bioinformatics, Data science and Enhanced Visualization capabilities to support Research and Training that enhances health in Africa.",
+    "vision": "To be a leading center of excellence in computational sciences, driving transformative research and producing world-class graduates who contribute to sustainable development in Africa and beyond."
+  },
+  "focusAreasSection": {
+    "sectionTitle": "Focus Areas",
+    "sectionDescription": "Our research and training programs span multiple disciplines, leveraging computational methods to solve real-world problems.",
+    "focusAreas": [
+      {
+        "title": "Bioinformatics & Genomics",
+        "description": "Advancing understanding of biological systems through computational analysis of genomic and molecular data, with applications in disease research and precision medicine.",
+        "icon": "beaker"
+      },
+      {
+        "title": "Data Science & Analytics",
+        "description": "Developing innovative data-driven solutions for complex problems in public health, agriculture, climate science, and beyond using machine learning and statistical methods.",
+        "icon": "chart-bar"
+      },
+      {
+        "title": "High-Performance Computing",
+        "description": "Providing state-of-the-art computational infrastructure and expertise to enable large-scale scientific computing and data-intensive research across Africa.",
+        "icon": "cpu-chip"
+      },
+      {
+        "title": "Capacity Building",
+        "description": "Training the next generation of computational scientists through graduate programs, workshops, and collaborative research opportunities.",
+        "icon": "academic-cap"
+      }
+    ]
+  },
+  "statsSection": {
+    "sectionTitle": "Our Impact",
+    "stats": [
+      {
+        "label": "Graduate Students",
+        "value": "150+",
+        "description": "MSc and PhD students trained"
+      },
+      {
+        "label": "Research Projects",
+        "value": "50+",
+        "description": "Active collaborative research initiatives"
+      },
+      {
+        "label": "Publications",
+        "value": "200+",
+        "description": "Peer-reviewed scientific publications"
+      },
+      {
+        "label": "Partner Institutions",
+        "value": "30+",
+        "description": "International and regional collaborations"
+      }
+    ]
+  },
+  "partnershipSection": {
+    "sectionTitle": "Our Partners",
+    "description": "We collaborate with leading institutions worldwide to advance computational research and training in Africa.",
+    "partnerCategories": [
+      {
+        "category": "International Universities",
+        "partners": [
+          {
+            "name": "University of Cambridge",
+            "description": "Collaborative research in bioinformatics and genomics",
+            "website": "https://www.cam.ac.uk"
+          },
+          {
+            "name": "Uppsala University",
+            "description": "Partnership in computational biology and training",
+            "website": "https://www.uu.se"
+          }
+        ]
+      },
+      {
+        "category": "Regional Institutions",
+        "partners": [
+          {
+            "name": "Makerere University",
+            "description": "Host institution and primary academic partner",
+            "website": "https://www.mak.ac.ug"
+          },
+          {
+            "name": "African Research Universities Alliance",
+            "description": "Network for research excellence across Africa",
+            "website": "https://arua.org.za"
+          }
+        ]
+      },
+      {
+        "category": "Funding Partners",
+        "partners": [
+          {
+            "name": "World Bank",
+            "description": "Support for infrastructure and capacity building",
+            "website": "https://www.worldbank.org"
+          },
+          {
+            "name": "Wellcome Trust",
+            "description": "Research funding for health-related projects",
+            "website": "https://wellcome.org"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+[
+  {
+    "title": "Annual ACE Bioinformatics Symposium 2024",
+    "slug": "ace-symposium-2024",
+    "description": "Join us for our flagship annual symposium bringing together bioinformatics researchers, students, and industry partners from across Africa. The event features keynote presentations, research talks, poster sessions, and networking opportunities.",
+    "excerpt": "Our annual gathering of bioinformatics experts and students from across Africa.",
+    "date": "2024-11-15T09:00:00Z",
+    "endDate": "2024-11-17T17:00:00Z",
+    "category": "conference",
+    "location": {
+      "venue": "Makerere University Main Hall",
+      "address": "Makerere University Campus, Kampala",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "Genomics",
+      "Data Science",
+      "Machine Learning in Biology",
+      "Climate Bioinformatics"
+    ],
+    "isPast": false,
+    "featured": true
+  },
+  {
+    "title": "Introduction to Machine Learning Workshop",
+    "slug": "ml-workshop-sept-2024",
+    "description": "A hands-on three-day workshop introducing participants to machine learning concepts and applications. Participants will learn to build and evaluate machine learning models using Python and popular libraries like scikit-learn and TensorFlow.",
+    "excerpt": "Learn the fundamentals of machine learning in this practical workshop.",
+    "date": "2024-09-20T09:00:00Z",
+    "endDate": "2024-09-22T17:00:00Z",
+    "category": "workshop",
+    "location": {
+      "venue": "ACE Computer Lab",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Neural Networks",
+      "Model Evaluation"
+    ],
+    "isPast": false,
+    "featured": true
+  },
+  {
+    "title": "Genomic Data Analysis Training Course",
+    "slug": "genomics-training-aug-2024",
+    "description": "This intensive two-week course covers essential skills for analyzing next-generation sequencing data. Topics include quality control, alignment, variant calling, and functional annotation. Participants will work with real genomic datasets and learn to use standard bioinformatics tools.",
+    "excerpt": "Comprehensive training in analyzing next-generation sequencing data.",
+    "date": "2024-08-05T09:00:00Z",
+    "endDate": "2024-08-16T17:00:00Z",
+    "category": "training",
+    "location": {
+      "venue": "ACE Training Center",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "NGS Quality Control",
+      "Sequence Alignment",
+      "Variant Calling",
+      "Functional Annotation"
+    ],
+    "isPast": false,
+    "featured": false
+  },
+  {
+    "title": "Data Visualization Seminar",
+    "slug": "data-viz-seminar-july-2024",
+    "description": "A one-day seminar exploring best practices in data visualization for scientific communication. Learn to create compelling visual representations of complex data using R and Python visualization libraries.",
+    "excerpt": "Master the art of communicating data through effective visualizations.",
+    "date": "2024-07-10T14:00:00Z",
+    "category": "seminar",
+    "location": {
+      "venue": "ACE Seminar Room",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "Visualization Principles",
+      "ggplot2",
+      "Matplotlib",
+      "Interactive Visualizations"
+    ],
+    "isPast": false,
+    "featured": false
+  },
+  {
+    "title": "HPC User Training Session",
+    "slug": "hpc-training-june-2024",
+    "description": "Learn how to effectively use the ACE HPC cluster for your research. This session covers cluster access, job submission, software modules, and best practices for running computational jobs.",
+    "excerpt": "Get started with high-performance computing at ACE.",
+    "date": "2024-06-25T10:00:00Z",
+    "category": "training",
+    "location": {
+      "venue": "ACE Computer Lab",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "Cluster Architecture",
+      "Job Scheduling",
+      "Parallel Computing",
+      "Software Modules"
+    ],
+    "isPast": false,
+    "featured": false
+  },
+  {
+    "title": "Guest Lecture: AI in Healthcare",
+    "slug": "ai-healthcare-lecture-may-2024",
+    "description": "Distinguished guest speaker Prof. Jane Smith from University of Cambridge will present on applications of artificial intelligence in healthcare, including diagnostic tools, drug discovery, and personalized medicine.",
+    "excerpt": "Special lecture on artificial intelligence applications in healthcare.",
+    "date": "2024-05-18T15:00:00Z",
+    "category": "seminar",
+    "location": {
+      "venue": "ACE Auditorium",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": true,
+      "onlineLink": "https://zoom.us/j/example"
+    },
+    "topics": [
+      "AI in Diagnostics",
+      "Drug Discovery",
+      "Personalized Medicine",
+      "Healthcare AI Ethics"
+    ],
+    "isPast": true,
+    "featured": false
+  },
+  {
+    "title": "African Bioinformatics Network Meeting 2024",
+    "slug": "abn-meeting-2024",
+    "description": "Regional meeting of the African Bioinformatics Network bringing together researchers, educators, and students to discuss collaborative opportunities, share research findings, and plan future initiatives.",
+    "excerpt": "Regional gathering of the African Bioinformatics Network community.",
+    "date": "2024-04-10T09:00:00Z",
+    "endDate": "2024-04-12T17:00:00Z",
+    "category": "conference",
+    "location": {
+      "venue": "Imperial Resort Beach Hotel",
+      "address": "Entebbe, Uganda",
+      "city": "Entebbe",
+      "isVirtual": false
+    },
+    "topics": [
+      "Research Collaboration",
+      "Capacity Building",
+      "Resource Sharing",
+      "Network Sustainability"
+    ],
+    "isPast": true,
+    "featured": false
+  },
+  {
+    "title": "Python for Bioinformatics Workshop",
+    "slug": "python-bioinformatics-march-2024",
+    "description": "A practical five-day workshop teaching Python programming specifically for bioinformatics applications. Participants will learn to manipulate biological sequences, parse data files, and automate bioinformatics workflows.",
+    "excerpt": "Learn Python programming for bioinformatics applications.",
+    "date": "2024-03-04T09:00:00Z",
+    "endDate": "2024-03-08T17:00:00Z",
+    "category": "workshop",
+    "location": {
+      "venue": "ACE Computer Lab",
+      "address": "ACE Building, Makerere University",
+      "city": "Kampala",
+      "isVirtual": false
+    },
+    "topics": [
+      "Python Basics",
+      "Biopython",
+      "Sequence Analysis",
+      "Workflow Automation"
+    ],
+    "isPast": true,
+    "featured": false
+  }
+]

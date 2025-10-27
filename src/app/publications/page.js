@@ -11,7 +11,6 @@ export default function PublicationsPage() {
   useEffect(() => {
     async function getPublications() {
       const data = await client.fetch(allPublicationsQuery)
-      console.log(data)
       setPublications(data)
       setLoading(false)
     }

@@ -11,7 +11,6 @@ async function getProjects() {
 
 export default async function ResearchPage() {
   const projects = await getProjects()
-  console.log(projects)
   const categories = [
     { value: 'all', label: 'All Projects' },
     { value: 'amr', label: 'Antimicrobial Resistance' },

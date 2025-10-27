@@ -1,0 +1,182 @@
+[
+  {
+    "title": "MSc in Bioinformatics",
+    "slug": "msc-bioinformatics",
+    "type": "msc",
+    "level": "graduate",
+    "description": "The MSc in Bioinformatics is a comprehensive two-year program that trains students in computational biology, genomics, and data analysis. Students gain hands-on experience with cutting-edge bioinformatics tools and techniques, preparing them for careers in research, healthcare, and biotechnology.",
+    "overview": "A rigorous graduate program combining molecular biology, computer science, and statistics to analyze biological data.",
+    "duration": "2 years",
+    "eligibility": [
+      "Bachelor's degree in biological sciences, computer science, mathematics, or related field",
+      "Minimum GPA of 3.0 on a 4.0 scale",
+      "Basic programming knowledge recommended",
+      "Proficiency in English"
+    ],
+    "requirements": [
+      "Completed application form",
+      "Official transcripts",
+      "Two letters of recommendation",
+      "Statement of purpose",
+      "CV/Resume",
+      "English proficiency test scores (TOEFL/IELTS for international students)"
+    ],
+    "learningOutcomes": [
+      "Analyze and interpret large-scale biological datasets",
+      "Develop bioinformatics pipelines and tools",
+      "Apply statistical methods to biological problems",
+      "Design and conduct computational biology research",
+      "Communicate scientific findings effectively"
+    ],
+    "mode": "on-campus",
+    "isActive": true,
+    "featured": true
+  },
+  {
+    "title": "PhD in Data-Intensive Sciences",
+    "slug": "phd-data-intensive-sciences",
+    "type": "phd",
+    "level": "postgraduate",
+    "description": "The PhD in Data-Intensive Sciences is an advanced research program that prepares students to tackle complex problems in bioinformatics, data science, and computational methods. Students conduct original research under the guidance of experienced faculty and contribute to advancing the field.",
+    "overview": "A doctoral program focusing on cutting-edge research in data science, bioinformatics, and high-performance computing.",
+    "duration": "3-4 years",
+    "eligibility": [
+      "Master's degree in bioinformatics, computer science, statistics, or related field",
+      "Strong academic record with minimum GPA of 3.5",
+      "Research experience demonstrated through publications or thesis work",
+      "Proficiency in programming and statistical analysis"
+    ],
+    "requirements": [
+      "Completed application form",
+      "Official transcripts from all previous institutions",
+      "Three letters of recommendation from academic referees",
+      "Research proposal (5-10 pages)",
+      "CV with list of publications",
+      "Interview with potential supervisors"
+    ],
+    "learningOutcomes": [
+      "Conduct independent, original research",
+      "Publish findings in peer-reviewed journals",
+      "Develop novel computational methods and tools",
+      "Mentor junior researchers and students",
+      "Contribute to advancing knowledge in the field"
+    ],
+    "mode": "on-campus",
+    "isActive": true,
+    "featured": true
+  },
+  {
+    "title": "Introduction to Bioinformatics Workshop",
+    "slug": "intro-bioinformatics-workshop",
+    "type": "short-course",
+    "level": "professional",
+    "description": "A hands-on five-day workshop introducing participants to the fundamentals of bioinformatics. Learn essential skills in sequence analysis, genomic data processing, and using popular bioinformatics tools.",
+    "overview": "A practical introduction to bioinformatics for researchers and students.",
+    "duration": "5 days",
+    "eligibility": [
+      "Background in biological sciences or related field",
+      "Basic computer literacy",
+      "No prior bioinformatics experience required"
+    ],
+    "requirements": [
+      "Completed registration form",
+      "Payment of workshop fee",
+      "Laptop computer for practical sessions"
+    ],
+    "learningOutcomes": [
+      "Understand basic bioinformatics concepts and workflows",
+      "Use BLAST and sequence alignment tools",
+      "Process and analyze DNA/RNA sequence data",
+      "Navigate biological databases and resources"
+    ],
+    "mode": "hybrid",
+    "isActive": true,
+    "featured": false
+  },
+  {
+    "title": "Data Science Bootcamp",
+    "slug": "data-science-bootcamp",
+    "type": "short-course",
+    "level": "professional",
+    "description": "An intensive two-week bootcamp covering essential data science skills including programming in Python/R, data visualization, statistical analysis, and machine learning fundamentals.",
+    "overview": "Comprehensive training in data science tools and techniques for researchers and professionals.",
+    "duration": "2 weeks",
+    "eligibility": [
+      "University degree or equivalent professional experience",
+      "Basic understanding of statistics",
+      "Motivation to learn programming"
+    ],
+    "requirements": [
+      "Completed registration form",
+      "Payment of bootcamp fee",
+      "Laptop with required software installed"
+    ],
+    "learningOutcomes": [
+      "Write Python/R programs for data analysis",
+      "Create effective data visualizations",
+      "Apply statistical methods to real datasets",
+      "Build basic machine learning models",
+      "Work with large datasets efficiently"
+    ],
+    "mode": "on-campus",
+    "isActive": true,
+    "featured": false
+  },
+  {
+    "title": "HPC Training Course",
+    "slug": "hpc-training-course",
+    "type": "short-course",
+    "level": "professional",
+    "description": "Learn how to use high-performance computing resources for research. This course covers cluster architecture, job scheduling, parallel programming, and optimizing computational workflows.",
+    "overview": "Practical training in using HPC systems for scientific computing.",
+    "duration": "1 week",
+    "eligibility": [
+      "Graduate students or researchers with computational projects",
+      "Basic Linux command-line knowledge",
+      "Programming experience in at least one language"
+    ],
+    "requirements": [
+      "Completed registration form",
+      "Active research project requiring HPC resources"
+    ],
+    "learningOutcomes": [
+      "Navigate HPC cluster systems",
+      "Submit and manage batch jobs",
+      "Optimize code for parallel execution",
+      "Use common scientific software on HPC systems"
+    ],
+    "mode": "on-campus",
+    "isActive": true,
+    "featured": false
+  },
+  {
+    "title": "Research Internship Program",
+    "slug": "research-internship",
+    "type": "internship",
+    "level": "undergraduate",
+    "description": "A 3-6 month research internship program for undergraduate students interested in computational biology and data science. Interns work alongside faculty and graduate students on active research projects.",
+    "overview": "Hands-on research experience for undergraduate students in bioinformatics and data science.",
+    "duration": "3-6 months",
+    "eligibility": [
+      "Currently enrolled undergraduate student",
+      "Minimum GPA of 3.0",
+      "Interest in computational research",
+      "Available for full-time internship"
+    ],
+    "requirements": [
+      "Completed application form",
+      "Current transcript",
+      "Letter of recommendation from a faculty member",
+      "Statement of interest"
+    ],
+    "learningOutcomes": [
+      "Gain practical research experience",
+      "Learn bioinformatics and data analysis skills",
+      "Work in a collaborative research environment",
+      "Develop a research portfolio"
+    ],
+    "mode": "on-campus",
+    "isActive": true,
+    "featured": false
+  }
+]

@@ -1,16 +1,23 @@
 import PartnerCarousel from "../about/PartnerCarousel"
+import { client } from '@/lib/sanity'
+import { fetchWithFallback } from '@/lib/fallback'
 
-export default function PartnershipsSection() {
+export default async function PartnershipsSection() {
+  const homeData = await fetchWithFallback(
+      () => client.fetch(`*[_type == "homePage"][0]`),
+      'home'
+    )
+
   return (
     <section className="py-24 sm:py-32 bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-red-900">Partnerships</h2>
+          <h2 className="text-base font-semibold leading-7 text-red-900">{homeData.partnershipSection.sectionTitle}</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Collaborating for Greater Impact
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Working with leading institutions and organizations worldwide to advance our mission
+            {homeData.partnershipSection.description}
           </p>
         </div>
         <PartnerCarousel/>
