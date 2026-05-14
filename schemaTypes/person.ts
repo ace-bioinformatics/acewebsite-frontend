@@ -1,0 +1,76 @@
+import {defineField, defineType} from 'sanity'
+
+export const personType = defineType({
+  name: 'person',
+  title: 'Person',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {source: 'name'},
+    }),
+    defineField({
+      name: 'role',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'bio',
+      type: 'text',
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+    }),
+    defineField({
+      name: 'staffCategory',
+      title: 'Staff Category',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Admin', value: 'admin'},
+          {title: 'IT', value: 'it'},
+          {title: 'Interns', value: 'interns'},
+          {title: 'MSc Fellows', value: 'msc_fellows'},
+          {title: 'PhD Fellows', value: 'phd_fellows'},
+          {title: 'Bioinformatics Researchers', value: 'bioinformatics_researchers'},
+          {title: 'AI', value: 'ai'},
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'email',
+      type: 'email',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Lower numbers appear first. Leave empty to sort alphabetically.',
+      validation: (rule) => rule.integer().min(0),
+    }),
+  ],
+  orderings: [
+    {
+      title: 'Display Order',
+      name: 'orderAsc',
+      by: [
+        {field: 'order', direction: 'asc'},
+        {field: 'name', direction: 'asc'}
+      ]
+    },
+    {
+      title: 'Name A-Z',
+      name: 'nameAsc',
+      by: [{field: 'name', direction: 'asc'}]
+    },
+  ],
+})

@@ -1,0 +1,18 @@
+import { blogPostType } from './blogPost'
+import { academicProgramType } from './academicProgram'
+import { facilityType } from './facility'
+import { personType } from './person'
+import { projectType } from './project'
+import { publicationType } from './publication'
+import { sitePageType } from './sitePage'
+import { testimonialType } from './testimonial'
+import { partnerType } from './partner'
+import { heroSlide } from './heroSlide'
+import { eventType } from './event'
+import { eventHighlightType } from './eventHighlight'
+import { aboutPage } from './aboutPage'
+import { contactPage } from './contactPage'
+import { homePage } from './homePage'
+import { siteSettingsType } from './siteSettings'
+
+export const schemaTypes = [blogPostType, academicProgramType, facilityType, personType, projectType, publicationType, sitePageType, testimonialType, partnerType, heroSlide, eventType, eventHighlightType, aboutPage, contactPage, homePage, siteSettingsType]

@@ -1,12 +1,25 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/lib/sanity'
 import { allPublicationsQuery } from '@/lib/queries'
 
+const THEMATIC_AREAS = [
+  { value: 'all', label: 'All Areas' },
+  { value: 'ai', label: 'AI' },
+  { value: 'amr', label: 'AMR' },
+  { value: 'human_genomics_cancer', label: 'Human Genomics & Cancer' },
+  { value: 'malaria', label: 'Malaria' },
+  { value: 'visualization', label: 'Visualization' },
+]
+
+const ITEMS_PER_PAGE = 10
+
 export default function PublicationsPage() {
   const [publications, setPublications] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
+  const [activeArea, setActiveArea] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     async function getPublications() {
@@ -17,49 +30,55 @@ export default function PublicationsPage() {
     getPublications()
   }, [])
 
-  // Pagination settings
-  const ITEMS_PER_PAGE = 10
-  const totalPages = Math.ceil((publications?.length || 0) / ITEMS_PER_PAGE)
-  
-  // Calculate pagination
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const endIndex = startIndex + ITEMS_PER_PAGE
-  const paginatedPublications = publications?.slice(startIndex, endIndex) || []
-  
-  // Generate page numbers to display
-  const getPageNumbers = () => {
-    const pages = []
-    const maxPagesToShow = 5
-    
-    if (totalPages <= maxPagesToShow) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i)
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) pages.push(i)
-        pages.push('...')
-        pages.push(totalPages)
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1)
-        pages.push('...')
-        for (let i = totalPages - 3; i <= totalPages; i++) pages.push(i)
-      } else {
-        pages.push(1)
-        pages.push('...')
-        pages.push(currentPage - 1)
-        pages.push(currentPage)
-        pages.push(currentPage + 1)
-        pages.push('...')
-        pages.push(totalPages)
-      }
+  const filtered = useMemo(() => {
+    let result = publications || []
+    if (activeArea !== 'all') {
+      result = result.filter((p) => p.thematicArea === activeArea)
     }
-    
-    return pages
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      result = result.filter(
+        (p) =>
+          p.title?.toLowerCase().includes(q) ||
+          p.authors?.some((a) => a.toLowerCase().includes(q)) ||
+          p.abstract?.toLowerCase().includes(q) ||
+          p.journal?.toLowerCase().includes(q)
+      )
+    }
+    return result
+  }, [publications, activeArea, search])
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const paginated = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+
+  function handleSearchChange(e) {
+    setSearch(e.target.value)
+    setCurrentPage(1)
   }
-   const handlePageChange = (page) => {
+
+  function handleAreaChange(area) {
+    setActiveArea(area)
+    setCurrentPage(1)
+  }
+
+  function handlePageChange(page) {
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function getPageNumbers() {
+    const pages = []
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i)
+    } else if (currentPage <= 3) {
+      pages.push(1, 2, 3, 4, '...', totalPages)
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+    } else {
+      pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages)
+    }
+    return pages
   }
 
   if (loading) {
@@ -71,7 +90,7 @@ export default function PublicationsPage() {
         </div>
       </div>
     )
-  } 
+  }
 
   return (
     <div className="bg-white">
@@ -89,73 +108,125 @@ export default function PublicationsPage() {
         </div>
       </div>
 
+      {/* Search + Filters */}
+      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 space-y-3">
+          {/* Search bar */}
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              value={search}
+              onChange={handleSearchChange}
+              placeholder="Search by title, author, journal, or abstract…"
+              className="block w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            />
+            {search && (
+              <button
+                onClick={() => { setSearch(''); setCurrentPage(1) }}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+
+          {/* Thematic area tabs */}
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {THEMATIC_AREAS.map((area) => (
+              <button
+                key={area.value}
+                onClick={() => handleAreaChange(area.value)}
+                className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  activeArea === area.value
+                    ? 'bg-red-700 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-700'
+                }`}
+              >
+                {area.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Publications List */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24">
-        <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Our Research Output
-          </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            {publications?.length || 0} publications advancing scientific knowledge
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-8">
+          <p className="text-sm text-gray-500">
+            {filtered.length} publication{filtered.length !== 1 ? 's' : ''} found
+            {activeArea !== 'all' && ` in ${THEMATIC_AREAS.find((a) => a.value === activeArea)?.label}`}
+            {search && ` matching "${search}"`}
           </p>
           {totalPages > 1 && (
-            <p className="mt-2 text-sm text-gray-500">
-              Showing {startIndex + 1}-{Math.min(endIndex, publications?.length || 0)} of {publications?.length || 0}
+            <p className="text-sm text-gray-500">
+              Page {currentPage} of {totalPages}
             </p>
           )}
         </div>
 
-        {paginatedPublications && paginatedPublications.length > 0 ? (
+        {paginated.length > 0 ? (
           <>
-            <div className="space-y-8">
-              {paginatedPublications.map((pub, index) => (
+            <div className="space-y-6">
+              {paginated.map((pub, index) => (
                 <article
                   key={pub._id}
                   className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200 p-6"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-grow">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
-                          {pub.category || 'Publication'}
-                        </span>
-                        <span className="text-sm text-gray-500">{pub.year}</span>
+                      <div className="flex flex-wrap items-center gap-2 mb-3">
+                        {pub.thematicArea && (
+                          <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
+                            {THEMATIC_AREAS.find((a) => a.value === pub.thematicArea)?.label || pub.thematicArea}
+                          </span>
+                        )}
+                        {pub.type && (
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 capitalize">
+                            {pub.type}
+                          </span>
+                        )}
+                        {pub.year && (
+                          <span className="text-sm text-gray-500">{pub.year}</span>
+                        )}
                         {pub.featured && (
                           <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
                             Featured
                           </span>
                         )}
                       </div>
-                      
+
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
                         {pub.title}
                       </h3>
-                      
+
                       <p className="text-sm text-gray-600 mb-3">
                         {pub.authors?.join(', ')}
                       </p>
-                      
+
                       {pub.journal && (
-                        <p className="text-sm text-gray-700 italic mb-3">
-                          {pub.journal}
-                        </p>
+                        <p className="text-sm text-gray-700 italic mb-3">{pub.journal}</p>
                       )}
-                      
+
                       {pub.abstract && (
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                          {pub.abstract}
-                        </p>
+                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">{pub.abstract}</p>
                       )}
-                      
+
                       <div className="flex items-center gap-4">
                         {pub.doi && (
                           <a
-                            href={`https://doi.org/${pub.doi}`}
+                            href={pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm font-medium text-red-700 hover:text-red-600"
                           >
-                            DOI: {pub.doi}
+                            DOI ↗
                           </a>
                         )}
                         {pub.url && (
@@ -173,7 +244,7 @@ export default function PublicationsPage() {
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="flex-shrink-0 text-right">
                       <div className="text-3xl font-bold text-gray-200">
                         {(startIndex + index + 1).toString().padStart(2, '0')}
@@ -184,10 +255,9 @@ export default function PublicationsPage() {
               ))}
             </div>
 
-            {/* Pagination Controls */}
+            {/* Pagination */}
             {totalPages > 1 && (
               <nav className="flex items-center justify-center gap-2 mt-12" aria-label="Pagination">
-                {/* Previous Button */}
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
@@ -203,25 +273,16 @@ export default function PublicationsPage() {
                   Previous
                 </button>
 
-                {/* Page Numbers */}
                 <div className="hidden sm:flex gap-2">
-                  {getPageNumbers().map((page, idx) => {
-                    if (page === '...') {
-                      return (
-                        <span key={`ellipsis-${idx}`} className="px-4 py-2 text-gray-500">
-                          ...
-                        </span>
-                      )
-                    }
-                    
-                    const isActive = page === currentPage
-                    
-                    return (
+                  {getPageNumbers().map((page, idx) =>
+                    page === '...' ? (
+                      <span key={`ellipsis-${idx}`} className="px-4 py-2 text-gray-500">...</span>
+                    ) : (
                       <button
                         key={page}
                         onClick={() => handlePageChange(page)}
                         className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                          isActive
+                          page === currentPage
                             ? 'bg-red-700 text-white'
                             : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                         }`}
@@ -229,15 +290,13 @@ export default function PublicationsPage() {
                         {page}
                       </button>
                     )
-                  })}
+                  )}
                 </div>
 
-                {/* Mobile page indicator */}
                 <div className="sm:hidden px-4 py-2 text-sm text-gray-700">
                   Page {currentPage} of {totalPages}
                 </div>
 
-                {/* Next Button */}
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
@@ -256,26 +315,33 @@ export default function PublicationsPage() {
             )}
           </>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No publications available at the moment.</p>
+          <div className="text-center py-16">
+            <svg className="mx-auto h-12 w-12 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="text-gray-500">No publications match your search.</p>
+            <button
+              onClick={() => { setSearch(''); setActiveArea('all') }}
+              className="mt-4 text-sm text-red-700 hover:text-red-600 font-medium"
+            >
+              Clear filters
+            </button>
           </div>
         )}
       </div>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <div className="bg-red-50 py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              Collaborate with Us
-            </h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Collaborate with Us</h2>
             <p className="mt-4 text-lg text-gray-600">
-              Interested in collaborative research? Let's work together to advance science
+              Interested in collaborative research? Let&apos;s work together to advance science
             </p>
             <div className="mt-8">
               <a
                 href="/contact"
-                className="rounded-md bg-red-700 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-600 transition-colors inline-block"
+                className="rounded-md bg-red-700 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-800 transition-colors inline-block"
               >
                 Start a Conversation
               </a>

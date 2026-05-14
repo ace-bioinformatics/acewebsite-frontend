@@ -5,10 +5,12 @@ import { urlFor } from '@/lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
+import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
+import ACEPattern from '@/Components/shared/ACEPattern'
 
 export async function generateStaticParams() {
   const projects = await client.fetch(allProjectsQuery)
-  
+
   return projects.map((project) => ({
     slug: project.slug.current,
   }))
@@ -38,11 +40,12 @@ export default async function ProjectPage({ params }) {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-br from-red-700 to-red-900 py-16 sm:py-24">
+      <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-16 sm:py-24 overflow-hidden">
+        <ACEPattern rows={6} cols={9} opacity={0.08} className="absolute top-4 right-4 hidden lg:block" />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <Link 
-              href="/research" 
+            <Link
+              href="/research"
               className="inline-flex items-center text-red-100 hover:text-white mb-8"
             >
               <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,8 +67,8 @@ export default async function ProjectPage({ params }) {
             <div className="mt-6 flex items-center gap-4 text-red-100">
               {project.status && (
                 <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                  project.status === 'active' 
-                    ? 'bg-emerald-500 text-white' 
+                  project.status === 'active'
+                    ? 'bg-emerald-500 text-white'
                     : project.status === 'completed'
                     ? 'bg-gray-500 text-white'
                     : 'bg-purple-500 text-white'
@@ -88,6 +91,7 @@ export default async function ProjectPage({ params }) {
 
       {/* Featured Image */}
       {project.featuredImage && (
+        <AnimateOnScroll variant="fade-in">
         <div className="relative h-96 w-full">
           <Image
             src={urlFor(project.featuredImage).width(1200).height(600).url()}
@@ -97,20 +101,24 @@ export default async function ProjectPage({ params }) {
             priority
           />
         </div>
+        </AnimateOnScroll>
       )}
 
       {/* Content */}
-      <div className="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-4xl px-6 py-16 lg:px-8 space-y-12">
         {/* Description */}
         {project.description && (
+          <AnimateOnScroll variant="fade-up">
           <div className="prose prose-lg max-w-none">
             <PortableText value={project.description} />
           </div>
+          </AnimateOnScroll>
         )}
 
         {/* Team Members */}
         {project.team && project.team.length > 0 && (
-          <div className="mt-12 border-t border-gray-200 pt-12">
+          <AnimateOnScroll variant="fade-up">
+          <div className="border-t border-gray-200 pt-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Research Team</h2>
             <div className="flex flex-wrap gap-3">
               {project.team.map((member, index) => (
@@ -123,11 +131,13 @@ export default async function ProjectPage({ params }) {
               ))}
             </div>
           </div>
+          </AnimateOnScroll>
         )}
 
         {/* Timeline */}
         {(project.startDate || project.endDate) && (
-          <div className="mt-12 border-t border-gray-200 pt-12">
+          <AnimateOnScroll variant="fade-up">
+          <div className="border-t border-gray-200 pt-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Timeline</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.startDate && (
@@ -156,10 +166,12 @@ export default async function ProjectPage({ params }) {
               )}
             </div>
           </div>
+          </AnimateOnScroll>
         )}
       </div>
 
       {/* CTA */}
+      <AnimateOnScroll variant="fade-up">
       <div className="bg-red-50 py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -180,6 +192,7 @@ export default async function ProjectPage({ params }) {
           </div>
         </div>
       </div>
+      </AnimateOnScroll>
     </div>
   )
 }

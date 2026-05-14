@@ -1,5 +1,39 @@
 export const settingsQuery = `*[_type == "settings"][0]`
 
+export const allBlogPostsQuery = `
+  *[_type == "blogPost"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    "featuredImage": images[0] { "url": asset->url },
+    "author": author->{ name, "image": image }
+  }
+`
+
+export const blogPostBySlugQuery = `
+  *[_type == "blogPost" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    body,
+    images[] { "url": asset->url },
+    "author": author->{ name, role, bio, "image": image }
+  }
+`
+
+export const allBlogSlugsQuery = `*[_type == "blogPost"]{ "slug": slug.current }`
+
+export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
+  title,
+  socials,
+  contactEmail,
+  address
+}`
+
 export const heroSlidesQuery = `
   *[_type == "heroSlide" && isActive == true] | order(order asc) {
     _id,
@@ -18,6 +52,7 @@ export const allStaffQuery = `*[_type == "person"] | order(order asc, name asc) 
   name,
   slug,
   role,
+  staffCategory,
   bio,
   image,
   email,
@@ -101,16 +136,18 @@ export const projectBySlugQuery = `
 `
 
 export const allPublicationsQuery = `
-  *[_type == "publication"] | order(year desc) {
+  *[_type == "publication"] | order(date desc) {
     _id,
     title,
     authors,
     journal,
-    year,
+    "year": date[0..3],
+    date,
     doi,
     url,
     abstract,
-    category,
+    type,
+    thematicArea,
     featured
   }
 `
@@ -129,13 +166,22 @@ export const programBySlugQuery = `
   *[_type == "academicProgram" && slug.current == $slug][0] {
     _id,
     name,
-    requirements,
     slug,
     type,
     description,
     eligibility,
     duration,
     requirements,
+    researchActivities[] {
+      _key,
+      title,
+      description,
+      photos[] {
+        ...,
+        "url": asset->url,
+        caption
+      }
+    }
   }
 `
 
@@ -205,7 +251,12 @@ export const eventBySlugQuery = `
     topics,
     capacity,
     registrationLink,
-    "detailsLink": "/events/" + slug.current
+    "detailsLink": "/events/" + slug.current,
+    gallery[] {
+      "url": asset->url,
+      caption,
+      "dimensions": asset->metadata.dimensions
+    }
   }
 `
 

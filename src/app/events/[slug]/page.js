@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { client } from '@/lib/sanity'
 import { eventBySlugQuery, allEventsQuery } from '@/lib/queries'
 import { notFound } from 'next/navigation'
+import EventGallery from '@/Components/events/EventGallery'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
@@ -263,6 +264,21 @@ export default async function EventDetailsPage({ params }) {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Photo Gallery */}
+      {event.gallery && event.gallery.length > 0 && (
+        <div className="py-16 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mb-10">
+              <h2 className="text-3xl font-bold text-gray-900">Event Gallery</h2>
+              <p className="mt-2 text-gray-500">
+                {event.gallery.length} photo{event.gallery.length !== 1 ? 's' : ''} — click any image to view full screen
+              </p>
+            </div>
+            <EventGallery photos={event.gallery} />
           </div>
         </div>
       )}

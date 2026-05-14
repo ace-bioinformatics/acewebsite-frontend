@@ -1,6 +1,30 @@
 import PartnerCarousel from "../about/PartnerCarousel"
 import { client } from '@/lib/sanity'
 import { fetchWithFallback } from '@/lib/fallback'
+import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
+import ACEPattern from '@/Components/shared/ACEPattern'
+
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null
+  try {
+    const parsed = new URL(url)
+    // youtube.com/watch?v=ID
+    if (parsed.hostname.includes('youtube.com') && parsed.searchParams.get('v')) {
+      return `https://www.youtube.com/embed/${parsed.searchParams.get('v')}`
+    }
+    // youtu.be/ID
+    if (parsed.hostname === 'youtu.be') {
+      return `https://www.youtube.com/embed${parsed.pathname}`
+    }
+    // already an embed URL
+    if (parsed.pathname.startsWith('/embed/')) {
+      return url
+    }
+  } catch {
+    // invalid URL — ignore
+  }
+  return null
+}
 
 export default async function PartnershipsSection() {
   const homeData = await fetchWithFallback(
@@ -8,10 +32,14 @@ export default async function PartnershipsSection() {
       'home'
     )
 
+  const embedUrl = getYouTubeEmbedUrl(homeData?.partnershipSection?.partnershipVideoUrl)
+
   return (
-    <section className="py-24 sm:py-32 bg-white">
+    <section className="relative py-24 sm:py-32 bg-white overflow-hidden">
+      <ACEPattern rows={6} cols={8} opacity={0.08} className="absolute top-8 left-8 hidden xl:block" />
+
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
+        <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-red-900">{homeData.partnershipSection.sectionTitle}</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Collaborating for Greater Impact
@@ -19,9 +47,9 @@ export default async function PartnershipsSection() {
           <p className="mt-6 text-lg leading-8 text-gray-600">
             {homeData.partnershipSection.description}
           </p>
-        </div>
+        </AnimateOnScroll>
         <PartnerCarousel/>
-        <div className="mx-auto mt-16 max-w-5xl">
+        <AnimateOnScroll variant="fade-up" delay={100} className="mx-auto mt-16 max-w-5xl">
           <div className="relative isolate overflow-hidden bg-gradient-to-br from-blue-50 to-emerald-50 px-6 py-20 sm:rounded-3xl sm:px-10 sm:py-24 lg:py-24 xl:px-24">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
               <div className="lg:pr-8">
@@ -63,17 +91,28 @@ export default async function PartnershipsSection() {
                 </div>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-blue-800 to-purple-900 shadow-2xl">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-white p-8">
-                      <svg className="mx-auto h-16 w-16 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                      </svg>
-                      <p className="text-xl font-semibold">Advancing Health</p>
-                      <p className="text-lg">Through Innovation</p>
-                    </div>
+                {embedUrl ? (
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <iframe
+                      src={embedUrl}
+                      title="ACE Uganda & Google DeepMind Partnership Announcement"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-900 flex flex-col items-center justify-center gap-4">
+                    <svg className="h-14 w-14 text-red-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    <p className="text-white text-sm font-medium">Partnership Announcement Video</p>
+                    <p className="text-gray-400 text-xs text-center px-6">
+                      Add the YouTube URL in the Studio under<br />
+                      <span className="text-gray-300">Home Page → Partnership Section → Partnership Announcement Video URL</span>
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -82,7 +121,7 @@ export default async function PartnershipsSection() {
               <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-red-400 to-red-300 opacity-25"></div>
             </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

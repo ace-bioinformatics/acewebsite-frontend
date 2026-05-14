@@ -2,6 +2,13 @@
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
 
+@theme {
+  --color-red-600: #a71c20;
+  --color-red-700: #a71c20;
+  --color-red-800: #870b0b;
+  --color-red-900: #870b0b;
+}
+
 @layer base {
   :root {
     /* Primary colors */
@@ -51,10 +58,10 @@
     --color-red-300: 0 94% 82%;
     --color-red-400: 0 91% 71%;
     --color-red-500: 0 84% 60%;
-    --color-red-600: 0 72% 51%;
-    --color-red-700: 0 74% 42%;
-    --color-red-800: 0 70% 35%;
-    --color-red-900: 0 63% 31%;
+    --color-red-600: 358 72% 38%;
+    --color-red-700: 358 72% 38%;
+    --color-red-800: 0 85% 28%;
+    --color-red-900: 0 85% 28%;
   }
 }
 

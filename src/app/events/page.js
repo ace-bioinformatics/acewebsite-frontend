@@ -3,6 +3,8 @@ import EventsClient from '@/Components/events/EventsClient'
 import EventHighlight from '@/Components/events/EventHighlight'
 import { client } from '@/lib/sanity'
 import { upcomingEventsQuery, pastEventsQuery, eventHighlightsQuery } from '@/lib/queries'
+import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
+import ACEPattern from '@/Components/shared/ACEPattern'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
@@ -52,18 +54,11 @@ export default async function EventsPage() {
     <div className="bg-white">
       {/* Hero Header */}
       <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-red-900 py-24 sm:py-32 overflow-hidden">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-            animation: 'float 20s ease-in-out infinite'
-          }}></div>
-        </div>
+        <ACEPattern rows={6} cols={10} opacity={0.08} className="absolute top-6 right-6 hidden lg:block" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-block animate-scale-in">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 inline-block">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-semibold text-white">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -71,13 +66,13 @@ export default async function EventsPage() {
                 Events & Happenings
               </span>
             </div>
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in-up">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Discover Our Events
             </h1>
-            <p className="mt-6 text-lg leading-8 text-red-100 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+            <p className="mt-6 text-lg leading-8 text-red-100">
               Join us for workshops, conferences, seminars, and networking events that shape the future of bioinformatics and data science in Africa
             </p>
-          </div>
+          </AnimateOnScroll>
         </div>
       </div>
 
@@ -85,16 +80,18 @@ export default async function EventsPage() {
       {eventHighlights.length > 0 && (
         <div className="bg-gradient-to-b from-gray-50 to-white py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center mb-16">
+            <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 Event Highlights
               </h2>
               <p className="mt-4 text-lg text-gray-600">
                 Key moments and milestones from our most impactful events
               </p>
-            </div>
+            </AnimateOnScroll>
 
-            <EventHighlight highlights={eventHighlights} />
+            <AnimateOnScroll variant="fade-up" delay={100}>
+              <EventHighlight highlights={eventHighlights} />
+            </AnimateOnScroll>
           </div>
         </div>
       )}
@@ -102,14 +99,14 @@ export default async function EventsPage() {
       {/* Upcoming Events Section */}
       <div className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-12">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Upcoming Events
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Don't miss out on these exciting opportunities to learn and connect
             </p>
-          </div>
+          </AnimateOnScroll>
 
           {/* Client-side filtering component */}
           <EventsClient

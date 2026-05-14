@@ -12,6 +12,7 @@ const navigation = [
   { name: 'Programs', href: '/programs' },
   { name: 'Publications', href: '/publications' },
   { name: 'Events', href: '/events' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Our Staff', href: '/team' },
   { name: 'Contact', href: '/contact' },
 ]
@@ -29,7 +30,7 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/acewebsite-frontend/images/ace-logo.png"
+                src="/images/ace-logo.png"
                 alt="ACE Uganda - African Center of Excellence in Bioinformatics"
                 width={280}
                 height={60}

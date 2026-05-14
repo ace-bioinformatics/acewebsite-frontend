@@ -3,7 +3,8 @@ import AnimatedTimeline from '@/Components/about/AnimatedTimeline'
 import PartnerCarousel from '@/Components/about/PartnerCarousel'
 import { client } from '@/lib/sanity'
 import { fetchWithFallback } from '@/lib/fallback'
-import aboutPage from '../../../sanity/schemaTypes/aboutPage'
+import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
+import ACEPattern from '@/Components/shared/ACEPattern'
 
 export default async function AboutPage() {
   const aboutData = await fetchWithFallback(
@@ -61,22 +62,24 @@ export default async function AboutPage() {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-br from-red-700 to-red-900 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+      <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-24 sm:py-32 overflow-hidden">
+        <ACEPattern rows={7} cols={10} opacity={0.08} className="absolute top-6 right-6 hidden lg:block" />
+        <ACEPattern rows={4} cols={6} opacity={0.06} className="absolute bottom-6 left-6 hidden lg:block" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               {aboutData.introSection.heading}
             </h1>
             <p className="mt-6 text-lg leading-8 text-red-100">
               {aboutData.introSection.description}
             </p>
-          </div>
+          </AnimateOnScroll>
         </div>
       </div>
 
       {/* Overview */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
-        <div className="mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-20">
+        <AnimateOnScroll variant="fade-up" className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">
             Who We Are
           </h2>
@@ -90,35 +93,31 @@ export default async function AboutPage() {
               Layered over those facilities is professionally curated long term (MSc & PhD) and short term (Certificates) academic programs, as well as research and development support units.
             </p>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
 
       {/* Services Section */}
-      <div className="bg-gray-50 py-20">
+      <div className="relative bg-gray-50 py-20 overflow-hidden">
+        <ACEPattern rows={5} cols={7} opacity={0.08} className="absolute bottom-6 right-6 hidden xl:block" />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {aboutData.servicesSection.sectionTitle}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               {aboutData.servicesSection.sectionDescription}
             </p>
-          </div>
+          </AnimateOnScroll>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {aboutData.servicesSection.services.map((service) => (
-              <div
-                key={service._key}
-                className="relative flex flex-col p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {service.description}
-                </p>
-              </div>
+            {aboutData.servicesSection.services.map((service, i) => (
+              <AnimateOnScroll key={service._key} variant="fade-up" delay={i * 80}>
+                <div className="relative flex flex-col p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow h-full">
+                  <div className="text-4xl mb-4">{service.icon}</div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
+                  <p className="text-sm text-gray-600">{service.description}</p>
+                </div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -126,7 +125,7 @@ export default async function AboutPage() {
 
       {/* Education and Training */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
-        <div className="mx-auto max-w-3xl">
+        <AnimateOnScroll variant="fade-up" className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">
             {aboutData.educationSection.sectionTitle}
           </h2>
@@ -140,14 +139,14 @@ export default async function AboutPage() {
               ))}
             </ol>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
 
       {/* Mission & Vision */}
       <div className="bg-gray-50 py-24" id="mission">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
+            <AnimateOnScroll variant="fade-right">
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-red-700 text-white mb-6">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -159,56 +158,46 @@ export default async function AboutPage() {
               <p className="text-lg text-gray-600">
                 {aboutData.missionVision.mission}
               </p>
-            </div>
+            </AnimateOnScroll>
 
-            <div>
+            <AnimateOnScroll variant="fade-left" delay={100}>
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-lg bg-emerald-600 text-white mb-6">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
-                Our Vision
-              </h2>
-              <p className="text-lg text-gray-600">
-                {aboutData.missionVision.vision}
-              </p>
-            </div>
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">Our Vision</h2>
+              <p className="text-lg text-gray-600">{aboutData.missionVision.vision}</p>
+            </AnimateOnScroll>
           </div>
         </div>
       </div>
 
       {/* Core Values */}
-      <div className="py-24">
+      <div className="relative py-24 overflow-hidden">
+        <ACEPattern rows={5} cols={8} opacity={0.07} className="absolute top-8 left-8 hidden xl:block" />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-16">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {aboutData.coreValues.sectionTitle}
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Guiding principles that shape our work and culture
-            </p>
-          </div>
+            <p className="mt-4 text-lg text-gray-600">Guiding principles that shape our work and culture</p>
+          </AnimateOnScroll>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {aboutData.coreValues.values.map((value) => (
-              <div
-                key={value.title}
-                className="relative flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-50 text-red-700 mb-4">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d={value.icon} />
-                  </svg>
+            {aboutData.coreValues.values.map((value, i) => (
+              <AnimateOnScroll key={value.title} variant="zoom" delay={i * 80}>
+                <div className="relative flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow h-full">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-50 text-red-700 mb-4">
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d={value.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{value.title}</h3>
+                  <p className="text-sm text-gray-600">{value.description}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {value.description}
-                </p>
-              </div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -217,15 +206,12 @@ export default async function AboutPage() {
       {/* Timeline */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center mb-20">
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-20">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {aboutData.timelineSection.sectionTitle}
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Key milestones in our growth and development
-            </p>
-          </div>
-
+            <p className="mt-4 text-lg text-gray-600">Key milestones in our growth and development</p>
+          </AnimateOnScroll>
           <AnimatedTimeline milestones={aboutData.timelineSection.milestones} />
         </div>
       </div>
@@ -233,15 +219,13 @@ export default async function AboutPage() {
       {/* Collaborations Section */}
       <div className="bg-red-50 py-20" id="collaborations">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center mb-6">
-              Collaborations
-            </h2>
+          <AnimateOnScroll variant="fade-up" className="mx-auto max-w-3xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center mb-6">Collaborations</h2>
             <p className="text-lg text-gray-600 text-center mb-12">
               To optimize productivity and value creation, the ACE is leveraging all possible partners in the local and international bioinformatics research and development ecosystem.
             </p>
             <PartnerCarousel/>
-          </div>
+          </AnimateOnScroll>
         </div>
       </div>
 

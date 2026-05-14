@@ -58,8 +58,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Email</h3>
-                  <p className="mt-1 text-base text-gray-600">info@ace.ac.ug</p>
-                  <p className="text-base text-gray-600">admissions@ace.ac.ug</p>
+                  <p className="mt-1 text-base text-gray-600">ace.ac.ug@gmail.com</p>
                 </div>
               </div>
 
@@ -71,7 +70,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-gray-900">Phone</h3>
-                  <p className="mt-1 text-base text-gray-600">+256 XXX XXXXXX</p>
+                  <p className="mt-1 text-base text-gray-600">+256 312 211 422</p>
                 </div>
               </div>
 
