@@ -68,7 +68,9 @@ export const personBySlugQuery = `
     department,
     bio,
     image,
-    email
+    email,
+    linkedin,
+    twitter
   }
 `
 
@@ -115,6 +117,7 @@ export const allProjectsQuery = `
     slug,
     excerpt,
     category,
+    thematicArea,
     featuredImage,
     status
   }
@@ -126,12 +129,16 @@ export const projectBySlugQuery = `
     title,
     slug,
     description,
+    abstract,
     category,
+    thematicArea,
     featuredImage,
     status,
     startDate,
     endDate,
-    team
+    team,
+    funders,
+    "pi": pi->{ name, role, slug }
   }
 `
 

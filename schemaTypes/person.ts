@@ -51,6 +51,16 @@ export const personType = defineType({
       type: 'email',
     }),
     defineField({
+      name: 'linkedin',
+      title: 'LinkedIn Profile URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'twitter',
+      title: 'X (Twitter) Profile URL',
+      type: 'url',
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

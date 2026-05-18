@@ -45,8 +45,26 @@ export const projectType = defineType({
       of: [{type: 'reference', to: [{type: 'partner'}]}],
     }),
     defineField({
-      name: 'funder',
+      name: 'thematicArea',
+      title: 'Thematic Area',
       type: 'string',
+      options: {
+        list: [
+          {title: 'AI', value: 'ai'},
+          {title: 'AMR', value: 'amr'},
+          {title: 'Human Genomics & Cancer', value: 'human_genomics_cancer'},
+          {title: 'Malaria', value: 'malaria'},
+          {title: 'Visualization', value: 'visualization'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'funders',
+      title: 'Funders',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'List of organizations or agencies funding this project',
     }),
     defineField({
       name: 'pi',

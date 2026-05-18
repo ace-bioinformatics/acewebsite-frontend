@@ -96,13 +96,13 @@ export default async function AboutPage() {
         </AnimateOnScroll>
       </div>
 
-      {/* Services Section */}
+      {/* Thematic Areas Section */}
       <div className="relative bg-gray-50 py-20 overflow-hidden">
         <ACEPattern rows={5} cols={7} opacity={0.08} className="absolute bottom-6 right-6 hidden xl:block" />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              {aboutData.servicesSection.sectionTitle}
+              Thematic Areas
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               {aboutData.servicesSection.sectionDescription}
