@@ -1,9 +1,19 @@
-import { Inter } from 'next/font/google'
+import { Montserrat, Open_Sans } from 'next/font/google'
 import Header from '@/Components/layout/Header'
 import Footer from '@/Components/layout/Footer'
 import '@/styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  display: 'swap',
+})
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'ACE Uganda - African Center of Excellence in Bioinformatics',
@@ -14,7 +24,7 @@ export const metadata = {
 export default function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${montserrat.variable} ${openSans.variable}`} suppressHydrationWarning>
         <Header />
         <main className="min-h-screen">
           {children}
