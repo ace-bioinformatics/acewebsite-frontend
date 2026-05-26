@@ -61,6 +61,12 @@ export const personType = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'googleScholarUrl',
+      title: 'Google Scholar Profile URL',
+      type: 'url',
+      description: 'Link to the person\'s Google Scholar profile (e.g. https://scholar.google.com/citations?user=…)',
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

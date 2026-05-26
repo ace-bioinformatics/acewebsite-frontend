@@ -31,8 +31,16 @@ export const partnerType = defineType({
       type: 'text',
     }),
     defineField({
+      name: 'url',
+      title: 'Website URL',
+      type: 'url',
+      description: 'Partner organisation\'s website (optional)',
+    }),
+    defineField({
       name: 'logo',
       type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', title: 'Alt Text', type: 'string' })],
     }),
   ],
 })

@@ -98,8 +98,8 @@ export default async function StaffDetailPage({ params }) {
                   </a>
                 )}
 
-                {(person.linkedin || person.twitter) && (
-                  <div className="flex gap-3 pt-2">
+                {(person.linkedin || person.twitter || person.googleScholarUrl) && (
+                  <div className="flex gap-3 pt-2 flex-wrap">
                     {person.linkedin && (
                       <a
                         href={person.linkedin}
@@ -123,6 +123,22 @@ export default async function StaffDetailPage({ params }) {
                       >
                         <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                      </a>
+                    )}
+                    {person.googleScholarUrl && (
+                      <a
+                        href={person.googleScholarUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center h-9 w-9 rounded-lg bg-white border border-gray-300 hover:border-red-300 hover:bg-red-50 transition-colors"
+                        title="Google Scholar Profile"
+                      >
+                        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#4285F4" />
+                          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#4285F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          <circle cx="19" cy="17" r="3" fill="#EA4335" />
+                          <path d="M17.5 17h3M19 15.5v3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
                         </svg>
                       </a>
                     )}

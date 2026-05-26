@@ -11,6 +11,23 @@ export const projectType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'featuredImage',
+      title: 'Featured Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text', type: 'string', description: 'Describe the image for accessibility' }),
+      ],
+      description: 'Main image shown on project cards and detail page',
+    }),
+    defineField({
+      name: 'priority',
+      title: 'Display Priority',
+      type: 'number',
+      description: 'Lower number appears first (e.g. 1 = top). Leave empty to sort by date after prioritised items.',
+      validation: (rule) => rule.integer().min(1),
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {source: 'title'},

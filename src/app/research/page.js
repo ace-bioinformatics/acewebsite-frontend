@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/lib/sanity'
-import { allProjectsQuery } from '@/lib/queries'
+import { allProjectsQuery, allPartnersQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
+import { getFallbackData } from '@/lib/fallback'
 import Link from 'next/link'
 import Image from 'next/image'
 import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
@@ -29,6 +30,7 @@ export default function ResearchPage() {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeArea, setActiveArea] = useState('all')
+  const [partners, setPartners] = useState([])
 
   useEffect(() => {
     async function getProjects() {
@@ -36,7 +38,16 @@ export default function ResearchPage() {
       setProjects(data || [])
       setLoading(false)
     }
+    async function getPartners() {
+      try {
+        const data = await client.fetch(allPartnersQuery)
+        setPartners(data && data.length > 0 ? data : getFallbackData('partners') || [])
+      } catch {
+        setPartners(getFallbackData('partners') || [])
+      }
+    }
     getProjects()
+    getPartners()
   }, [])
 
   const filtered = useMemo(() => {
@@ -185,6 +196,48 @@ export default function ResearchPage() {
         )}
       </div>
 
+      {/* Partners & Collaborators */}
+      {partners.length > 0 && (
+        <div className="bg-gray-50 py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <AnimateOnScroll variant="fade-up" className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900">Partners &amp; Collaborators</h2>
+              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Our research is powered by strong partnerships with leading funders and collaborating institutions.
+              </p>
+            </AnimateOnScroll>
+
+            {/* Funders */}
+            {partners.filter((p) => p.type === 'funder').length > 0 && (
+              <div className="mb-12">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 text-center">Funders</h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {partners.filter((p) => p.type === 'funder').map((partner, i) => (
+                    <AnimateOnScroll key={partner._id} variant="zoom" delay={i * 60}>
+                      <PartnerCard partner={partner} />
+                    </AnimateOnScroll>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Collaborators */}
+            {partners.filter((p) => p.type === 'collaborator').length > 0 && (
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 text-center">Collaborators</h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {partners.filter((p) => p.type === 'collaborator').map((partner, i) => (
+                    <AnimateOnScroll key={partner._id} variant="zoom" delay={i * 60}>
+                      <PartnerCard partner={partner} />
+                    </AnimateOnScroll>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* CTA Section */}
       <AnimateOnScroll variant="fade-up">
         <div className="bg-red-50 py-16">
@@ -210,4 +263,33 @@ export default function ResearchPage() {
       </AnimateOnScroll>
     </div>
   )
+}
+
+function PartnerCard({ partner }) {
+  const inner = (
+    <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-5 py-3 shadow-sm hover:border-red-200 hover:shadow-md transition-all min-w-[180px]">
+      {partner.logo?.url ? (
+        <img src={partner.logo.url} alt={partner.logo.alt || partner.name} className="h-8 w-8 object-contain shrink-0" />
+      ) : (
+        <div className="h-8 w-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+          <span className="text-xs font-bold text-red-700">{partner.name.charAt(0)}</span>
+        </div>
+      )}
+      <div>
+        <p className="text-sm font-semibold text-gray-900 leading-tight">{partner.name}</p>
+        {partner.description && (
+          <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{partner.description}</p>
+        )}
+      </div>
+    </div>
+  )
+
+  if (partner.url) {
+    return (
+      <a href={partner.url} target="_blank" rel="noopener noreferrer">
+        {inner}
+      </a>
+    )
+  }
+  return inner
 }

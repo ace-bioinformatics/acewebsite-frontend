@@ -12,6 +12,21 @@ export const aboutPage =  defineType({
       description: 'For internal reference only',
       validation: (rule) => rule.required()
     },
+    // Who We Are
+    {
+      name: 'whoWeAreSection',
+      title: 'Who We Are Section',
+      type: 'object',
+      fields: [
+        {
+          name: 'body',
+          title: 'Content',
+          type: 'text',
+          rows: 10,
+          description: 'The main "Who We Are" narrative. Rendered on the /about/who-we-are page.',
+        },
+      ],
+    },
     // Hero/Introduction Section
     {
       name: 'introSection',

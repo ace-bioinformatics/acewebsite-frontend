@@ -1,0 +1,58 @@
+[
+  {
+    "_id": "partner-nih",
+    "name": "National Institutes of Health",
+    "type": "funder",
+    "description": "Primary funding agency through NIH/NIAID/OCICB supporting ACE Uganda's infrastructure, research and training since 2015.",
+    "url": "https://www.nih.gov"
+  },
+  {
+    "_id": "partner-niaid",
+    "name": "NIAID / OCICB",
+    "type": "funder",
+    "description": "The Office of Cyber Infrastructure and Computational Biology within NIAID provides ongoing technical and financial support.",
+    "url": "https://www.niaid.nih.gov"
+  },
+  {
+    "_id": "partner-makerere",
+    "name": "Makerere University",
+    "type": "collaborator",
+    "description": "Host institution — the Colleges of Health Sciences and Computing & Information Sciences are the academic homes of ACE Uganda.",
+    "url": "https://www.mak.ac.ug"
+  },
+  {
+    "_id": "partner-idi",
+    "name": "Infectious Diseases Institute",
+    "type": "collaborator",
+    "description": "Co-founding partner housed at Makerere University. ACE Uganda's physical offices are located in the IDI-McKinnell Knowledge Centre.",
+    "url": "https://idimakerere.com"
+  },
+  {
+    "_id": "partner-cafgen",
+    "name": "CAfGEN Project",
+    "type": "collaborator",
+    "description": "Collaborative HIV research network across sub-Saharan Africa working closely with ACE Uganda on genomic studies.",
+    "url": null
+  },
+  {
+    "_id": "partner-renu",
+    "name": "RENU",
+    "type": "collaborator",
+    "description": "Research and Education Network of Uganda — provides the 10 Gbps NREN connectivity linking ACE to global research networks.",
+    "url": "https://www.renu.ac.ug"
+  },
+  {
+    "_id": "partner-arua",
+    "name": "African Research Universities Alliance",
+    "type": "collaborator",
+    "description": "Pan-African academic alliance that facilitates collaborative research, graduate training and staff mobility across member universities.",
+    "url": "https://arua.org.za"
+  },
+  {
+    "_id": "partner-google-deepmind",
+    "name": "Google DeepMind",
+    "type": "collaborator",
+    "description": "Strategic AI research partnership established in 2023, providing access to state-of-the-art machine learning resources and collaborative research programmes.",
+    "url": "https://deepmind.google"
+  }
+]

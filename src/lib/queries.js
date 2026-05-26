@@ -70,7 +70,8 @@ export const personBySlugQuery = `
     image,
     email,
     linkedin,
-    twitter
+    twitter,
+    googleScholarUrl
   }
 `
 
@@ -111,14 +112,15 @@ export const postBySlugQuery = `
 `
 
 export const allProjectsQuery = `
-  *[_type == "project"] | order(_createdAt desc) {
+  *[_type == "project"] | order(priority asc, _createdAt desc) {
     _id,
     title,
     slug,
     excerpt,
     category,
     thematicArea,
-    featuredImage,
+    priority,
+    "featuredImage": featuredImage { ..., "url": asset->url },
     status
   }
 `
@@ -132,13 +134,52 @@ export const projectBySlugQuery = `
     abstract,
     category,
     thematicArea,
-    featuredImage,
+    "featuredImage": featuredImage { ..., "url": asset->url },
     status,
     startDate,
     endDate,
     team,
     funders,
     "pi": pi->{ name, role, slug }
+  }
+`
+
+export const allFacilitiesQuery = `
+  *[_type == "facility"] | order(order asc, name asc) {
+    _id,
+    name,
+    slug,
+    type,
+    summary,
+    order,
+    "heroImage": heroImage { ..., "url": asset->url, alt }
+  }
+`
+
+export const facilityBySlugQuery = `
+  *[_type == "facility" && slug.current == $slug][0] {
+    _id,
+    name,
+    slug,
+    type,
+    summary,
+    body,
+    specs,
+    potentialUses,
+    "heroImage": heroImage { ..., "url": asset->url, alt },
+    "gallery": gallery[] { ..., "url": asset->url, caption, alt }
+  }
+`
+
+export const allPartnersQuery = `
+  *[_type == "partner"] | order(name asc) {
+    _id,
+    name,
+    slug,
+    type,
+    description,
+    url,
+    "logo": logo { ..., "url": asset->url, alt }
   }
 `
 

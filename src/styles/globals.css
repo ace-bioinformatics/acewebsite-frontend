@@ -7,9 +7,6 @@
   --color-red-700: #a71c20;
   --color-red-800: #870b0b;
   --color-red-900: #870b0b;
-
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -75,13 +72,11 @@
   
   body {
     @apply bg-white text-gray-900;
-    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
-    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
   }
 }
 

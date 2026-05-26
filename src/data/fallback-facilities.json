@@ -1,0 +1,71 @@
+[
+  {
+    "_id": "facility-hpc",
+    "name": "ACE HPC Compute Core",
+    "slug": { "current": "hpc-compute-core" },
+    "type": "computing",
+    "order": 1,
+    "summary": "The ACE data centre housing a high-performance computing environment with 320 cores, 1.25 TB RAM and 1.5 PB of high-speed storage — powering genomics, AI, and large-scale data science across Africa.",
+    "specs": [
+      { "label": "CPU Cores", "value": "320 cores" },
+      { "label": "RAM", "value": "1.25 TB" },
+      { "label": "Storage", "value": "1.5 PB high-speed" },
+      { "label": "Network (NREN)", "value": "10 Gbps RENU" },
+      { "label": "Internet", "value": "200 Mbps" }
+    ],
+    "potentialUses": [
+      "Full microbial genome sequencing and assembly",
+      "Large-scale genomic data analysis",
+      "Hosting and querying large biological databases",
+      "Regional mirrors of international reference databases",
+      "Accelerating data science, modelling and imaging visualisation",
+      "Machine learning and AI model training"
+    ],
+    "body": "The ACE Compute Core is a purpose-built server room housing the centre's high-performance computing environment. It was installed in 2017 through the NIH/NIAID/OCICB partnership and has been continuously upgraded since.\n\nThe cluster provides ACE researchers, students and authorised external collaborators with on-demand access to significant computational resources, enabling workloads that are impossible on desktop hardware — from whole-genome sequencing pipelines to deep-learning model training.\n\nThe infrastructure connects to Uganda's national research and education network (RENU) via a dedicated 10 Gbps fibre link and to the global internet at 200 Mbps, ensuring fast data transfer to and from international databases and collaborators."
+  },
+  {
+    "_id": "facility-vizlab",
+    "name": "Visualization Lab",
+    "slug": { "current": "visualization-lab" },
+    "type": "vr",
+    "order": 2,
+    "summary": "Uganda's only GPU-backed 3D visualisation and Virtual Reality facility, supporting immersive learning, medical diagnostics, biomedical visualisation, and 3D-conferencing — fully integrated with the ACE HPC environment.",
+    "specs": [
+      { "label": "Display", "value": "Immersive 3D / VR" },
+      { "label": "Workstations", "value": "GPU-backed" },
+      { "label": "HPC Integration", "value": "Direct cluster link" },
+      { "label": "Unique In", "value": "Uganda" }
+    ],
+    "potentialUses": [
+      "Dynamic 3D visualisation for learning and training",
+      "Medical diagnostics and biomedical visualisation",
+      "Virtual reality research and experimentation",
+      "3D conferencing and remote collaboration",
+      "Visualisation of large genomic and scientific datasets"
+    ],
+    "body": "The ACE Visualization Lab is the only facility of its kind in Uganda. It is equipped with GPU-backed workstations directly connected to the ACE HPC cluster, allowing researchers to render and interact with large computational datasets in real time.\n\nThe lab supports a range of cutting-edge applications: from immersive virtual reality environments used in medical education to 3D conferencing that bridges geographically distributed research teams. Its tight integration with the HPC environment means that visualisation work benefits directly from the cluster's computational power — no data movement bottleneck.\n\nThe facility is available to ACE students, researchers, and external collaborators on a scheduled basis."
+  },
+  {
+    "_id": "facility-telelearning",
+    "name": "Tele-Learning Center",
+    "slug": { "current": "tele-learning-center" },
+    "type": "learning",
+    "order": 3,
+    "summary": "A state-of-the-art video-conferencing classroom with 24 workstations, 1 Gbps research-partner connectivity, 1080p auto-zoom camera, and professional acoustics — designed for interactive remote instruction and multi-site scientific meetings.",
+    "specs": [
+      { "label": "Workstations", "value": "24 energy-optimised" },
+      { "label": "Research Network", "value": "1 Gbps to partners" },
+      { "label": "Internet", "value": "200 Mbps RENU" },
+      { "label": "Wireless", "value": "802.11ac" },
+      { "label": "Camera", "value": "1080p autozoom, speaker-tracking" },
+      { "label": "Lighting", "value": "3500 K, CRI 90+" }
+    ],
+    "potentialUses": [
+      "Interactive classroom instruction with remote participants",
+      "Remote lectures, seminars and guest talks",
+      "Multi-site scientific meetings and consortia",
+      "e-Learning and online course delivery"
+    ],
+    "body": "The ACE Tele-Learning Center is a professionally designed video-conferencing classroom that eliminates the barriers between on-site and remote participants.\n\n**Audio** — Controlled acoustics with acoustic tiles and wall-mounted microphones ensure every voice is captured clearly. Full-duplex transmission, auto-calibration, echo cancellation and sound masking make audio indistinguishable from an in-person meeting.\n\n**Visual** — A speaker-tracking, 1080p autozoom camera automatically follows the active speaker, while 3500 K lighting with a CRI of 90+ ensures natural colour reproduction for all participants.\n\n**Networking** — A dedicated 1 Gbps fibre connection to research partners, 200 Mbps RENU internet access and 802.11ac wireless provide reliable, high-bandwidth connectivity for uninterrupted sessions.\n\n**Workstations** — 24 energy-optimised workstations allow students to follow hands-on demonstrations and participate in practical sessions even during remote instruction."
+  }
+]

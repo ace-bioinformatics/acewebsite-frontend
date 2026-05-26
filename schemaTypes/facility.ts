@@ -7,33 +7,111 @@ export const facilityType = defineType({
   fields: [
     defineField({
       name: 'name',
+      title: 'Facility Name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
+      title: 'Slug',
       type: 'slug',
-      options: {source: 'name'},
-    }),
-    defineField({
-      name: 'description',
-      type: 'text',
+      options: { source: 'name' },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'type',
+      title: 'Facility Type',
       type: 'string',
       options: {
         list: [
-          {title: 'Computing', value: 'computing'},
-          {title: 'Learning', value: 'learning'},
-          {title: 'VR', value: 'vr'},
+          { title: 'HPC / Compute', value: 'computing' },
+          { title: 'Tele-Learning', value: 'learning' },
+          { title: 'Visualization / VR', value: 'vr' },
         ],
+        layout: 'radio',
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
+      name: 'summary',
+      title: 'Short Summary',
+      type: 'text',
+      rows: 3,
+      description: 'One or two sentences shown on the Facilities overview card',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
       type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Gallery Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'caption', title: 'Caption', type: 'string' }),
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'body',
+      title: 'Main Content',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [defineField({ name: 'alt', title: 'Alt Text', type: 'string' })],
+        },
+      ],
+      description: 'Rich-text description and narrative for the detail page',
+    }),
+    defineField({
+      name: 'specs',
+      title: 'Specifications / Capacity',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'label', title: 'Label', type: 'string', validation: (r) => r.required() }),
+            defineField({ name: 'value', title: 'Value', type: 'string', validation: (r) => r.required() }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'value' } },
+        },
+      ],
+      description: 'Key specs shown in the stats grid (e.g. "CPU Cores" / "320 cores")',
+    }),
+    defineField({
+      name: 'potentialUses',
+      title: 'Potential Uses',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Bullet-list of example use-cases or applications',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Lower number appears first on the Facilities overview page',
     }),
   ],
+  orderings: [
+    { title: 'Display Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
+  ],
+  preview: {
+    select: { title: 'name', subtitle: 'type' },
+  },
 })

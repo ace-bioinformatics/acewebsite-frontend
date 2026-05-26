@@ -29,6 +29,8 @@ import fallbackTeam from '@/data/fallback-team.json'
 import fallbackProjects from '@/data/fallback-projects.json'
 import fallbackEvents from '@/data/fallback-events.json'
 import fallbackPublications from '@/data/fallback-publications.json'
+import fallbackFacilities from '@/data/fallback-facilities.json'
+import fallbackPartners from '@/data/fallback-partners.json'
 
 /**
  * Fallback data registry
@@ -43,7 +45,9 @@ const fallbackRegistry = {
   team: fallbackTeam,
   projects: fallbackProjects,
   events: fallbackEvents,
-  publications: fallbackPublications
+  publications: fallbackPublications,
+  facilities: fallbackFacilities,
+  partners: fallbackPartners,
 }
 
 /**
