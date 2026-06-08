@@ -54,7 +54,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const facility = await getProject(slug)
+  const facility = await getFacility(slug)
   if (!facility) return { title: 'Facility Not Found | ACE Uganda' }
   return {
     title: `${facility.name} | ACE Uganda`,
@@ -75,7 +75,8 @@ const portableComponents = {
 }
 
 export default async function FacilityDetailPage({ params }) {
-  const facility = await getFacility(params.slug)
+  const { slug } = await params
+  const facility = await getFacility(slug)
 
   if (!facility) notFound()
 
