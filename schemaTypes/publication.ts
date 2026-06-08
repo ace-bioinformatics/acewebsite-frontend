@@ -11,6 +11,13 @@ export const publicationType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'publishedAt',
+      title: 'Publication Date',
+      type: 'date',
+      description: 'The date this publication was published (e.g. in a journal or conference). Used to sort publications chronologically.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {source: 'title'},
@@ -23,7 +30,10 @@ export const publicationType = defineType({
     }),
     defineField({
       name: 'date',
+      title: 'Legacy Date (deprecated)',
       type: 'date',
+      description: 'Superseded by "Publication Date" (publishedAt). Kept for backwards compatibility.',
+      hidden: true,
     }),
     defineField({
       name: 'type',
@@ -61,7 +71,10 @@ export const publicationType = defineType({
     }),
     defineField({
       name: 'image',
+      title: 'Cover Image',
       type: 'image',
+      description: 'Recommended: 800 × 450px (16:9 ratio), max 1MB. Used as the publication card thumbnail.',
+      options: { hotspot: true },
     }),
   ],
 })

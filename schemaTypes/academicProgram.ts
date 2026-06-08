@@ -47,7 +47,10 @@ export const academicProgramType = defineType({
     }),
     defineField({
       name: 'image',
+      title: 'Program Image',
       type: 'image',
+      description: 'Recommended: 1200 × 675px (16:9 ratio), max 2MB. Used as the program card and detail page header image.',
+      options: { hotspot: true },
     }),
     defineField({
       name: 'researchActivities',

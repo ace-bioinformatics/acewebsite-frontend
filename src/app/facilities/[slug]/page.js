@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { client } from '@/lib/sanity'
-import { fetchWithFallback, getFallbackData } from '@/lib/fallback'
+import { getFallbackData } from '@/lib/fallback'
 import { PortableText } from '@portabletext/react'
 import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
 import ACEPattern from '@/Components/shared/ACEPattern'
@@ -84,18 +84,20 @@ export default async function FacilityDetailPage({ params }) {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-20 sm:py-28 overflow-hidden">
-        {!facility.heroImage?.url && (
+      <div className={`relative py-20 sm:py-28 overflow-hidden ${facility.heroImage?.url ? '' : 'bg-gradient-to-br from-red-700 to-red-900'}`}>
+        {facility.heroImage?.url ? (
+          <>
+            <div className="absolute inset-0">
+              <img
+                src={facility.heroImage.url}
+                alt={facility.heroImage.alt || facility.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gray-900/65" />
+            </div>
+          </>
+        ) : (
           <ACEPattern rows={6} cols={9} opacity={0.08} className="absolute top-4 right-4 hidden lg:block" />
-        )}
-        {facility.heroImage?.url && (
-          <div className="absolute inset-0">
-            <img
-              src={facility.heroImage.url}
-              alt={facility.heroImage.alt || facility.name}
-              className="w-full h-full object-cover opacity-20"
-            />
-          </div>
         )}
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateOnScroll variant="fade-up">

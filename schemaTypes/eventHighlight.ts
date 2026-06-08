@@ -40,6 +40,7 @@ export const eventHighlightType = defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      description: 'Recommended: 1200 × 675px (16:9 ratio), max 2MB. Shown on the homepage event highlight section.',
       options: {
         hotspot: true,
       },

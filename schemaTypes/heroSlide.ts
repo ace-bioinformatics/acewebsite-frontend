@@ -44,6 +44,7 @@ export const heroSlide = defineType({
       name: 'image',
       title: 'Slide Image',
       type: 'image',
+      description: 'Recommended: 1920 × 1080px (16:9 ratio), max 3MB. This image fills the full-width homepage hero — use high-resolution, wide landscape photos.',
       options: {
         hotspot: true,
       },

@@ -27,6 +27,8 @@ export const personType = defineType({
     defineField({
       name: 'image',
       type: 'image',
+      description: 'Recommended: 500 × 500px (1:1 square), max 1MB. Use a professional headshot with a neutral background.',
+      options: { hotspot: true },
     }),
     defineField({
       name: 'staffCategory',

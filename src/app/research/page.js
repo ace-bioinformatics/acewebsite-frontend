@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/lib/sanity'
-import { allProjectsQuery, allPartnersQuery } from '@/lib/queries'
+import { allProjectsQuery, allPartnersQuery, allFundersQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import { getFallbackData } from '@/lib/fallback'
 import Link from 'next/link'
@@ -31,6 +31,7 @@ export default function ResearchPage() {
   const [loading, setLoading] = useState(true)
   const [activeArea, setActiveArea] = useState('all')
   const [partners, setPartners] = useState([])
+  const [funders, setFunders] = useState([])
 
   useEffect(() => {
     async function getProjects() {
@@ -46,13 +47,22 @@ export default function ResearchPage() {
         setPartners(getFallbackData('partners') || [])
       }
     }
+    async function getFunders() {
+      try {
+        const data = await client.fetch(allFundersQuery)
+        setFunders(data || [])
+      } catch {
+        setFunders([])
+      }
+    }
     getProjects()
     getPartners()
+    getFunders()
   }, [])
 
   const filtered = useMemo(() => {
     if (activeArea === 'all') return projects
-    return projects.filter((p) => p.thematicArea === activeArea)
+    return projects.filter((p) => p.thematicAreas?.includes(activeArea))
   }, [projects, activeArea])
 
   const areaLabel = THEMATIC_AREAS.find((a) => a.value === activeArea)?.label
@@ -116,37 +126,51 @@ export default function ResearchPage() {
         ) : filtered.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project, i) => {
-              const areaColor = project.thematicArea ? AREA_COLORS[project.thematicArea] : null
-              const areaName = project.thematicArea
-                ? THEMATIC_AREAS.find((a) => a.value === project.thematicArea)?.label
-                : null
+              const firstArea = project.thematicAreas?.[0]
+              const firstAreaName = firstArea ? THEMATIC_AREAS.find((a) => a.value === firstArea)?.label : null
 
               return (
-                <AnimateOnScroll key={project._id} variant="fade-up" delay={i * 60}>
+                <AnimateOnScroll key={project._id} variant="fade-up" delay={i * 60} className="h-full">
                   <Link
                     href={`/research/${project.slug?.current || project._id}`}
                     className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all h-full"
                   >
-                    {project.featuredImage ? (
-                      <div className="relative h-48 w-full overflow-hidden bg-gray-200">
+                    {/* Fixed-height image area — always present */}
+                    <div className="relative h-48 w-full shrink-0 overflow-hidden">
+                      {project.featuredImage ? (
                         <Image
-                          src={urlFor(project.featuredImage).width(600).height(400).url()}
+                          src={urlFor(project.featuredImage).width(600).height(384).url()}
                           alt={project.featuredImage.alt || project.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="object-contain group-hover:scale-105 transition-transform duration-300"
                         />
-                      </div>
-                    ) : (
-                      <div className="h-2 w-full bg-gradient-to-r from-red-700 to-red-900" />
-                    )}
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-700 to-red-900">
+                          <div className="opacity-10">
+                            <svg className="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15M14.25 3.104c.251.023.501.05.75.082M19.8 15a2.25 2.25 0 01-2.14 1.5H6.34A2.25 2.25 0 014.2 15m15.6 0H4.2" />
+                            </svg>
+                          </div>
+                          {firstAreaName && (
+                            <span className="absolute bottom-3 left-3 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-1 text-xs font-medium text-white">
+                              {firstAreaName}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
 
                     <div className="flex flex-1 flex-col p-6">
                       <div className="flex flex-wrap items-center gap-2 mb-3">
-                        {areaName && (
-                          <span className={`rounded-full px-3 py-0.5 text-xs font-semibold ring-1 ring-inset ${areaColor}`}>
-                            {areaName}
-                          </span>
-                        )}
+                        {project.thematicAreas?.map((area) => {
+                          const color = AREA_COLORS[area]
+                          const label = THEMATIC_AREAS.find((a) => a.value === area)?.label
+                          return label ? (
+                            <span key={area} className={`rounded-full px-3 py-0.5 text-xs font-semibold ring-1 ring-inset ${color}`}>
+                              {label}
+                            </span>
+                          ) : null
+                        })}
                         {project.status && (
                           <span className={`rounded-full px-3 py-0.5 text-xs font-medium ${
                             project.status === 'active' || project.status === 'ongoing'
@@ -163,7 +187,7 @@ export default function ResearchPage() {
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors leading-snug">
                         {project.title}
                       </h3>
-                      <p className="mt-3 text-sm text-gray-600 line-clamp-3 flex-grow">
+                      <p className="mt-3 text-sm text-gray-600 line-clamp-3 flex-1">
                         {project.excerpt}
                       </p>
                       <div className="mt-4 flex items-center text-sm font-semibold text-red-700 group-hover:text-red-600">
@@ -197,7 +221,7 @@ export default function ResearchPage() {
       </div>
 
       {/* Partners & Collaborators */}
-      {partners.length > 0 && (
+      {(funders.length > 0 || partners.filter((p) => p.type === 'collaborator').length > 0) && (
         <div className="bg-gray-50 py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <AnimateOnScroll variant="fade-up" className="text-center mb-12">
@@ -208,13 +232,13 @@ export default function ResearchPage() {
             </AnimateOnScroll>
 
             {/* Funders */}
-            {partners.filter((p) => p.type === 'funder').length > 0 && (
+            {funders.length > 0 && (
               <div className="mb-12">
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 text-center">Funders</h3>
                 <div className="flex flex-wrap justify-center gap-4">
-                  {partners.filter((p) => p.type === 'funder').map((partner, i) => (
-                    <AnimateOnScroll key={partner._id} variant="zoom" delay={i * 60}>
-                      <PartnerCard partner={partner} />
+                  {funders.map((funder, i) => (
+                    <AnimateOnScroll key={funder._id} variant="zoom" delay={i * 60}>
+                      <FunderCard funder={funder} />
                     </AnimateOnScroll>
                   ))}
                 </div>
@@ -287,6 +311,39 @@ function PartnerCard({ partner }) {
   if (partner.url) {
     return (
       <a href={partner.url} target="_blank" rel="noopener noreferrer">
+        {inner}
+      </a>
+    )
+  }
+  return inner
+}
+
+function FunderCard({ funder }) {
+  const inner = (
+    <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm hover:border-red-200 hover:shadow-md transition-all min-w-[180px]">
+      {funder.logo?.url ? (
+        <img
+          src={funder.logo.url}
+          alt={funder.logo.alt || funder.name}
+          className="h-10 w-auto object-contain shrink-0 max-w-[80px]"
+        />
+      ) : (
+        <div className="h-10 w-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+          <span className="text-xs font-bold text-red-700">{funder.name.charAt(0)}</span>
+        </div>
+      )}
+      <div>
+        <p className="text-sm font-semibold text-gray-900 leading-tight">{funder.name}</p>
+        {funder.description && (
+          <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{funder.description}</p>
+        )}
+      </div>
+    </div>
+  )
+
+  if (funder.website) {
+    return (
+      <a href={funder.website} target="_blank" rel="noopener noreferrer">
         {inner}
       </a>
     )

@@ -1,6 +1,7 @@
 import { blogPostType } from './blogPost'
 import { academicProgramType } from './academicProgram'
 import { facilityType } from './facility'
+import { funderType } from './funder'
 import { personType } from './person'
 import { projectType } from './project'
 import { publicationType } from './publication'
@@ -15,4 +16,4 @@ import { contactPage } from './contactPage'
 import { homePage } from './homePage'
 import { siteSettingsType } from './siteSettings'
 
-export const schemaTypes = [blogPostType, academicProgramType, facilityType, personType, projectType, publicationType, sitePageType, testimonialType, partnerType, heroSlide, eventType, eventHighlightType, aboutPage, contactPage, homePage, siteSettingsType]
+export const schemaTypes = [blogPostType, academicProgramType, facilityType, funderType, personType, projectType, publicationType, sitePageType, testimonialType, partnerType, heroSlide, eventType, eventHighlightType, aboutPage, contactPage, homePage, siteSettingsType]

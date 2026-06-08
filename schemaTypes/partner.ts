@@ -38,7 +38,9 @@ export const partnerType = defineType({
     }),
     defineField({
       name: 'logo',
+      title: 'Logo',
       type: 'image',
+      description: 'Recommended: PNG with transparent background, at least 300 × 150px, max 500KB. Square or landscape logos work best.',
       options: { hotspot: true },
       fields: [defineField({ name: 'alt', title: 'Alt Text', type: 'string' })],
     }),

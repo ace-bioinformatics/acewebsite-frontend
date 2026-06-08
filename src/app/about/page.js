@@ -160,7 +160,7 @@ export default async function AboutPage() {
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {coreValues.map((value, i) => (
-                <AnimateOnScroll key={value.title} variant="zoom" delay={i * 80}>
+                <AnimateOnScroll key={value.title} variant="zoom" delay={i * 80} className="h-full">
                   <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow h-full">
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-50 text-red-700 mb-4">
                       {coreValueIcons[i] || coreValueIcons[0]}

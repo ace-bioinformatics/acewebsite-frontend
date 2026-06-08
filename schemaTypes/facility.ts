@@ -44,6 +44,7 @@ export const facilityType = defineType({
       name: 'heroImage',
       title: 'Hero Image',
       type: 'image',
+      description: 'Recommended: 1920 × 1080px (16:9 ratio), max 3MB. Avoid images with heavy red tones — the page uses a dark overlay for text legibility.',
       options: { hotspot: true },
       fields: [
         defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
@@ -53,6 +54,7 @@ export const facilityType = defineType({
       name: 'gallery',
       title: 'Gallery Images',
       type: 'array',
+      description: 'Recommended: 1200 × 675px (16:9 ratio) per image, max 2MB each.',
       of: [
         {
           type: 'image',

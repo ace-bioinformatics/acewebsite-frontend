@@ -60,6 +60,7 @@ export const eventType = defineType({
       name: 'image',
       title: 'Event Image',
       type: 'image',
+      description: 'Recommended: 1200 × 675px (16:9 ratio), max 2MB. Used as the event banner and card thumbnail.',
       options: {
         hotspot: true,
       },

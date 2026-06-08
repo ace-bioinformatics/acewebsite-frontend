@@ -173,87 +173,8 @@ export default function PublicationsPage() {
 
         {paginated.length > 0 ? (
           <>
-            <div className="space-y-6">
-              {paginated.map((pub, index) => (
-                <article
-                  key={pub._id}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200 p-6"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-grow">
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        {pub.thematicArea && (
-                          <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
-                            {THEMATIC_AREAS.find((a) => a.value === pub.thematicArea)?.label || pub.thematicArea}
-                          </span>
-                        )}
-                        {pub.type && (
-                          <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 capitalize">
-                            {pub.type}
-                          </span>
-                        )}
-                        {pub.year && (
-                          <span className="text-sm text-gray-500">{pub.year}</span>
-                        )}
-                        {pub.featured && (
-                          <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
-                            Featured
-                          </span>
-                        )}
-                      </div>
+            <YearGroupedList publications={paginated} startIndex={startIndex} thematicAreas={THEMATIC_AREAS} />
 
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {pub.title}
-                      </h3>
-
-                      <p className="text-sm text-gray-600 mb-3">
-                        {pub.authors?.join(', ')}
-                      </p>
-
-                      {pub.journal && (
-                        <p className="text-sm text-gray-700 italic mb-3">{pub.journal}</p>
-                      )}
-
-                      {pub.abstract && (
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">{pub.abstract}</p>
-                      )}
-
-                      <div className="flex items-center gap-4">
-                        {pub.doi && (
-                          <a
-                            href={pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm font-medium text-red-700 hover:text-red-600"
-                          >
-                            DOI ↗
-                          </a>
-                        )}
-                        {pub.url && (
-                          <a
-                            href={pub.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-sm font-medium text-red-700 hover:text-red-600"
-                          >
-                            View Publication
-                            <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex-shrink-0 text-right">
-                      <div className="text-3xl font-bold text-gray-200">
-                        {(startIndex + index + 1).toString().padStart(2, '0')}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
 
             {/* Pagination */}
             {totalPages > 1 && (
@@ -349,6 +270,123 @@ export default function PublicationsPage() {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+function formatPubDate(dateStr) {
+  if (!dateStr) return null
+  return new Date(dateStr).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+function getPubYear(pub) {
+  const src = pub.publishedAt || pub.date
+  return src ? src.slice(0, 4) : 'Undated'
+}
+
+function YearGroupedList({ publications, startIndex, thematicAreas }) {
+  // Group into ordered years
+  const groups = []
+  const seen = new Map()
+  publications.forEach((pub, idx) => {
+    const year = getPubYear(pub)
+    if (!seen.has(year)) {
+      seen.set(year, groups.length)
+      groups.push({ year, items: [] })
+    }
+    groups[seen.get(year)].items.push({ pub, globalIdx: startIndex + idx })
+  })
+
+  return (
+    <div className="space-y-12">
+      {groups.map(({ year, items }) => (
+        <div key={year}>
+          {/* Year heading */}
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-2xl font-bold text-gray-900">{year}</span>
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-xs text-gray-400">{items.length} publication{items.length !== 1 ? 's' : ''}</span>
+          </div>
+
+          <div className="space-y-4">
+            {items.map(({ pub, globalIdx }) => (
+              <article
+                key={pub._id}
+                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200 p-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-grow min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      {pub.thematicArea && (
+                        <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
+                          {thematicAreas.find((a) => a.value === pub.thematicArea)?.label || pub.thematicArea}
+                        </span>
+                      )}
+                      {pub.type && (
+                        <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 capitalize">
+                          {pub.type}
+                        </span>
+                      )}
+                      {pub.featured && (
+                        <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
+                          Featured
+                        </span>
+                      )}
+                      {(pub.publishedAt || pub.date) && (
+                        <span className="text-xs text-gray-400">
+                          {formatPubDate(pub.publishedAt || pub.date)}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{pub.title}</h3>
+                    <p className="text-sm text-gray-600 mb-3">{pub.authors?.join(', ')}</p>
+
+                    {pub.journal && (
+                      <p className="text-sm text-gray-700 italic mb-3">{pub.journal}</p>
+                    )}
+                    {pub.abstract && (
+                      <p className="text-sm text-gray-600 line-clamp-2 mb-4">{pub.abstract}</p>
+                    )}
+
+                    <div className="flex items-center gap-4">
+                      {pub.doi && (
+                        <a
+                          href={pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-red-700 hover:text-red-600"
+                        >
+                          DOI ↗
+                        </a>
+                      )}
+                      {pub.url && (
+                        <a
+                          href={pub.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm font-medium text-red-700 hover:text-red-600"
+                        >
+                          View Publication
+                          <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex-shrink-0 text-right">
+                    <div className="text-3xl font-bold text-gray-200">
+                      {(globalIdx + 1).toString().padStart(2, '0')}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://localhost:3000/facilities/ace-computer-core)",
+      "Bash(curl -s http://localhost:3000/research/sheds-she-data-science)",
+      "Bash(curl -s http://localhost:3000/research)",
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/facilities/ace-computer-core /tmp/facility-hero.png)",
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/research/sheds-she-data-science /tmp/research-hero.png)",
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/research /tmp/research-grid.png)"
+    ]
+  }
+}

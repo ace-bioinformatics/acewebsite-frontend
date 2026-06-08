@@ -42,77 +42,97 @@ export default async function ProjectPage({ params }) {
     )
   }
 
-  const thematicLabel = project.thematicArea ? THEMATIC_AREA_LABELS[project.thematicArea] || project.thematicArea : null
+  const thematicLabels = project.thematicAreas?.map(
+    (a) => THEMATIC_AREA_LABELS[a] || a
+  ) ?? []
 
   return (
     <div className="bg-white">
       {/* Header */}
       <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-16 sm:py-24 overflow-hidden">
-        <ACEPattern rows={6} cols={9} opacity={0.08} className="absolute top-4 right-4 hidden lg:block" />
+        {!project.featuredImage && (
+          <ACEPattern rows={6} cols={9} opacity={0.08} className="absolute top-4 right-4 hidden lg:block" />
+        )}
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <Link
-              href="/research"
-              className="inline-flex items-center text-red-100 hover:text-white mb-8"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Research
-            </Link>
+          <div className={`flex gap-10 ${project.featuredImage ? 'lg:items-center' : 'max-w-4xl'}`}>
+            {/* Text column */}
+            <div className="flex-1 min-w-0">
+              <Link
+                href="/research"
+                className="inline-flex items-center text-red-100 hover:text-white mb-8"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Research
+              </Link>
 
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.category && (
-                <span className="inline-flex items-center rounded-full bg-red-500 px-3 py-1 text-sm font-medium text-white">
-                  {project.category}
-                </span>
-              )}
-              {thematicLabel && (
-                <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-medium text-white">
-                  {thematicLabel}
-                </span>
-              )}
-              {project.status && (
-                <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                  project.status === 'active' || project.status === 'ongoing'
-                    ? 'bg-emerald-500 text-white'
-                    : project.status === 'completed'
-                    ? 'bg-gray-500 text-white'
-                    : 'bg-purple-500 text-white'
-                }`}>
-                  {project.status}
-                </span>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.category && (
+                  <span className="inline-flex items-center rounded-full bg-red-500 px-3 py-1 text-sm font-medium text-white">
+                    {project.category}
+                  </span>
+                )}
+                {thematicLabels.map((label) => (
+                  <span key={label} className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-medium text-white">
+                    {label}
+                  </span>
+                ))}
+                {project.status && (
+                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
+                    project.status === 'active' || project.status === 'ongoing'
+                      ? 'bg-emerald-500 text-white'
+                      : project.status === 'completed'
+                      ? 'bg-gray-500 text-white'
+                      : 'bg-purple-500 text-white'
+                  }`}>
+                    {project.status}
+                  </span>
+                )}
+              </div>
+
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                {project.title}
+              </h1>
+
+              {project.startDate && (
+                <p className="mt-4 text-red-100 text-sm">
+                  Started: {new Date(project.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+                  {project.endDate && ` · Ends: ${new Date(project.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}`}
+                </p>
               )}
             </div>
 
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              {project.title}
-            </h1>
-
-            {project.startDate && (
-              <p className="mt-4 text-red-100 text-sm">
-                Started: {new Date(project.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
-                {project.endDate && ` · Ends: ${new Date(project.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}`}
-              </p>
+            {/* Featured image — right column on desktop, below text on mobile */}
+            {project.featuredImage && (
+              <div className="hidden lg:block shrink-0 w-80 xl:w-96">
+                <div className="relative h-64 xl:h-72 rounded-xl overflow-hidden bg-white/10 ring-1 ring-white/20">
+                  <Image
+                    src={urlFor(project.featuredImage).width(800).height(600).url()}
+                    alt={project.featuredImage.alt || project.title}
+                    fill
+                    className="object-contain p-2"
+                    priority
+                  />
+                </div>
+              </div>
             )}
           </div>
+
+          {/* Featured image — visible on mobile, below text */}
+          {project.featuredImage && (
+            <div className="mt-8 lg:hidden relative h-56 rounded-xl overflow-hidden bg-white/10 ring-1 ring-white/20">
+              <Image
+                src={urlFor(project.featuredImage).width(800).height(450).url()}
+                alt={project.featuredImage.alt || project.title}
+                fill
+                className="object-contain p-2"
+                priority
+              />
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Featured Image */}
-      {project.featuredImage && (
-        <AnimateOnScroll variant="fade-in">
-          <div className="relative h-96 w-full">
-            <Image
-              src={urlFor(project.featuredImage).width(1200).height(600).url()}
-              alt={project.featuredImage.alt || project.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </AnimateOnScroll>
-      )}
 
       {/* Content */}
       <div className="mx-auto max-w-4xl px-6 py-16 lg:px-8 space-y-12">

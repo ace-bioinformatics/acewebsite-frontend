@@ -118,7 +118,7 @@ export const allProjectsQuery = `
     slug,
     excerpt,
     category,
-    thematicArea,
+    thematicAreas,
     priority,
     "featuredImage": featuredImage { ..., "url": asset->url },
     status
@@ -133,7 +133,7 @@ export const projectBySlugQuery = `
     description,
     abstract,
     category,
-    thematicArea,
+    thematicAreas,
     "featuredImage": featuredImage { ..., "url": asset->url },
     status,
     startDate,
@@ -183,13 +183,24 @@ export const allPartnersQuery = `
   }
 `
 
+export const allFundersQuery = `
+  *[_type == "funder"] | order(order asc) {
+    _id,
+    name,
+    website,
+    description,
+    "logo": logo { "url": asset->url, alt }
+  }
+`
+
 export const allPublicationsQuery = `
-  *[_type == "publication"] | order(date desc) {
+  *[_type == "publication"] | order(publishedAt desc, date desc) {
     _id,
     title,
     authors,
     journal,
-    "year": date[0..3],
+    publishedAt,
+    "year": coalesce(publishedAt, date)[0..3],
     date,
     doi,
     url,
