@@ -53,7 +53,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const facility = await getFacility(params.slug)
+  const { slug } = await params
+  const facility = await getProject(slug)
   if (!facility) return { title: 'Facility Not Found | ACE Uganda' }
   return {
     title: `${facility.name} | ACE Uganda`,

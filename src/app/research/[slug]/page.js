@@ -27,7 +27,8 @@ async function getProject(slug) {
 }
 
 export default async function ProjectPage({ params }) {
-  const project = await getProject(params.slug)
+  const { slug } = await params
+  const project = await getProject(slug)
 
   if (!project) {
     return (
@@ -189,14 +190,26 @@ export default async function ProjectPage({ params }) {
             <section className="border-t border-gray-200 pt-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Research Team</h2>
               <div className="flex flex-wrap gap-3">
-                {project.team.map((member, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-                  >
-                    {member}
-                  </span>
-                ))}
+                {project.team.map((member, index) => {
+                  const name = typeof member === 'string' ? member : member.name
+                  const slug = typeof member === 'object' ? member.slug?.current : null
+                  return slug ? (
+                    <Link
+                      key={member._id || index}
+                      href={`/team/${slug}`}
+                      className="inline-flex items-center rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors"
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    <span
+                      key={index}
+                      className="inline-flex items-center rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                    >
+                      {name}
+                    </span>
+                  )
+                })}
               </div>
             </section>
           </AnimateOnScroll>
@@ -208,17 +221,39 @@ export default async function ProjectPage({ params }) {
             <section className="border-t border-gray-200 pt-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Funders</h2>
               <div className="flex flex-wrap gap-3">
-                {project.funders.map((funder, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
-                  >
-                    <svg className="h-4 w-4 text-red-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {funder}
-                  </span>
-                ))}
+                {project.funders.map((funder, index) => {
+                  const name = typeof funder === 'string' ? funder : funder.name
+                  const website = typeof funder === 'object' ? funder.website : null
+                  const logo = typeof funder === 'object' ? funder.logo : null
+
+                  const inner = (
+                    <div
+                      key={funder._id || index}
+                      className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
+                    >
+                      {logo?.url ? (
+                        <Image
+                          src={logo.url}
+                          alt={logo.alt || name}
+                          width={20}
+                          height={20}
+                          className="object-contain shrink-0"
+                        />
+                      ) : (
+                        <svg className="h-4 w-4 text-red-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      )}
+                      {name}
+                    </div>
+                  )
+
+                  return website ? (
+                    <a key={funder._id || index} href={website} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                      {inner}
+                    </a>
+                  ) : inner
+                })}
               </div>
             </section>
           </AnimateOnScroll>

@@ -138,8 +138,20 @@ export const projectBySlugQuery = `
     status,
     startDate,
     endDate,
-    team,
-    funders,
+    "team": team[]->{ 
+      _id, 
+      name, 
+      role, 
+      slug,
+      "image": image { "url": asset->url }
+    },
+    "funders": funders[]->{ 
+      _id, 
+      name, 
+      website, 
+      description,
+      "logo": logo { "url": asset->url, alt }
+    },
     "pi": pi->{ name, role, slug }
   }
 `
