@@ -103,21 +103,62 @@ export const eventType = defineType({
       description: 'Display this event prominently on the events page',
     }),
     defineField({
+      name: 'galleryTitle',
+      title: 'Gallery Section Title',
+      type: 'string',
+      description: 'Optional. Defaults to "Event Gallery" if left blank.',
+    }),
+    defineField({
       name: 'gallery',
       title: 'Event Gallery',
       type: 'array',
-      description: 'Photos from this event — upload as many as you like',
+      description: 'Photos from the event. Recommended: JPEG, minimum 1200px wide, max 5MB per image.',
       of: [
         {
-          type: 'image',
-          options: { hotspot: true },
+          type: 'object',
+          name: 'galleryImage',
           fields: [
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            }),
             defineField({
               name: 'caption',
               title: 'Caption',
               type: 'string',
+              description: 'Optional caption shown below the image in the lightbox',
+            }),
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Describe the image for accessibility and SEO',
+              validation: (Rule) => Rule.required().warning('Alt text is important for accessibility'),
+            }),
+            defineField({
+              name: 'credit',
+              title: 'Photo Credit',
+              type: 'string',
+              description: 'Photographer or source (e.g. "Photo: John Doe")',
             }),
           ],
+          preview: {
+            select: {
+              title: 'caption',
+              subtitle: 'credit',
+              media: 'image',
+            },
+            prepare({ title, subtitle, media }: { title: string; subtitle: string; media: any }) {
+              return {
+                title: title || 'Untitled photo',
+                subtitle: subtitle || '',
+                media,
+              }
+            },
+          },
         },
       ],
     }),

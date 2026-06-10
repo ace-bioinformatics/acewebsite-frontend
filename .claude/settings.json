@@ -6,7 +6,12 @@
       "Bash(curl -s http://localhost:3000/research)",
       "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/facilities/ace-computer-core /tmp/facility-hero.png)",
       "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/research/sheds-she-data-science /tmp/research-hero.png)",
-      "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/research /tmp/research-grid.png)"
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=/Users/wasukira/Library/Caches/ms-playwright npx playwright screenshot --wait-for-timeout=3000 http://localhost:3000/research /tmp/research-grid.png)",
+      "Bash(npm install *)",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/react-photo-album/package.json'\\).version\\); console.log\\(require\\('./node_modules/yet-another-react-lightbox/package.json'\\).version\\)\")",
+      "Bash(node -e \"const rpa = require\\('./node_modules/react-photo-album'\\); console.log\\(Object.keys\\(rpa\\)\\)\")",
+      "Bash(node -e \"const p = require\\('/Users/wasukira/Projects/acewebsite-frontend/node_modules/react-photo-album/package.json'\\); console.log\\(JSON.stringify\\(p.exports, null, 2\\)\\)\")",
+      "Bash(node -e \"const p = require\\('/Users/wasukira/Projects/acewebsite-frontend/node_modules/yet-another-react-lightbox/package.json'\\); console.log\\(JSON.stringify\\(p.exports, null, 2\\)\\)\")"
     ]
   }
 }

@@ -27,7 +27,8 @@ async function getEventData(slug) {
 }
 
 export default async function EventDetailsPage({ params }) {
-  const event = await getEventData(params.slug)
+  const { slug } = await params
+  const event = await getEventData(slug)
 
   if (!event) {
     notFound()
@@ -272,13 +273,7 @@ export default async function EventDetailsPage({ params }) {
       {event.gallery && event.gallery.length > 0 && (
         <div className="py-16 bg-gray-50">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mb-10">
-              <h2 className="text-3xl font-bold text-gray-900">Event Gallery</h2>
-              <p className="mt-2 text-gray-500">
-                {event.gallery.length} photo{event.gallery.length !== 1 ? 's' : ''} — click any image to view full screen
-              </p>
-            </div>
-            <EventGallery photos={event.gallery} />
+            <EventGallery images={event.gallery} title={event.galleryTitle} />
           </div>
         </div>
       )}

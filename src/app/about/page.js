@@ -62,8 +62,8 @@ export default async function AboutPage() {
   const aboutData = await getAboutData()
 
   const coreValues = aboutData?.coreValues?.values || []
-  const education = aboutData?.educationSection
   const missionVision = aboutData?.missionVision
+  const strategicObjectives = aboutData?.strategicObjectives
 
   return (
     <div className="bg-white">
@@ -157,10 +157,13 @@ export default async function AboutPage() {
               </h2>
               <p className="mt-4 text-lg text-gray-600">Guiding principles that shape our work and culture</p>
             </AnimateOnScroll>
-
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <div className="flex flex-wrap justify-center gap-8">
               {coreValues.map((value, i) => (
-                <AnimateOnScroll key={value.title} variant="zoom" delay={i * 80} className="h-full">
+                <AnimateOnScroll
+                  key={value.title}
+                  variant="zoom"
+                  delay={i * 80}
+                  className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[220px]">
                   <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow h-full">
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-50 text-red-700 mb-4">
                       {coreValueIcons[i] || coreValueIcons[0]}
@@ -175,33 +178,44 @@ export default async function AboutPage() {
         </div>
       )}
 
-      {/* Education & Training */}
-      {education && (
-        <div className="bg-gray-50 py-20">
+      {/* Strategic Objectives */}
+      {strategicObjectives?.objectives?.length > 0 && (
+        <div className="bg-gray-900 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <AnimateOnScroll variant="fade-up" className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">
-                {education.sectionTitle || 'Education & Training'}
+            <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center mb-16">
+              <span className="inline-block rounded-full bg-red-700/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">
+                Strategy
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                {strategicObjectives.sectionTitle || 'Strategic Objectives'}
               </h2>
-              <p className="text-lg text-gray-600 mb-8">{education.description}</p>
-              {education.programs && education.programs.length > 0 && (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  {education.programs.map((program, i) => (
-                    <AnimateOnScroll key={program.title} variant="fade-up" delay={i * 80}>
-                      <div className="rounded-xl border border-gray-200 bg-white p-5 hover:border-red-200 hover:shadow-sm transition-all">
-                        <h3 className="font-semibold text-gray-900 text-sm mb-1">{program.title}</h3>
-                        <p className="text-xs text-gray-500 leading-relaxed">{program.description}</p>
-                      </div>
-                    </AnimateOnScroll>
-                  ))}
-                </div>
+              {strategicObjectives.sectionDescription && (
+                <p className="mt-4 text-lg text-gray-400 leading-relaxed">
+                  {strategicObjectives.sectionDescription}
+                </p>
               )}
-              <div className="mt-8">
-                <Link href="/programs" className="rounded-md bg-red-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-800 transition-colors">
-                  View All Programs →
-                </Link>
-              </div>
             </AnimateOnScroll>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {strategicObjectives.objectives.map((obj, i) => (
+                <AnimateOnScroll key={obj.title} variant="fade-up" delay={i * 70}>
+                  <div className="group relative flex flex-col h-full rounded-2xl border border-white/10 bg-white/5 p-7 hover:bg-white/10 hover:border-red-700/50 transition-all">
+                    <div className="mb-5 flex items-center gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-700 text-sm font-bold text-white">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div className="h-px flex-1 bg-white/10 group-hover:bg-red-700/40 transition-colors" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white mb-3 leading-snug">
+                      {obj.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed flex-1">
+                      {obj.description}
+                    </p>
+                  </div>
+                </AnimateOnScroll>
+              ))}
+            </div>
           </div>
         </div>
       )}

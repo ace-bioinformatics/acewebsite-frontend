@@ -16,17 +16,6 @@ export const partnerType = defineType({
       options: {source: 'name'},
     }),
     defineField({
-      name: 'type',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Funder', value: 'funder'},
-          {title: 'Collaborator', value: 'collaborator'},
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'description',
       type: 'text',
     }),

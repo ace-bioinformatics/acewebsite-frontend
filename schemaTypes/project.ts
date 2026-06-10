@@ -90,8 +90,16 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'pi',
+      title: 'Principal Investigator',
       type: 'reference',
       to: [{type: 'person'}],
+    }),
+    defineField({
+      name: 'fellows',
+      title: 'Fellows',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'person'}]}],
+      description: 'ACE fellows working on this project. Linked from the Staff directory.',
     }),
     defineField({
       name: 'abstract',

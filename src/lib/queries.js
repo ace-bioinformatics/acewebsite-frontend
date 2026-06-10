@@ -152,7 +152,8 @@ export const projectBySlugQuery = `
       description,
       "logo": logo { "url": asset->url, alt }
     },
-    "pi": pi->{ name, role, slug }
+    "pi": pi->{ name, role, slug, "image": image { "url": asset->url } },
+    "fellows": fellows[]->{ _id, name, role, slug, "image": image { "url": asset->url } }
   }
 `
 
@@ -322,12 +323,18 @@ export const eventBySlugQuery = `
     topics,
     capacity,
     registrationLink,
-    "detailsLink": "/events/" + slug.current,
+    galleryTitle,
     gallery[] {
-      "url": asset->url,
+      _key,
       caption,
-      "dimensions": asset->metadata.dimensions
-    }
+      alt,
+      credit,
+      "url": image.asset->url,
+      "width": image.asset->metadata.dimensions.width,
+      "height": image.asset->metadata.dimensions.height,
+      "blurDataURL": image.asset->metadata.lqip
+    },
+    "detailsLink": "/events/" + slug.current
   }
 `
 

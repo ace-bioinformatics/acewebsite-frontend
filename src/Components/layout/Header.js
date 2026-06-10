@@ -11,11 +11,11 @@ const navigation = [
     name: 'About',
     href: '/about',
     submenu: [
-      { name: 'Facilities', href: '/facilities' },
       { name: 'Who Are We', href: '/about/who-we-are' },
-      { name: 'Thematic Areas', href: '/about/thematic-areas' },
       { name: 'Our Journey', href: '/about/our-journey' },
+      { name: 'Thematic Areas', href: '/about/thematic-areas' },
       { name: 'Programs', href: '/programs' },
+      { name: 'Facilities', href: '/facilities' },
     ],
   },
   { name: 'Research', href: '/research' },

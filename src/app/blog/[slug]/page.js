@@ -27,6 +27,32 @@ function formatDate(iso) {
 }
 
 const ptComponents = {
+  block: {
+    normal: ({ children }) => <p className="mb-5 leading-relaxed text-gray-700">{children}</p>,
+    h2: ({ children }) => <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">{children}</h3>,
+    h4: ({ children }) => <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">{children}</h4>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-red-700 pl-5 italic text-gray-600 my-6">{children}</blockquote>
+    ),
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
+    em: ({ children }) => <em className="italic">{children}</em>,
+    link: ({ value, children }) => (
+      <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-red-700 hover:underline">
+        {children}
+      </a>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => <ul className="list-disc pl-6 mb-5 space-y-1 text-gray-700">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal pl-6 mb-5 space-y-1 text-gray-700">{children}</ol>,
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    number: ({ children }) => <li className="leading-relaxed">{children}</li>,
+  },
   types: {
     image: ({ value }) => {
       if (!value?.asset) return null

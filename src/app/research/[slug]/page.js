@@ -50,88 +50,68 @@ export default async function ProjectPage({ params }) {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-16 sm:py-24 overflow-hidden">
-        {!project.featuredImage && (
+      <div className={`relative py-16 sm:py-24 overflow-hidden ${project.featuredImage ? '' : 'bg-gradient-to-br from-red-700 to-red-900'}`}>
+        {project.featuredImage ? (
+          <div className="absolute inset-0">
+            <Image
+              src={urlFor(project.featuredImage).width(1600).height(900).url()}
+              alt={project.featuredImage.alt || project.title}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-slate-900/75" />
+          </div>
+        ) : (
           <ACEPattern rows={6} cols={9} opacity={0.08} className="absolute top-4 right-4 hidden lg:block" />
         )}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className={`flex gap-10 ${project.featuredImage ? 'lg:items-center' : 'max-w-4xl'}`}>
-            {/* Text column */}
-            <div className="flex-1 min-w-0">
-              <Link
-                href="/research"
-                className="inline-flex items-center text-red-100 hover:text-white mb-8"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Back to Research
-              </Link>
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="max-w-4xl">
+            <Link
+              href="/research"
+              className="inline-flex items-center text-red-100 hover:text-white mb-8"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Research
+            </Link>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.category && (
-                  <span className="inline-flex items-center rounded-full bg-red-500 px-3 py-1 text-sm font-medium text-white">
-                    {project.category}
-                  </span>
-                )}
-                {thematicLabels.map((label) => (
-                  <span key={label} className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-medium text-white">
-                    {label}
-                  </span>
-                ))}
-                {project.status && (
-                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                    project.status === 'active' || project.status === 'ongoing'
-                      ? 'bg-emerald-500 text-white'
-                      : project.status === 'completed'
-                      ? 'bg-gray-500 text-white'
-                      : 'bg-purple-500 text-white'
-                  }`}>
-                    {project.status}
-                  </span>
-                )}
-              </div>
-
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                {project.title}
-              </h1>
-
-              {project.startDate && (
-                <p className="mt-4 text-red-100 text-sm">
-                  Started: {new Date(project.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
-                  {project.endDate && ` · Ends: ${new Date(project.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}`}
-                </p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.category && (
+                <span className="inline-flex items-center rounded-full bg-red-500 px-3 py-1 text-sm font-medium text-white">
+                  {project.category}
+                </span>
+              )}
+              {thematicLabels.map((label) => (
+                <span key={label} className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-medium text-white">
+                  {label}
+                </span>
+              ))}
+              {project.status && (
+                <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
+                  project.status === 'active' || project.status === 'ongoing'
+                    ? 'bg-emerald-500 text-white'
+                    : project.status === 'completed'
+                    ? 'bg-gray-500 text-white'
+                    : 'bg-purple-500 text-white'
+                }`}>
+                  {project.status}
+                </span>
               )}
             </div>
 
-            {/* Featured image — right column on desktop, below text on mobile */}
-            {project.featuredImage && (
-              <div className="hidden lg:block shrink-0 w-80 xl:w-96">
-                <div className="relative h-64 xl:h-72 rounded-xl overflow-hidden bg-white/10 ring-1 ring-white/20">
-                  <Image
-                    src={urlFor(project.featuredImage).width(800).height(600).url()}
-                    alt={project.featuredImage.alt || project.title}
-                    fill
-                    className="object-contain p-2"
-                    priority
-                  />
-                </div>
-              </div>
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              {project.title}
+            </h1>
+
+            {project.startDate && (
+              <p className="mt-4 text-red-100 text-sm">
+                Started: {new Date(project.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+                {project.endDate && ` · Ends: ${new Date(project.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}`}
+              </p>
             )}
           </div>
-
-          {/* Featured image — visible on mobile, below text */}
-          {project.featuredImage && (
-            <div className="mt-8 lg:hidden relative h-56 rounded-xl overflow-hidden bg-white/10 ring-1 ring-white/20">
-              <Image
-                src={urlFor(project.featuredImage).width(800).height(450).url()}
-                alt={project.featuredImage.alt || project.title}
-                fill
-                className="object-contain p-2"
-                priority
-              />
-            </div>
-          )}
         </div>
       </div>
 
@@ -162,24 +142,73 @@ export default async function ProjectPage({ params }) {
         {project.pi && (
           <AnimateOnScroll variant="fade-up">
             <section className="border-t border-gray-200 pt-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Principal Investigator</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Principal Investigator</h2>
               <Link
                 href={`/team/${project.pi.slug?.current}`}
-                className="inline-flex items-center gap-3 rounded-xl bg-red-50 px-5 py-3 hover:bg-red-100 transition-colors group"
+                className="inline-flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm hover:border-red-200 hover:shadow-md transition-all group w-full sm:w-auto"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white shrink-0">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-gray-100 ring-2 ring-white shadow">
+                  {project.pi.image?.url ? (
+                    <Image
+                      src={project.pi.image.url}
+                      alt={project.pi.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-red-100 to-red-200">
+                      <svg className="h-8 w-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900 group-hover:text-red-700 transition-colors">{project.pi.name}</p>
-                  {project.pi.role && <p className="text-sm text-gray-500">{project.pi.role}</p>}
+                  {project.pi.role && <p className="text-sm text-gray-500 mt-0.5">{project.pi.role}</p>}
+                  <p className="text-xs text-red-700 font-medium mt-1">View Profile →</p>
                 </div>
-                <svg className="h-4 w-4 text-gray-400 group-hover:text-red-700 ml-auto transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
               </Link>
+            </section>
+          </AnimateOnScroll>
+        )}
+
+        {/* Fellows */}
+        {project.fellows && project.fellows.length > 0 && (
+          <AnimateOnScroll variant="fade-up">
+            <section className="border-t border-gray-200 pt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Fellows</h2>
+              <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
+                {project.fellows.map((fellow, i) => (
+                  <AnimateOnScroll key={fellow._id} variant="zoom" delay={i * 60}>
+                    <Link href={`/team/${fellow.slug?.current}`} className="group">
+                      <div className="relative overflow-hidden rounded-2xl bg-gray-100 aspect-square">
+                        {fellow.image?.url ? (
+                          <Image
+                            src={fellow.image.url}
+                            alt={fellow.name}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center bg-gradient-to-br from-red-100 to-red-200">
+                            <svg className="h-14 w-14 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                          <p className="p-3 text-white text-xs font-medium">View Profile</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 text-center">
+                        <p className="text-sm font-semibold text-gray-900 group-hover:text-red-700 transition-colors leading-snug">{fellow.name}</p>
+                        {fellow.role && <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{fellow.role}</p>}
+                      </div>
+                    </Link>
+                  </AnimateOnScroll>
+                ))}
+              </div>
             </section>
           </AnimateOnScroll>
         )}

@@ -190,28 +190,28 @@ export const aboutPage =  defineType({
         }
       ]
     },
-    // Education & Training Section
+    // Strategic Objectives
     {
-      name: 'educationSection',
-      title: 'Education & Training Section',
+      name: 'strategicObjectives',
+      title: 'Strategic Objectives',
       type: 'object',
       fields: [
         {
           name: 'sectionTitle',
           title: 'Section Title',
           type: 'string',
-          validation: rule => rule.required()
+          initialValue: 'Strategic Objectives',
         },
         {
-          name: 'description',
-          title: 'Description',
+          name: 'sectionDescription',
+          title: 'Section Description',
           type: 'text',
-          rows: 5,
-          validation: rule => rule.required()
+          rows: 3,
+          description: 'A short paragraph introducing the strategic objectives.',
         },
         {
-          name: 'programs',
-          title: 'Training Programs',
+          name: 'objectives',
+          title: 'Objectives',
           type: 'array',
           of: [
             {
@@ -219,26 +219,25 @@ export const aboutPage =  defineType({
               fields: [
                 {
                   name: 'title',
-                  title: 'Program Title',
+                  title: 'Objective Title',
                   type: 'string',
-                  validation: rule => rule.required()
+                  validation: (rule: any) => rule.required(),
                 },
                 {
                   name: 'description',
                   title: 'Description',
                   type: 'text',
-                  rows: 3
-                }
+                  rows: 4,
+                  validation: (rule: any) => rule.required(),
+                },
               ],
               preview: {
-                select: {
-                  title: 'title'
-                }
-              }
-            }
-          ]
-        }
-      ]
+                select: { title: 'title', subtitle: 'description' },
+              },
+            },
+          ],
+        },
+      ],
     },
     // Timeline/History Section
     {
