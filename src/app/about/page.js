@@ -196,6 +196,7 @@ export default async function AboutPage() {
               )}
             </AnimateOnScroll>
 
+
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {strategicObjectives.objectives.map((obj, i) => (
                 <AnimateOnScroll key={obj.title} variant="fade-up" delay={i * 70}>
