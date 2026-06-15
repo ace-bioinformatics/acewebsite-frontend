@@ -222,9 +222,9 @@ export default function ResearchPage() {
 
       {/* Partners & Collaborators */}
       {(funders.length > 0 || partners.filter((p) => p.type === 'collaborator').length > 0) && (
-        <div className="bg-gray-50 py-20">
+        <section className="bg-white py-24 border-t border-gray-100">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <AnimateOnScroll variant="fade-up" className="text-center mb-12">
+            <AnimateOnScroll variant="fade-up" className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">Partners &amp; Collaborators</h2>
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                 Our research is powered by strong partnerships with leading funders and collaborating institutions.
@@ -233,11 +233,15 @@ export default function ResearchPage() {
 
             {/* Funders */}
             {funders.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 text-center">Funders</h3>
-                <div className="flex flex-wrap justify-center gap-4">
+              <div className="mb-16">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="flex-1 h-px bg-gray-200" />
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">Funders</span>
+                  <div className="flex-1 h-px bg-gray-200" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {funders.map((funder, i) => (
-                    <AnimateOnScroll key={funder._id} variant="zoom" delay={i * 60}>
+                    <AnimateOnScroll key={funder._id} variant="zoom" delay={i * 60} className="h-full">
                       <FunderCard funder={funder} />
                     </AnimateOnScroll>
                   ))}
@@ -248,18 +252,22 @@ export default function ResearchPage() {
             {/* Collaborators */}
             {partners.filter((p) => p.type === 'collaborator').length > 0 && (
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6 text-center">Collaborators</h3>
-                <div className="flex flex-wrap justify-center gap-4">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="flex-1 h-px bg-gray-200" />
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">Collaborators</span>
+                  <div className="flex-1 h-px bg-gray-200" />
+                </div>
+                <div className="flex flex-wrap justify-center gap-3">
                   {partners.filter((p) => p.type === 'collaborator').map((partner, i) => (
                     <AnimateOnScroll key={partner._id} variant="zoom" delay={i * 60}>
-                      <PartnerCard partner={partner} />
+                      <CollaboratorBadge partner={partner} />
                     </AnimateOnScroll>
                   ))}
                 </div>
               </div>
             )}
           </div>
-        </div>
+        </section>
       )}
 
       {/* CTA Section */}
@@ -319,23 +327,41 @@ function PartnerCard({ partner }) {
 }
 
 function FunderCard({ funder }) {
-  const inner = (
-    <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm hover:border-red-200 hover:shadow-md transition-all min-w-[180px]">
-      {funder.logo?.url ? (
-        <img
-          src={funder.logo.url}
-          alt={funder.logo.alt || funder.name}
-          className="h-10 w-auto object-contain shrink-0 max-w-[80px]"
-        />
-      ) : (
-        <div className="h-10 w-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-          <span className="text-xs font-bold text-red-700">{funder.name.charAt(0)}</span>
+  const card = (
+    <div className="group relative h-52 w-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl hover:border-red-100 transition-all duration-300 cursor-pointer">
+      <div className="flex h-full items-center justify-center p-6">
+        <div className="w-32 h-20 flex items-center justify-center shrink-0">
+          {funder.logo?.url ? (
+            <img
+              src={funder.logo.url}
+              alt={funder.logo.alt || funder.name}
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center">
+              <span className="text-2xl font-bold text-red-700 select-none">{funder.name.charAt(0)}</span>
+            </div>
+          )}
         </div>
-      )}
-      <div>
-        <p className="text-sm font-semibold text-gray-900 leading-tight">{funder.name}</p>
+      </div>
+      {/* Slide-up hover overlay */}
+      <div className="absolute inset-x-0 bottom-0 h-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-red-900 to-red-700 p-4 flex flex-col justify-end">
+        {funder.logo?.url && (
+          <div className="w-14 h-10 flex items-center justify-center shrink-0 mb-1">
+            <img
+              src={funder.logo.url}
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full object-contain opacity-80 brightness-0 invert"
+            />
+          </div>
+        )}
+        <p className="text-sm font-semibold text-white leading-tight mb-1">{funder.name}</p>
         {funder.description && (
-          <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{funder.description}</p>
+          <p className="text-xs text-red-200 line-clamp-2 mb-2">{funder.description}</p>
+        )}
+        {funder.website && (
+          <span className="text-xs font-medium text-white/80">Visit website →</span>
         )}
       </div>
     </div>
@@ -343,10 +369,38 @@ function FunderCard({ funder }) {
 
   if (funder.website) {
     return (
-      <a href={funder.website} target="_blank" rel="noopener noreferrer">
-        {inner}
+      <a href={funder.website} target="_blank" rel="noopener noreferrer" className="block h-52">
+        {card}
       </a>
     )
   }
-  return inner
+  return <div className="h-52">{card}</div>
+}
+
+function CollaboratorBadge({ partner }) {
+  const badge = (
+    <div className="flex items-center gap-2.5 rounded-full border border-gray-200 bg-gray-50 px-4 py-2.5 hover:border-red-200 hover:shadow-md transition-all">
+      {partner.logo?.url ? (
+        <img
+          src={partner.logo.url}
+          alt={partner.logo.alt || partner.name}
+          className="h-6 w-6 object-contain shrink-0"
+        />
+      ) : (
+        <div className="h-6 w-6 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+          <span className="text-xs font-bold text-red-700">{partner.name.charAt(0)}</span>
+        </div>
+      )}
+      <span className="text-sm font-medium text-gray-800 whitespace-nowrap">{partner.name}</span>
+    </div>
+  )
+
+  if (partner.url) {
+    return (
+      <a href={partner.url} target="_blank" rel="noopener noreferrer">
+        {badge}
+      </a>
+    )
+  }
+  return badge
 }

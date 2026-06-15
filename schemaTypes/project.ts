@@ -95,6 +95,13 @@ export const projectType = defineType({
       to: [{type: 'person'}],
     }),
     defineField({
+      name: 'coPrincipalInvestigators',
+      title: 'Co-Principal Investigators',
+      type: 'array',
+      description: 'Select one or more Co-PIs from ACE staff. Leave empty if none.',
+      of: [{ type: 'reference', to: [{ type: 'person' }] }],
+    }),
+    defineField({
       name: 'fellows',
       title: 'Fellows',
       type: 'array',

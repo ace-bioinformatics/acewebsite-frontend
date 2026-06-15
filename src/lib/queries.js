@@ -67,6 +67,7 @@ export const personBySlugQuery = `
     role,
     department,
     bio,
+    researchInterests,
     image,
     email,
     linkedin,
@@ -153,6 +154,7 @@ export const projectBySlugQuery = `
       "logo": logo { "url": asset->url, alt }
     },
     "pi": pi->{ name, role, slug, "image": image { "url": asset->url } },
+    "coPrincipalInvestigators": coPrincipalInvestigators[]->{ _id, name, role, slug, "image": image { "url": asset->url } },
     "fellows": fellows[]->{ _id, name, role, slug, "image": image { "url": asset->url } }
   }
 `

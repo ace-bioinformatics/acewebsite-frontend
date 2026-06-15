@@ -21,6 +21,14 @@ export const personType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'researchInterests',
+      title: 'Research Interests',
+      type: 'array',
+      description: 'Add each research interest as a separate tag (e.g. "Human Genomics", "Cancer Genomics", "AMR")',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    }),
+    defineField({
       name: 'bio',
       type: 'text',
     }),

@@ -173,6 +173,43 @@ export default async function ProjectPage({ params }) {
           </AnimateOnScroll>
         )}
 
+        {/* Co-Principal Investigators */}
+        {project.coPrincipalInvestigators && project.coPrincipalInvestigators.length > 0 && (
+          <AnimateOnScroll variant="fade-up">
+            <section className="border-t border-gray-200 pt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                {project.coPrincipalInvestigators.length === 1 ? 'Co-Principal Investigator' : 'Co-Principal Investigators'}
+              </h2>
+              <div className="flex flex-col gap-3">
+                {project.coPrincipalInvestigators.map((copi) => (
+                  <Link
+                    key={copi._id}
+                    href={`/team/${copi.slug?.current}`}
+                    className="inline-flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm hover:border-red-200 hover:shadow-md transition-all group w-full sm:w-auto sm:w-fit"
+                  >
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-gray-100 ring-2 ring-white shadow">
+                      {copi.image?.url ? (
+                        <Image src={copi.image.url} alt={copi.name} fill className="object-cover" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-red-100 to-red-200">
+                          <svg className="h-8 w-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 group-hover:text-red-700 transition-colors">{copi.name}</p>
+                      {copi.role && <p className="text-sm text-gray-500 mt-0.5">{copi.role}</p>}
+                      <p className="text-xs text-red-700 font-medium mt-1">View Profile →</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          </AnimateOnScroll>
+        )}
+
         {/* Fellows */}
         {project.fellows && project.fellows.length > 0 && (
           <AnimateOnScroll variant="fade-up">
@@ -249,39 +286,46 @@ export default async function ProjectPage({ params }) {
           <AnimateOnScroll variant="fade-up">
             <section className="border-t border-gray-200 pt-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Funders</h2>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 {project.funders.map((funder, index) => {
                   const name = typeof funder === 'string' ? funder : funder.name
                   const website = typeof funder === 'object' ? funder.website : null
                   const logo = typeof funder === 'object' ? funder.logo : null
+                  const description = typeof funder === 'object' ? funder.description : null
 
-                  const inner = (
-                    <div
-                      key={funder._id || index}
-                      className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm"
-                    >
-                      {logo?.url ? (
-                        <Image
-                          src={logo.url}
-                          alt={logo.alt || name}
-                          width={20}
-                          height={20}
-                          className="object-contain shrink-0"
-                        />
-                      ) : (
-                        <svg className="h-4 w-4 text-red-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      )}
-                      {name}
+                  const card = (
+                    <div className="group relative flex flex-col items-center justify-center w-32 h-32 rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300 overflow-hidden cursor-pointer">
+                      <div className="w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-2">
+                        {logo?.url ? (
+                          <Image
+                            src={logo.url}
+                            alt={logo.alt || name}
+                            width={64}
+                            height={64}
+                            className="object-contain w-full h-full"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center">
+                            <span className="text-lg font-bold text-red-700">{name?.charAt(0)}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-red-900 via-red-800 to-red-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-3">
+                        <p className="text-white text-xs font-bold text-center leading-tight mb-1">{name}</p>
+                        {description && (
+                          <p className="text-red-100 text-xs text-center leading-tight line-clamp-4">{description}</p>
+                        )}
+                      </div>
                     </div>
                   )
 
                   return website ? (
-                    <a key={funder._id || index} href={website} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                      {inner}
+                    <a key={funder._id || index} href={website} target="_blank" rel="noopener noreferrer">
+                      {card}
                     </a>
-                  ) : inner
+                  ) : (
+                    <div key={funder._id || index}>{card}</div>
+                  )
                 })}
               </div>
             </section>

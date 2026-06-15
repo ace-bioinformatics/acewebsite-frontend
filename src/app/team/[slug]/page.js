@@ -19,7 +19,8 @@ async function getPerson(slug) {
 }
 
 export default async function StaffDetailPage({ params }) {
-  const person = await getPerson(params.slug)
+  const { slug } = await params
+  const person = await getPerson(slug)
 
   if (!person) {
     return (
@@ -98,19 +99,32 @@ export default async function StaffDetailPage({ params }) {
                   </a>
                 )}
 
-                {(person.linkedin || person.twitter || person.googleScholarUrl) && (
-                  <div className="flex gap-3 pt-2 flex-wrap">
+                {(person.googleScholarUrl || person.linkedin || person.twitter) && (
+                  <div className="mt-4 flex flex-col gap-2">
+                    {person.googleScholarUrl && (
+                      <a
+                        href={person.googleScholarUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors"
+                      >
+                        <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+                        </svg>
+                        Google Scholar
+                      </a>
+                    )}
                     {person.linkedin && (
                       <a
                         href={person.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center h-9 w-9 rounded-lg bg-blue-700 text-white hover:bg-blue-800 transition-colors"
-                        title="LinkedIn Profile"
+                        className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors"
                       >
-                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
+                        LinkedIn
                       </a>
                     )}
                     {person.twitter && (
@@ -118,30 +132,30 @@ export default async function StaffDetailPage({ params }) {
                         href={person.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center h-9 w-9 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors"
-                        title="X (Twitter) Profile"
+                        className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-red-700 transition-colors"
                       >
-                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
+                        X (Twitter)
                       </a>
                     )}
-                    {person.googleScholarUrl && (
-                      <a
-                        href={person.googleScholarUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center h-9 w-9 rounded-lg bg-white border border-gray-300 hover:border-red-300 hover:bg-red-50 transition-colors"
-                        title="Google Scholar Profile"
-                      >
-                        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#4285F4" />
-                          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#4285F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          <circle cx="19" cy="17" r="3" fill="#EA4335" />
-                          <path d="M17.5 17h3M19 15.5v3" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-                        </svg>
-                      </a>
-                    )}
+                  </div>
+                )}
+
+                {person.researchInterests && person.researchInterests.length > 0 && (
+                  <div className="mt-5">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Research Interests</p>
+                    <div className="flex flex-wrap gap-2">
+                      {person.researchInterests.map((interest) => (
+                        <span
+                          key={interest}
+                          className="rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-200"
+                        >
+                          {interest}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -167,20 +181,6 @@ export default async function StaffDetailPage({ params }) {
                 </div>
               )}
 
-              {/* Additional sections can be added here */}
-              <div className="mt-12 pt-8 border-t border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Research Interests</h3>
-                <p className="text-gray-600">
-                  Information about research interests will be available soon.
-                </p>
-              </div>
-
-              <div className="mt-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Publications</h3>
-                <p className="text-gray-600">
-                  Publication list will be available soon.
-                </p>
-              </div>
             </div>
           </div>
         </div>
