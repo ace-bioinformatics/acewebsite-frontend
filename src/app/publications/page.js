@@ -33,7 +33,7 @@ export default function PublicationsPage() {
   const filtered = useMemo(() => {
     let result = publications || []
     if (activeArea !== 'all') {
-      result = result.filter((p) => p.thematicArea === activeArea)
+      result = result.filter((p) => p.thematicAreas?.includes(activeArea))
     }
     if (search.trim()) {
       const q = search.toLowerCase()
@@ -42,7 +42,8 @@ export default function PublicationsPage() {
           p.title?.toLowerCase().includes(q) ||
           p.authors?.some((a) => a.toLowerCase().includes(q)) ||
           p.abstract?.toLowerCase().includes(q) ||
-          p.journal?.toLowerCase().includes(q)
+          p.journal?.toLowerCase().includes(q) ||
+          p.publisherName?.toLowerCase().includes(q)
       )
     }
     return result
@@ -317,16 +318,24 @@ function YearGroupedList({ publications, startIndex, thematicAreas }) {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-grow min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-3">
-                      {pub.thematicArea && (
-                        <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
-                          {thematicAreas.find((a) => a.value === pub.thematicArea)?.label || pub.thematicArea}
+                      {pub.thematicAreas?.map((area) => (
+                        <span key={area} className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
+                          {thematicAreas.find((a) => a.value === area)?.label || area}
                         </span>
-                      )}
-                      {pub.type && (
-                        <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 capitalize">
-                          {pub.type}
-                        </span>
-                      )}
+                      ))}
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        {pub.type && (
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                            {{'journal': 'Journal Article', 'book': 'Book', 'conference': 'Conference Paper'}[pub.type] || pub.type}
+                          </span>
+                        )}
+                        {pub.publisherName && pub.type && (
+                          <span className="text-gray-300">·</span>
+                        )}
+                        {pub.publisherName && (
+                          <span className="text-xs text-gray-500">{pub.publisherName}</span>
+                        )}
+                      </div>
                       {pub.featured && (
                         <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
                           Featured

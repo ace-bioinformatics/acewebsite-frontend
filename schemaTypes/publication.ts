@@ -37,32 +37,41 @@ export const publicationType = defineType({
     }),
     defineField({
       name: 'type',
+      title: 'Publication Type',
       type: 'string',
       options: {
         list: [
-          {title: 'Journal', value: 'journal'},
+          {title: 'Journal Article', value: 'journal'},
           {title: 'Book', value: 'book'},
-          {title: 'Conference', value: 'conference'},
+          {title: 'Conference Paper', value: 'conference'},
         ],
+        layout: 'radio',
       },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'publisherName',
+      title: 'Publisher Name',
+      type: 'string',
+      description: 'The name of the journal publisher, book publishing house, or conference organizer (e.g. "Oxford University Press", "IEEE", "Springer").',
     }),
     defineField({
       name: 'doi',
       type: 'url',
     }),
     defineField({
-      name: 'thematicArea',
-      title: 'Thematic Area',
-      type: 'string',
+      name: 'thematicAreas',
+      title: 'Thematic Areas',
+      type: 'array',
+      of: [{type: 'string'}],
       options: {
         list: [
           {title: 'AI', value: 'ai'},
-          {title: 'AMR (Antimicrobial Resistance)', value: 'amr'},
+          {title: 'AMR', value: 'amr'},
           {title: 'Human Genomics & Cancer', value: 'human_genomics_cancer'},
           {title: 'Malaria', value: 'malaria'},
           {title: 'Visualization', value: 'visualization'},
         ],
-        layout: 'radio',
       },
     }),
     defineField({

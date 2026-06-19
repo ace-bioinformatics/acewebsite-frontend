@@ -221,7 +221,8 @@ export const allPublicationsQuery = `
     url,
     abstract,
     type,
-    thematicArea,
+    publisherName,
+    thematicAreas,
     featured
   }
 `
