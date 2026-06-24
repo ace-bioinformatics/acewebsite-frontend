@@ -5,11 +5,17 @@ import { allPublicationsQuery } from '@/lib/queries'
 
 const THEMATIC_AREAS = [
   { value: 'all', label: 'All Areas' },
-  { value: 'ai', label: 'AI' },
   { value: 'amr', label: 'AMR' },
-  { value: 'human_genomics_cancer', label: 'Human Genomics & Cancer' },
+  { value: 'human_genomics', label: 'Human Genomics' },
   { value: 'malaria', label: 'Malaria' },
+  { value: 'hpc', label: 'High Performance Computing' },
+  { value: 'mathematical_modelling', label: 'Mathematical Modelling' },
+  { value: 'capacity_building_and_training', label: 'Capacity Building & Training' },
+  { value: 'machine_learning', label: 'Machine Learning' },
+  { value: 'databases_and_pipelines', label: 'Databases & Pipelines' },
+  { value: 'reviews_and_perspectives', label: 'Reviews and Perspectives' },
   { value: 'visualization', label: 'Visualization' },
+  { value: 'other_bioinformatics', label: 'Other Bioinformatics' },
 ]
 
 const ITEMS_PER_PAGE = 10

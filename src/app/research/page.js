@@ -11,19 +11,31 @@ import ACEPattern from '@/Components/shared/ACEPattern'
 
 const THEMATIC_AREAS = [
   { value: 'all', label: 'All Areas' },
-  { value: 'ai', label: 'AI' },
   { value: 'amr', label: 'AMR' },
-  { value: 'human_genomics_cancer', label: 'Human Genomics & Cancer' },
+  { value: 'human_genomics', label: 'Human Genomics' },
   { value: 'malaria', label: 'Malaria' },
+  { value: 'hpc', label: 'High Performance Computing' },
+  { value: 'mathematical_modelling', label: 'Mathematical Modelling' },
+  { value: 'capacity_building_and_training', label: 'Capacity Building & Training' },
+  { value: 'machine_learning', label: 'Machine Learning' },
+  { value: 'databases_and_pipelines', label: 'Databases & Pipelines' },
+  { value: 'reviews_and_perspectives', label: 'Reviews and Perspectives' },
   { value: 'visualization', label: 'Visualization' },
+  { value: 'other_bioinformatics', label: 'Other Bioinformatics' },
 ]
 
 const AREA_COLORS = {
-  ai: 'bg-purple-50 text-purple-700 ring-purple-200',
   amr: 'bg-orange-50 text-orange-700 ring-orange-200',
-  human_genomics_cancer: 'bg-blue-50 text-blue-700 ring-blue-200',
+  human_genomics: 'bg-blue-50 text-blue-700 ring-blue-200',
   malaria: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
+  hpc: 'bg-cyan-50 text-cyan-700 ring-cyan-200',
+  mathematical_modelling: 'bg-indigo-50 text-indigo-700 ring-indigo-200',
+  capacity_building_and_training: 'bg-teal-50 text-teal-700 ring-teal-200',
+  machine_learning: 'bg-violet-50 text-violet-700 ring-violet-200',
+  databases_and_pipelines: 'bg-amber-50 text-amber-700 ring-amber-200',
+  reviews_and_perspectives: 'bg-sky-50 text-sky-700 ring-sky-200',
   visualization: 'bg-pink-50 text-pink-700 ring-pink-200',
+  other_bioinformatics: 'bg-gray-50 text-gray-700 ring-gray-200',
 }
 
 export default function ResearchPage() {

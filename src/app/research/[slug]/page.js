@@ -8,11 +8,17 @@ import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
 import ACEPattern from '@/Components/shared/ACEPattern'
 
 const THEMATIC_AREA_LABELS = {
-  ai: 'AI',
   amr: 'AMR',
-  human_genomics_cancer: 'Human Genomics & Cancer',
+  human_genomics: 'Human Genomics',
   malaria: 'Malaria',
+  hpc: 'High Performance Computing',
+  mathematical_modelling: 'Mathematical Modelling',
+  capacity_building_and_training: 'Capacity Building & Training',
+  machine_learning: 'Machine Learning',
+  databases_and_pipelines: 'Databases & Pipelines',
+  reviews_and_perspectives: 'Reviews and Perspectives',
   visualization: 'Visualization',
+  other_bioinformatics: 'Other Bioinformatics',
 }
 
 export async function generateStaticParams() {
@@ -134,6 +140,56 @@ export default async function ProjectPage({ params }) {
             <section className="border-t border-gray-200 pt-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Abstract</h2>
               <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{project.abstract}</p>
+            </section>
+          </AnimateOnScroll>
+        )}
+
+        {/* Aims & Objectives */}
+        {project.aimsAndObjectives && project.aimsAndObjectives.length > 0 && (
+          <AnimateOnScroll variant="fade-up">
+            <section className="border-t border-gray-200 pt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Aims &amp; Objectives</h2>
+              <ul className="space-y-3">
+                {project.aimsAndObjectives.map((aim, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-red-700 text-xs font-bold shrink-0 mt-0.5">
+                      {index + 1}
+                    </span>
+                    <p className="text-gray-700 leading-relaxed">{aim}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </AnimateOnScroll>
+        )}
+
+        {/* Key Outcomes */}
+        {project.keyOutcomes && project.keyOutcomes.length > 0 && (
+          <AnimateOnScroll variant="fade-up">
+            <section className="border-t border-gray-200 pt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Outcomes</h2>
+              <ul className="space-y-3">
+                {project.keyOutcomes.map((outcome, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <svg className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-gray-700 leading-relaxed">{outcome}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </AnimateOnScroll>
+        )}
+
+        {/* Relevance to the Sector */}
+        {project.relevanceToSector && (
+          <AnimateOnScroll variant="fade-up">
+            <section className="border-t border-gray-200 pt-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Relevance to the Sector</h2>
+              <div className="rounded-2xl bg-red-50 p-6">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{project.relevanceToSector}</p>
+              </div>
             </section>
           </AnimateOnScroll>
         )}

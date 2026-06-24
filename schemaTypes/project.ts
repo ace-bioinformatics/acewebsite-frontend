@@ -72,11 +72,17 @@ export const projectType = defineType({
       of: [{ type: 'string' }],
       options: {
         list: [
-          {title: 'AI', value: 'ai'},
           {title: 'AMR', value: 'amr'},
-          {title: 'Human Genomics & Cancer', value: 'human_genomics_cancer'},
+          {title: 'Human Genomics', value: 'human_genomics'},
           {title: 'Malaria', value: 'malaria'},
+          {title: 'High Performance Computing', value: 'hpc'},
+          {title: 'Mathematical Modelling', value: 'mathematical_modelling'},
+          {title: 'Capacity Building & Training', value: 'capacity_building_and_training'},
+          {title: 'Machine Learning', value: 'machine_learning'},
+          {title: 'Databases & Pipelines', value: 'databases_and_pipelines'},
+          {title: 'Reviews and Perspectives', value: 'reviews_and_perspectives'},
           {title: 'Visualization', value: 'visualization'},
+          {title: 'Other Bioinformatics', value: 'other_bioinformatics'},
         ],
       },
       description: 'Select all thematic areas this project belongs to.',
@@ -111,6 +117,27 @@ export const projectType = defineType({
     defineField({
       name: 'abstract',
       type: 'text',
+    }),
+    defineField({
+      name: 'aimsAndObjectives',
+      title: 'Aims & Objectives',
+      type: 'array',
+      description: 'List each aim or objective as a separate point. Keep each one concise — one sentence per objective works best.',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'keyOutcomes',
+      title: 'Key Outcomes',
+      type: 'array',
+      description: 'List the concrete results, findings, or deliverables this project has produced or achieved so far. Add one outcome per entry.',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'relevanceToSector',
+      title: 'Relevance to the Sector',
+      type: 'text',
+      rows: 5,
+      description: 'A short narrative explaining why this project matters — its broader impact on bioinformatics, public health, data science, or the relevant sector in Africa/Uganda.',
     }),
   ],
 })
