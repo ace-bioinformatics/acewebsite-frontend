@@ -30,7 +30,7 @@ export default function AboutHeroCarousel({ images }) {
           }`}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-900/85 to-red-950/85" />
+      <div className="absolute inset-0 bg-gray-900/65" />
 
       {images.length > 1 && (
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">

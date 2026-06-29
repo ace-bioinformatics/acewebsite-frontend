@@ -91,7 +91,7 @@ export default async function TeamPage() {
               priority
               className="absolute inset-0 object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-red-900/85 to-red-950/85" />
+            <div className="absolute inset-0 bg-gray-900/65" />
           </>
         )}
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
