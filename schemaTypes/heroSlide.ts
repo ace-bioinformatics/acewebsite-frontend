@@ -41,6 +41,20 @@ export const heroSlide = defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'mediaType',
+      title: 'Media Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Image', value: 'image' },
+          { title: 'Video', value: 'video' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'image',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'image',
       title: 'Slide Image',
       type: 'image',
@@ -55,7 +69,28 @@ export const heroSlide = defineType({
           title: 'Alt Text',
         },
       ],
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.custom((value, context) => {
+        const parent = context.parent as { mediaType?: string }
+        if (!parent?.mediaType || parent.mediaType === 'image') {
+          return value ? true : 'Image is required for Image slides'
+        }
+        return true
+      }),
+    }),
+    defineField({
+      name: 'video',
+      title: 'Background Video',
+      type: 'file',
+      options: { accept: 'video/mp4,video/webm' },
+      description: 'MP4 or WebM, no audio track, max ~10MB, ideally 1280px wide. Compress before uploading — Sanity does not transcode video.',
+      hidden: ({ parent }) => parent?.mediaType !== 'video',
+    }),
+    defineField({
+      name: 'posterImage',
+      title: 'Poster Image (Video Fallback)',
+      type: 'image',
+      description: 'Shown while the video loads, on slow connections, and for visitors with reduced-motion settings enabled. Required when Media Type is Video.',
+      hidden: ({ parent }) => parent?.mediaType !== 'video',
     }),
     defineField({
       name: 'ctaText',

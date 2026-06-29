@@ -41,12 +41,23 @@ export const heroSlidesQuery = `
     subtitle,
     description,
     category,
+    mediaType,
     image,
+    "videoUrl": video.asset->url,
+    "posterImage": posterImage{ ..., "url": asset->url },
     ctaText,
     ctaLink,
     order
   }
 `
+
+export const teamPageSettingsQuery = `*[_type == "teamPageSettings"][0]{
+  "heroImage": heroImage{ ..., "url": asset->url }
+}`
+
+export const aboutPageSettingsQuery = `*[_type == "aboutPageSettings"][0]{
+  "heroImages": heroImages[]{ ..., "url": asset->url, alt, caption }
+}`
 export const allStaffQuery = `*[_type == "person"] | order(order asc, name asc) {
   _id,
   name,

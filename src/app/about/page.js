@@ -2,8 +2,10 @@ import Link from 'next/link'
 import PartnerCarousel from '@/Components/about/PartnerCarousel'
 import { client } from '@/lib/sanity'
 import { fetchWithFallback } from '@/lib/fallback'
+import { aboutPageSettingsQuery } from '@/lib/queries'
 import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
 import ACEPattern from '@/Components/shared/ACEPattern'
+import AboutHeroCarousel from '@/Components/about/AboutHeroCarousel'
 
 export const metadata = {
   title: 'About | ACE Uganda',
@@ -59,7 +61,10 @@ const coreValueIcons = [
 ]
 
 export default async function AboutPage() {
-  const aboutData = await getAboutData()
+  const [aboutData, pageSettings] = await Promise.all([
+    getAboutData(),
+    client.fetch(aboutPageSettingsQuery),
+  ])
 
   const coreValues = aboutData?.coreValues?.values || []
   const missionVision = aboutData?.missionVision
@@ -69,9 +74,8 @@ export default async function AboutPage() {
     <div className="bg-white">
       {/* Hero */}
       <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-24 sm:py-32 overflow-hidden">
-        <ACEPattern rows={7} cols={10} opacity={0.08} className="absolute top-6 right-6 hidden lg:block" />
-        <ACEPattern rows={4} cols={6} opacity={0.06} className="absolute bottom-6 left-6 hidden lg:block" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <AboutHeroCarousel images={pageSettings?.heroImages} />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               {aboutData?.introSection?.heading || 'About ACE'}

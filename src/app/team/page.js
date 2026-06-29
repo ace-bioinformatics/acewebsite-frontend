@@ -1,10 +1,9 @@
 import { client } from '@/lib/sanity'
-import { allStaffQuery } from '@/lib/queries'
+import { allStaffQuery, teamPageSettingsQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
-import ACEPattern from '@/Components/shared/ACEPattern'
 
 const CATEGORY_ORDER = [
   { value: 'admin', label: 'Administration' },
@@ -66,7 +65,10 @@ function PersonCard({ person }) {
 }
 
 export default async function TeamPage() {
-  const staff = await client.fetch(allStaffQuery)
+  const [staff, pageSettings] = await Promise.all([
+    client.fetch(allStaffQuery),
+    client.fetch(teamPageSettingsQuery),
+  ])
   const grouped = groupStaffByCategory(staff || [])
 
   const orderedCategories = [
@@ -80,8 +82,19 @@ export default async function TeamPage() {
     <div className="bg-white">
       {/* Header */}
       <div className="relative bg-gradient-to-br from-red-700 to-red-900 py-24 sm:py-32 overflow-hidden">
-        <ACEPattern rows={6} cols={10} opacity={0.08} className="absolute top-6 right-6 hidden lg:block" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {pageSettings?.heroImage?.url && (
+          <>
+            <Image
+              src={pageSettings.heroImage.url}
+              alt=""
+              fill
+              priority
+              className="absolute inset-0 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-red-900/85 to-red-950/85" />
+          </>
+        )}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateOnScroll variant="fade-up" className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Our Team</h1>
             <p className="mt-6 text-lg leading-8 text-red-100">

@@ -1,9 +1,65 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
+
+function SlideMedia({ slide, isActive }) {
+  const videoRef = useRef(null)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mediaQuery.matches)
+    const handler = (e) => setPrefersReducedMotion(e.matches)
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    if (!videoRef.current) return
+    if (isActive && !prefersReducedMotion) {
+      videoRef.current.play().catch(() => {})
+    } else {
+      videoRef.current.pause()
+    }
+  }, [isActive, prefersReducedMotion])
+
+  const showVideo = slide.mediaType === 'video' && slide.videoUrl && !prefersReducedMotion
+
+  if (showVideo) {
+    return (
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        preload={isActive ? 'auto' : 'none'}
+        poster={slide.posterImage?.url}
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src={slide.videoUrl} type="video/mp4" />
+      </video>
+    )
+  }
+
+  const fallbackSrc = slide.mediaType === 'video'
+    ? slide.posterImage?.url
+    : (slide.image ? urlFor(slide.image).width(1920).height(1080).url() : null)
+
+  if (!fallbackSrc) return null
+
+  return (
+    <Image
+      src={fallbackSrc}
+      alt={slide.title}
+      fill
+      priority={isActive}
+      className="absolute inset-0 object-cover"
+    />
+  )
+}
 
 export default function HeroCarousel({ slides }) {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -72,16 +128,10 @@ export default function HeroCarousel({ slides }) {
             index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
         >
-          {/* Background Image */}
+          {/* Background Media */}
           <div className="absolute inset-0">
-            <Image
-              src={urlFor(slide.image).width(1920).height(1080).url()}
-              alt={slide.image.alt || slide.title}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
+            <SlideMedia slide={slide} isActive={index === currentSlide} />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
           </div>
 
           {/* Content */}
