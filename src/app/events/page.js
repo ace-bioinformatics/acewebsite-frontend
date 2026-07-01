@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import EventsClient from '@/Components/events/EventsClient'
 import EventHighlight from '@/Components/events/EventHighlight'
+import EventsHeroCarousel from '@/Components/events/EventsHeroCarousel'
 import { client } from '@/lib/sanity'
-import { upcomingEventsQuery, pastEventsQuery, eventHighlightsQuery } from '@/lib/queries'
+import { upcomingEventsQuery, pastEventsQuery, eventHighlightsQuery, eventsPageSettingsQuery } from '@/lib/queries'
 import AnimateOnScroll from '@/Components/shared/AnimateOnScroll'
-import ACEPattern from '@/Components/shared/ACEPattern'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
@@ -32,7 +32,10 @@ async function getEventsData() {
 }
 
 export default async function EventsPage() {
-  const { upcomingEvents, pastEvents, eventHighlights } = await getEventsData()
+  const [{ upcomingEvents, pastEvents, eventHighlights }, pageSettings] = await Promise.all([
+    getEventsData(),
+    client.fetch(eventsPageSettingsQuery),
+  ])
 
   // Filter categories and years
   const categories = [
@@ -54,9 +57,9 @@ export default async function EventsPage() {
     <div className="bg-white">
       {/* Hero Header */}
       <div className="relative bg-gradient-to-br from-red-700 via-red-800 to-red-900 py-24 sm:py-32 overflow-hidden">
-        <ACEPattern rows={6} cols={10} opacity={0.08} className="absolute top-6 right-6 hidden lg:block" />
+        <EventsHeroCarousel images={pageSettings?.heroImages} />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateOnScroll variant="fade-up" className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-block">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-semibold text-white">

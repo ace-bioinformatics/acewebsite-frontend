@@ -1,5 +1,5 @@
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
-const SINGLETONS = ['teamPageSettings', 'aboutPageSettings']
+const SINGLETONS = ['teamPageSettings', 'aboutPageSettings', 'eventsPageSettings']
 
 export const structure = (S) =>
   S.list()
@@ -20,6 +20,14 @@ export const structure = (S) =>
           S.document()
             .schemaType('aboutPageSettings')
             .documentId('aboutPageSettings')
+        ),
+      S.listItem()
+        .title('Events Page — Hero Carousel')
+        .id('eventsPageSettings')
+        .child(
+          S.document()
+            .schemaType('eventsPageSettings')
+            .documentId('eventsPageSettings')
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(

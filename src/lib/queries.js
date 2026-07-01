@@ -58,6 +58,10 @@ export const teamPageSettingsQuery = `*[_type == "teamPageSettings"][0]{
 export const aboutPageSettingsQuery = `*[_type == "aboutPageSettings"][0]{
   "heroImages": heroImages[]{ ..., "url": asset->url, alt, caption }
 }`
+
+export const eventsPageSettingsQuery = `*[_type == "eventsPageSettings"][0]{
+  "heroImages": heroImages[]{ ..., "url": asset->url, alt, caption }
+}`
 export const allStaffQuery = `*[_type == "person"] | order(order asc, name asc) {
   _id,
   name,
