@@ -212,15 +212,15 @@ export default async function FacilityDetailPage({ params }) {
             {/* Access CTA */}
             <AnimateOnScroll variant="fade-up" delay={140}>
               <div className="rounded-2xl bg-red-700 p-6 text-white">
-                <h3 className="font-semibold mb-2">Request Access</h3>
+                <h3 className="font-semibold mb-2">Get in Touch</h3>
                 <p className="text-sm text-red-100 mb-4 leading-relaxed">
                   This facility is available to ACE students, researchers, and approved collaborators.
                 </p>
                 <Link
-                  href="/contact"
+                  href={slug == "ace-computer-core" ? "https://forms.gle/6CGEUX3DDLAMksDR6" : "https://forms.gle/LYytHaK4p7kEnQwR8"}
                   className="inline-block rounded-md bg-white text-red-700 px-4 py-2 text-sm font-semibold hover:bg-red-50 transition-colors"
                 >
-                  Get in Touch
+                  Request Access
                 </Link>
               </div>
             </AnimateOnScroll>

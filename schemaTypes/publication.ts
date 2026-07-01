@@ -72,7 +72,7 @@ export const publicationType = defineType({
           {title: 'High Performance Computing', value: 'hpc'},
           {title: 'Mathematical Modelling', value: 'mathematical_modelling'},
           {title: 'Capacity Building & Training', value: 'capacity_building_and_training'},
-          {title: 'Machine Learning', value: 'machine_learning'},
+          {title: 'AI & Machine Learning', value: 'machine_learning'},
           {title: 'Databases & Pipelines', value: 'databases_and_pipelines'},
           {title: 'Reviews and Perspectives', value: 'reviews_and_perspectives'},
           {title: 'Visualization', value: 'visualization'},

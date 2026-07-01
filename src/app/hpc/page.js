@@ -17,7 +17,7 @@ export default function HPCPage() {
       ),
     },
     {
-      name: 'Machine Learning',
+      name: 'AI & Machine Learning',
       description: 'Train complex AI models for healthcare predictions and data analysis',
       icon: (
         <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">

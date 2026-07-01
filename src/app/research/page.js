@@ -16,7 +16,7 @@ const THEMATIC_AREAS = [
   { value: 'malaria', label: 'Malaria' },
   { value: 'hpc', label: 'High Performance Computing' },
   { value: 'capacity_building_and_training', label: 'Capacity Building & Training' },
-  { value: 'ai_and_machine_learning', label: 'AI & Machine Learning' },
+  { value: 'machine_learning', label: 'AI & Machine Learning' },
   { value: 'visualization', label: 'Visualization' },
 ]
 

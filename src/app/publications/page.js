@@ -11,7 +11,7 @@ const THEMATIC_AREAS = [
   { value: 'hpc', label: 'High Performance Computing' },
   { value: 'mathematical_modelling', label: 'Mathematical Modelling' },
   { value: 'capacity_building_and_training', label: 'Capacity Building & Training' },
-  { value: 'machine_learning', label: 'Machine Learning' },
+  { value: 'machine_learning', label: 'AI & Machine Learning' },
   { value: 'databases_and_pipelines', label: 'Databases & Pipelines' },
   { value: 'reviews_and_perspectives', label: 'Reviews and Perspectives' },
   { value: 'visualization', label: 'Visualization' },
