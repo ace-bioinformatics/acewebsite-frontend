@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { GoogleAnalytics, sendGAEvent } from '@next/third-parties/google'
 
-const GA_ID = process.env.NEXT_GA_ID
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 // Renders the GA4 tag only when a Measurement ID is configured, so local dev stays untracked.
 export function Analytics() {
