@@ -1,5 +1,6 @@
 import Header from '@/Components/layout/Header'
 import Footer from '@/Components/layout/Footer'
+import { Analytics } from '@/lib/analytics'
 
 export default function MainLayout({ children }) {
   return (
@@ -9,6 +10,7 @@ export default function MainLayout({ children }) {
         {children}
       </main>
       <Footer />
+      <Analytics />
     </>
   )
 }

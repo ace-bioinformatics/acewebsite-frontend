@@ -1,11 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useSearchTracking } from '@/lib/analytics'
 
 export default function EventFilters({ onFilterChange, categories, years }) {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedYear, setSelectedYear] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
+
+  useSearchTracking(searchQuery, { search_location: 'events', category: selectedCategory })
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category)

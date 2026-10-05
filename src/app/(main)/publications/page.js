@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/lib/sanity'
 import { allPublicationsQuery } from '@/lib/queries'
+import { useSearchTracking } from '@/lib/analytics'
 
 const THEMATIC_AREAS = [
   { value: 'all', label: 'All Areas' },
@@ -25,6 +26,8 @@ export default function PublicationsPage() {
   const [activeArea, setActiveArea] = useState('all')
   const [activeYear, setActiveYear] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
+
+  useSearchTracking(search, { search_location: 'publications', thematic_area: activeArea })
 
   useEffect(() => {
     async function getPublications() {
