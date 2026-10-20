@@ -40,12 +40,12 @@ export default function BlogPostPage({ post }) {
           )}
 
           {body.length > 0 ? (
-            <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-idred-600 prose-a:no-underline hover:prose-a:underline text-gray-700 leading-relaxed">
+            <div className="prose prose-lg max-w-none prose-p:text-justify prose-p:hyphens-auto prose-headings:text-gray-900 prose-a:text-idred-600 prose-a:no-underline hover:prose-a:underline text-gray-700 leading-relaxed">
               <PortableText value={body} />
             </div>
           ) : (
             loc(post.excerpt, locale) && (
-              <p className="text-lg text-gray-700 leading-relaxed">{loc(post.excerpt, locale)}</p>
+              <p className="text-lg text-gray-700 leading-relaxed text-justify hyphens-auto">{loc(post.excerpt, locale)}</p>
             )
           )}
 

@@ -1,6 +1,7 @@
 @import "tailwindcss/theme";
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-red-600: #a71c20;

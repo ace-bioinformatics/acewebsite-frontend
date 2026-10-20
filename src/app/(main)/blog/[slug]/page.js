@@ -127,7 +127,7 @@ export default async function BlogPostPage({ params }) {
         )}
 
         <AnimateOnScroll variant="fade-up" delay={100}>
-          <div className="prose prose-lg prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-red-700 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl max-w-none">
+          <div className="prose prose-lg prose-p:text-justify prose-p:hyphens-auto prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-red-700 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl max-w-none">
             <PortableText value={post.body} components={ptComponents} />
           </div>
         </AnimateOnScroll>
