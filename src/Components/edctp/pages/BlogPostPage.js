@@ -5,6 +5,7 @@ import { PortableText } from 'next-sanity'
 import { useI18n } from '@/lib/idmI18n'
 import { loc, locBlock } from '@/lib/edctpLocalize'
 import IdmPageHeader from '@/Components/edctp/IdmPageHeader'
+import EventGallery from '@/Components/events/EventGallery'
 
 function formatDate(dt, locale) {
   if (!dt) return null
@@ -17,6 +18,7 @@ export default function BlogPostPage({ post }) {
   const title = loc(post.title, locale)
   const body = locBlock(post.body, locale)
   const related = (post.related || []).filter((r) => r.slug?.current)
+  const gallery = (post.gallery || []).map((img) => ({ ...img, caption: loc(img.caption, locale) }))
 
   return (
     <>
@@ -30,17 +32,17 @@ export default function BlogPostPage({ post }) {
         ]}
       />
 
-      <div className="bg-white py-16">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+      <div className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8">
           {post.featuredImage?.url && (
-            <div className="relative rounded-2xl overflow-hidden shadow-md mb-10">
+            <div className="relative rounded-2xl overflow-hidden shadow-md mb-14">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={post.featuredImage.url} alt={title} className="w-full h-auto object-cover" />
             </div>
           )}
 
           {body.length > 0 ? (
-            <div className="prose prose-lg max-w-none prose-p:text-justify prose-p:hyphens-auto prose-headings:text-gray-900 prose-a:text-idred-600 prose-a:no-underline hover:prose-a:underline text-gray-700 leading-relaxed">
+            <div className="prose prose-lg max-w-none prose-p:text-justify prose-p:hyphens-auto prose-p:my-7 prose-p:leading-[1.9] prose-headings:text-gray-900 prose-headings:mt-14 prose-headings:mb-6 prose-li:my-2 prose-a:text-idred-600 prose-a:no-underline hover:prose-a:underline text-gray-700">
               <PortableText value={body} />
             </div>
           ) : (
@@ -48,10 +50,24 @@ export default function BlogPostPage({ post }) {
               <p className="text-lg text-gray-700 leading-relaxed text-justify hyphens-auto">{loc(post.excerpt, locale)}</p>
             )
           )}
+        </div>
 
+        {/* Photo album from the event covered in the post */}
+        {gallery.length > 0 && (
+          <div className="mx-auto max-w-5xl px-6 lg:px-8 mt-20">
+            <EventGallery
+              images={gallery}
+              title={t('blog.galleryTitle')}
+              subtitle={`${gallery.length} ${t(gallery.length === 1 ? 'blog.galleryPhoto' : 'blog.galleryPhotos')} · ${t('blog.galleryClickHint')}`}
+              navHint={t('blog.galleryNavHint')}
+            />
+          </div>
+        )}
+
+        <div className="mx-auto max-w-5xl px-6 lg:px-8">
           <Link
             href="/edctp-idm/blog"
-            className="inline-flex items-center gap-1.5 mt-12 text-sm font-semibold text-idred-600 hover:text-idred-800 transition-colors"
+            className="inline-flex items-center gap-1.5 mt-16 text-sm font-semibold text-idred-600 hover:text-idred-800 transition-colors"
           >
             <ArrowLeftIcon className="h-4 w-4" />{t('blog.backToBlog')}
           </Link>
@@ -59,9 +75,9 @@ export default function BlogPostPage({ post }) {
 
         {/* Related posts */}
         {related.length > 0 && (
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-20 pt-12 border-t border-gray-100">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">{t('blog.relatedPosts')}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-24 pt-16 border-t border-gray-100">
+            <h2 className="text-2xl font-bold text-gray-900 mb-10">{t('blog.relatedPosts')}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {related.map((r) => (
                 <Link
                   key={r._id}
@@ -76,7 +92,7 @@ export default function BlogPostPage({ post }) {
                       <div className="absolute inset-0 bg-gradient-to-br from-idblue-700 to-idblue-950" />
                     )}
                   </div>
-                  <div className="p-5">
+                  <div className="p-6">
                     {r.publishedAt && (
                       <p className="text-xs text-gray-400 mb-1.5">{formatDate(r.publishedAt, locale)}</p>
                     )}

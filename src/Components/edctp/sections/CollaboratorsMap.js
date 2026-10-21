@@ -16,8 +16,7 @@ const DECLUTTER_OFFSET_DEG = 1.1
 const GROUPS = [
   { key: 'beneficiaries', color: '#003366', labelKey: 'partners.beneficiaries' },
   { key: 'collaborators', color: '#a71c20', labelKey: 'partners.collaborators' },
-  { key: 'sites', color: '#00AEEF', labelKey: 'partners.partnerSites' },
-  { key: 'trainingSites', color: '#D97706', labelKey: 'partners.trainingSites' },
+  { key: 'trainingSites', color: '#00AEEF', labelKey: 'partners.trainingSites' },
 ]
 
 // Rest/hover fill for a partner country's boundary — "light blue" per the
@@ -122,7 +121,7 @@ function onEachCountry(feature, layer) {
   layer.on('mouseout', () => layer.setStyle(COUNTRY_BASE_STYLE))
 }
 
-export default function CollaboratorsMap({ beneficiaries = [], collaborators = [], sites = [], trainingSites = [] }) {
+export default function CollaboratorsMap({ beneficiaries = [], collaborators = [], trainingSites = [] }) {
   const { t } = useI18n()
   const [worldGeo, setWorldGeo] = useState(null)
 
@@ -134,20 +133,20 @@ export default function CollaboratorsMap({ beneficiaries = [], collaborators = [
   }, [])
 
   const pinned = useMemo(() => {
-    const byGroup = { beneficiaries, collaborators, sites, trainingSites }
+    const byGroup = { beneficiaries, collaborators, trainingSites }
     const withCoords = GROUPS.flatMap((group) =>
       (byGroup[group.key] || [])
         .map((item) => ({ item, coords: resolveCoords(item), group }))
         .filter((entry) => entry.coords)
     )
     return declutter(withCoords)
-  }, [beneficiaries, collaborators, sites, trainingSites])
+  }, [beneficiaries, collaborators, trainingSites])
 
   const allPoints = pinned.map((p) => p.coords)
 
   const allItems = useMemo(
-    () => [...beneficiaries, ...collaborators, ...sites, ...trainingSites],
-    [beneficiaries, collaborators, sites, trainingSites]
+    () => [...beneficiaries, ...collaborators, ...trainingSites],
+    [beneficiaries, collaborators, trainingSites]
   )
 
   const maxBounds = useMemo(() => {

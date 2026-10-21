@@ -39,15 +39,15 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
               <p className="font-bold text-white text-lg leading-tight">{programName}</p>
             )}
             <div>
-              <p className="text-xs text-idblue-300">{t('footer.grantNumber')}</p>
+              <p className="text-xs text-idblue-200">{t('footer.grantNumber')}</p>
             </div>
           </div>
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-white mb-2">{t('footer.contactTitle')}</p>
-            {phone && <p className="inline-flex items-center gap-1.5 text-sm text-idblue-200"><LocalPhoneOutlinedIcon sx={{ fontSize: 14 }} />{phone}</p>}
+            {phone && <p className="inline-flex items-center gap-1.5 text-sm text-idblue-100"><LocalPhoneOutlinedIcon sx={{ fontSize: 14 }} />{phone}</p>}
             {siteSettings?.contactEmail && (
-              <a href={`mailto:${siteSettings.contactEmail}`} className="flex items-center gap-1.5 text-sm text-idblue-200 hover:text-idblue-500 transition-colors">
+              <a href={`mailto:${siteSettings.contactEmail}`} className="flex items-center gap-1.5 text-sm text-idblue-100 hover:text-white transition-colors">
                 <EmailOutlinedIcon sx={{ fontSize: 14 }} />
                 {siteSettings.contactEmail}
               </a>
@@ -62,13 +62,13 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
             {idiSocials.length > 0 ? (
               <div className="flex flex-col gap-1.5">
                 {idiSocials.map((s, i) => (
-                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-200 hover:text-idblue-500 transition-colors">
+                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-100 hover:text-white transition-colors">
                     {s.platform}
                   </a>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-idblue-500">—</p>
+              <p className="text-sm text-idblue-300">—</p>
             )}
           </div>
 
@@ -77,13 +77,13 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
             {aceSocials.length > 0 ? (
               <div className="flex flex-col gap-1.5 sm:items-end">
                 {aceSocials.map(([platform, url]) => (
-                  <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-200 hover:text-idblue-500 transition-colors">
+                  <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-100 hover:text-white transition-colors">
                     {ACE_SOCIAL_LABELS[platform] || platform}
                   </a>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-idblue-500">—</p>
+              <p className="text-sm text-idblue-300">—</p>
             )}
           </div>
         </div>
@@ -97,10 +97,10 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
             <img
               src={edctpSettings.edctpAcknowledgementLogo.url}
               alt="EDCTP"
-              className="h-10 shrink-0 object-contain bg-white/10 rounded p-1.5"
+              className="h-16 shrink-0 object-contain bg-white rounded-md p-2"
             />
           )}
-          <p className="text-xs text-idblue-200 leading-relaxed text-center sm:text-left">
+          <p className="text-xs text-idblue-100 leading-relaxed text-center sm:text-left">
             {t('footer.acknowledgement')}
           </p>
         </div>
@@ -108,9 +108,9 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
 
       {/* Zone 4 — copyright */}
       <div className="border-t border-idblue-800">
-        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-idblue-300">
+        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-idblue-200">
           <p>{t('footer.copyright')}</p>
-          <Link href="/" className="hover:text-idblue-500 transition-colors">
+          <Link href="/" className="hover:text-white transition-colors">
             {t('footer.backToAce')}
           </Link>
         </div>

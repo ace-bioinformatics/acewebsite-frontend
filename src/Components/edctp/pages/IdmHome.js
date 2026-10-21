@@ -91,6 +91,29 @@ export default function IdmHome({ homePage, settings, posts, partners }) {
         </div>
       </section>
 
+      {/* Partner logo strip — sits between the hero and the impact stats */}
+      {partnerLogos.length > 0 && (
+        <section className="bg-white py-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-idblue-500 mb-8">
+              {t('nav.partners')}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
+              {partnerLogos.map((p) => (
+                <Link
+                  key={p._id}
+                  href="/edctp-idm/partners"
+                  title={p.name}
+                  className="flex h-24 w-48 items-center justify-center hover:scale-105 transition-transform"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.logo.url} alt={p.name} className="max-h-20 max-w-full object-contain" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       {/* Impact stats — bright blue numbers on deeper navy band */}
       {stats.length > 0 && (
         <section className="bg-idblue-950 py-14">
@@ -204,24 +227,6 @@ export default function IdmHome({ homePage, settings, posts, partners }) {
         </section>
       )}
 
-      {/* Partner logo strip — CEMA-style quiet band */}
-      {partnerLogos.length > 0 && (
-        <section className="bg-gray-50 py-14 border-t border-gray-100">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-idblue-500 mb-8">
-              {t('nav.partners')}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-              {partnerLogos.map((p) => (
-                <Link key={p._id} href="/edctp-idm/partners" className="opacity-70 hover:opacity-100 transition-opacity">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.logo.url} alt={p.name} className="h-12 w-auto max-w-[140px] object-contain" />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
     </>
   )
 }

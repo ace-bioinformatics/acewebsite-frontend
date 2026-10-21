@@ -7,11 +7,11 @@ function PartnerCard({ partner, t, locale }) {
   const role = loc(partner.role, locale)
 
   const card = (
-    <div className="group relative h-40 w-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-idblue-500 transition-all duration-300 cursor-pointer">
+    <div className="group relative h-48 w-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-idblue-500 transition-all duration-300 cursor-pointer">
       <div className="flex h-full items-center justify-center p-5">
         {partner.logo?.url ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={partner.logo.url} alt={partner.name} className="w-28 h-16 object-contain" />
+          <img src={partner.logo.url} alt={partner.name} className="h-28 w-full max-w-[220px] object-contain" />
         ) : (
           <div className="flex flex-col items-center gap-2">
             <div className="h-10 w-10 rounded-full bg-idblue-100 flex items-center justify-center">
@@ -32,12 +32,12 @@ function PartnerCard({ partner, t, locale }) {
 
   if (partner.website) {
     return (
-      <a href={partner.website} target="_blank" rel="noopener noreferrer" className="block h-40">
+      <a href={partner.website} target="_blank" rel="noopener noreferrer" className="block h-48">
         {card}
       </a>
     )
   }
-  return <div className="h-40">{card}</div>
+  return <div className="h-48">{card}</div>
 }
 
 function CollaboratorBadge({ partner }) {
@@ -45,9 +45,9 @@ function CollaboratorBadge({ partner }) {
     <div className="flex items-center gap-2.5 rounded-full border border-gray-200 bg-white px-4 py-2.5 hover:border-idblue-500 hover:shadow-md transition-all">
       {partner.logo?.url ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={partner.logo.url} alt={partner.name} className="h-6 w-6 object-contain shrink-0" />
+        <img src={partner.logo.url} alt={partner.name} className="h-10 w-10 rounded bg-white object-contain shrink-0" />
       ) : (
-        <div className="h-6 w-6 rounded-full bg-idblue-50 flex items-center justify-center shrink-0">
+        <div className="h-10 w-10 rounded-full bg-idblue-50 flex items-center justify-center shrink-0">
           <span className="text-xs font-bold text-idblue-500">{partner.name.charAt(0)}</span>
         </div>
       )}
@@ -67,7 +67,7 @@ function PartnerGroup({ id, title, partners, t, locale }) {
   return (
     <div id={id} className="mb-10 last:mb-0 scroll-mt-24">
       <p className="text-xs font-bold uppercase tracking-widest text-idblue-500 mb-4">{title}</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {partners.map((p) => <PartnerCard key={p._id} partner={p} t={t} locale={locale} />)}
       </div>
     </div>
@@ -78,10 +78,10 @@ export default function PartnersSection({ partners, collaborators }) {
   const { t, locale } = useI18n()
 
   const beneficiaries = (partners || []).filter((p) => (p.group || 'beneficiary') === 'beneficiary')
-  const partnerSites = (partners || []).filter((p) => p.group === 'partnerSite')
-  const trainingSites = (partners || []).filter((p) => p.group === 'trainingSite')
+  // `partnerSite` is the stored value for training sites (see edctpConsortiumPartner schema)
+  const trainingSites = (partners || []).filter((p) => p.group === 'partnerSite' || p.group === 'trainingSite')
 
-  const isEmpty = beneficiaries.length === 0 && partnerSites.length === 0 && trainingSites.length === 0 && !collaborators?.length
+  const isEmpty = beneficiaries.length === 0 && trainingSites.length === 0 && !collaborators?.length
 
   if (isEmpty) {
     return <p className="text-center text-gray-400 py-12">{t('partners.empty')}</p>
@@ -99,8 +99,6 @@ export default function PartnersSection({ partners, collaborators }) {
           </div>
         </div>
       )}
-
-      <PartnerGroup id="sites" title={t('partners.partnerSites')} partners={partnerSites} t={t} locale={locale} />
 
       <PartnerGroup id="training-sites" title={t('partners.trainingSites')} partners={trainingSites} t={t} locale={locale} />
     </div>

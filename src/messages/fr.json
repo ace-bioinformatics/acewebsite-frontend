@@ -38,7 +38,7 @@
     "sections": {
       "opportunities": "Appels ouverts, bourses et dates limites de candidature pour les chercheurs d'Afrique subsaharienne.",
       "training": "Sites de formation, boursiers, types de projets et événements de formation à venir.",
-      "partners": "Le consortium de bénéficiaires, collaborateurs et sites partenaires derrière le programme.",
+      "partners": "Le consortium de bénéficiaires, collaborateurs et sites de formation derrière le programme.",
       "publications": "Recherches évaluées par des pairs et rapports produits par le réseau IDM-Africa.",
       "blog": "Actualités, témoignages et mises à jour du programme et de ses boursiers.",
       "newsletter": "Numéros du bulletin téléchargeables couvrant les étapes clés du programme."
@@ -66,7 +66,6 @@
     "title": "Collaborateurs",
     "beneficiaries": "Bénéficiaires",
     "collaborators": "Collaborateurs",
-    "partnerSites": "Sites partenaires",
     "trainingSites": "Sites de formation",
     "visit": "Visiter",
     "empty": "Informations sur les collaborateurs à venir.",
@@ -89,6 +88,9 @@
     "emptyMentors": "Profils des mentors à venir.",
     "emptyProjects": "Informations sur les types de projets à venir.",
     "emptyEvents": "Aucun événement de formation à venir pour le moment.",
+    "upcomingTitle": "Formations à venir",
+    "upcomingSubtitle": "Rejoignez nos prochains cours courts, ateliers et événements de formation.",
+    "viewAllEvents": "Voir tous les événements de formation",
     "addToCalendar": "Ajouter au calendrier",
     "googleCalendar": "Google Agenda"
   },
@@ -122,7 +124,12 @@
     "title": "Blog",
     "empty": "Aucun article de blog pour le moment.",
     "relatedPosts": "Articles connexes",
-    "backToBlog": "Tous les articles"
+    "backToBlog": "Tous les articles",
+    "galleryTitle": "Album photo",
+    "galleryPhoto": "photo",
+    "galleryPhotos": "photos",
+    "galleryClickHint": "Cliquez sur une image pour l’afficher en plein écran",
+    "galleryNavHint": "Flèches du clavier ou balayage pour naviguer"
   },
   "newsletter": {
     "title": "Archive du bulletin",

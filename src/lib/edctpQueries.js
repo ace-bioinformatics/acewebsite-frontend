@@ -83,6 +83,13 @@ export const edctpRecentBlogPostsQuery = `*[_type == "edctpBlogPost"] | order(pu
 export const edctpBlogPostBySlugQuery = `*[_type == "edctpBlogPost" && slug.current == $slug][0]{
   _id, title, slug, excerpt, body,
   "featuredImage": featuredImage{ "url": asset->url },
+  "gallery": gallery[defined(image.asset)]{
+    _key, caption, alt, credit,
+    "url": image.asset->url,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
+    "blurDataURL": image.asset->metadata.lqip
+  },
   publishedAt,
   "related": *[_type == "edctpBlogPost" && slug.current != $slug] | order(publishedAt desc) [0...3]{
     _id, title, slug, "featuredImage": featuredImage{ "url": asset->url }, publishedAt

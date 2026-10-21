@@ -21,19 +21,19 @@ export default function BlogListPage({ posts }) {
         breadcrumb={[{ label: t('nav.blog'), href: '/edctp-idm/blog' }]}
       />
 
-      <div className="bg-white py-16">
+      <div className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {!posts?.length ? (
             <p className="text-center text-gray-400 py-12">{t('blog.empty')}</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
               {posts.map((post) => (
                 <Link
                   key={post._id}
                   href={post.slug?.current ? `/edctp-idm/blog/${post.slug.current}` : '#'}
                   className="group flex flex-col rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-idblue-500 transition-all duration-300"
                 >
-                  <div className="relative h-48 overflow-hidden bg-gray-100 shrink-0">
+                  <div className="relative h-56 overflow-hidden bg-gray-100 shrink-0">
                     {post.featuredImage?.url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={post.featuredImage.url} alt={loc(post.title, locale)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -41,15 +41,15 @@ export default function BlogListPage({ posts }) {
                       <div className="absolute inset-0 bg-gradient-to-br from-idblue-700 to-idblue-950" />
                     )}
                   </div>
-                  <div className="flex flex-col flex-1 p-5">
+                  <div className="flex flex-col flex-1 p-7 lg:p-8">
                     {post.publishedAt && (
-                      <p className="text-xs text-gray-400 mb-2">{formatDate(post.publishedAt, locale)}</p>
+                      <p className="text-xs text-gray-400 mb-3">{formatDate(post.publishedAt, locale)}</p>
                     )}
-                    <h2 className="text-base font-bold text-gray-900 group-hover:text-idblue-500 transition-colors leading-snug line-clamp-2 mb-2">
+                    <h2 className="text-base font-bold text-gray-900 group-hover:text-idblue-500 transition-colors leading-snug line-clamp-2 mb-3">
                       {loc(post.title, locale)}
                     </h2>
                     {loc(post.excerpt, locale) && (
-                      <p className="text-sm text-gray-500 line-clamp-3 flex-1 mb-4">{loc(post.excerpt, locale)}</p>
+                      <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 flex-1 mb-6">{loc(post.excerpt, locale)}</p>
                     )}
                     <span className="text-sm font-semibold text-idred-600 group-hover:text-idred-800 inline-flex items-center gap-1.5 mt-auto">
                       {t('common.readMore')}

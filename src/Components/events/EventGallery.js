@@ -12,7 +12,7 @@ import 'yet-another-react-lightbox/styles.css'
 import 'yet-another-react-lightbox/plugins/captions.css'
 import 'yet-another-react-lightbox/plugins/counter.css'
 
-export default function EventGallery({ images, title }) {
+export default function EventGallery({ images, title, subtitle, navHint }) {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
 
   if (!images?.length) return null
@@ -43,14 +43,14 @@ export default function EventGallery({ images, title }) {
             {title || 'Event Gallery'}
           </h2>
           <p className="mt-1 text-sm text-gray-500">
-            {images.length} photo{images.length !== 1 ? 's' : ''} &middot; Click any image to view full screen
+            {subtitle || <>{images.length} photo{images.length !== 1 ? 's' : ''} &middot; Click any image to view full screen</>}
           </p>
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs text-gray-400 mt-1 shrink-0">
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          Arrow keys or swipe to navigate
+          {navHint || 'Arrow keys or swipe to navigate'}
         </div>
       </div>
 

@@ -15,8 +15,8 @@ export default defineType({
       options: {
         list: [
           { title: 'Beneficiary', value: 'beneficiary' },
-          { title: 'Partner Site', value: 'partnerSite' },
-          { title: 'Training Site', value: 'trainingSite' },
+          // Stored value kept as `partnerSite` so existing documents stay valid; shown as Training Site.
+          { title: 'Training Site', value: 'partnerSite' },
         ],
         layout: 'radio',
       },

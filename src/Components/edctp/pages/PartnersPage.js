@@ -30,8 +30,8 @@ export default function PartnersPage({ partners, collaborators }) {
   const { t } = useI18n()
 
   const beneficiaries = (partners || []).filter((p) => (p.group || 'beneficiary') === 'beneficiary')
-  const sites = (partners || []).filter((p) => p.group === 'partnerSite')
-  const trainingSites = (partners || []).filter((p) => p.group === 'trainingSite')
+  // `partnerSite` is the stored value for training sites (see edctpConsortiumPartner schema)
+  const trainingSites = (partners || []).filter((p) => p.group === 'partnerSite' || p.group === 'trainingSite')
 
   const { totalCollaborators, countryCount, continentCount } = useMemo(() => {
     const all = [...(partners || []), ...(collaborators || [])]
@@ -58,7 +58,7 @@ export default function PartnersPage({ partners, collaborators }) {
 
       <StatBand stats={stats} />
 
-      <CollaboratorsMap beneficiaries={beneficiaries} collaborators={collaborators} sites={sites} trainingSites={trainingSites} />
+      <CollaboratorsMap beneficiaries={beneficiaries} collaborators={collaborators} trainingSites={trainingSites} />
 
       <div className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
