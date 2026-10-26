@@ -3,6 +3,7 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
 import Link from 'next/link'
 import { useI18n } from '@/lib/idmI18n'
+import { SOCIAL_ICONS, LINK_ICON, getSocialIcon } from '@/lib/socialIcons'
 
 const ACE_SOCIAL_LABELS = {
   twitter: 'X (Twitter)',
@@ -11,6 +12,17 @@ const ACE_SOCIAL_LABELS = {
   youtube: 'YouTube',
   instagram: 'Instagram',
   github: 'GitHub',
+}
+
+function SocialLink({ href, label, icon }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-idblue-100 hover:text-white transition-colors">
+      <svg className="h-4 w-4 shrink-0" fill="currentColor" viewBox={icon.viewBox} aria-hidden="true">
+        <path d={icon.path} />
+      </svg>
+      {label}
+    </a>
+  )
 }
 
 export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
@@ -60,11 +72,9 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{t('footer.followIdi')}</p>
             {idiSocials.length > 0 ? (
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col items-start gap-2.5">
                 {idiSocials.map((s, i) => (
-                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-100 hover:text-white transition-colors">
-                    {s.platform}
-                  </a>
+                  <SocialLink key={i} href={s.url} label={s.platform} icon={getSocialIcon(s.platform, s.url)} />
                 ))}
               </div>
             ) : (
@@ -75,11 +85,9 @@ export default function EdctpFooterContent({ siteSettings, edctpSettings }) {
           <div className="sm:text-right">
             <p className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{t('footer.followAce')}</p>
             {aceSocials.length > 0 ? (
-              <div className="flex flex-col gap-1.5 sm:items-end">
+              <div className="flex flex-col items-start gap-2.5 sm:items-end">
                 {aceSocials.map(([platform, url]) => (
-                  <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-sm text-idblue-100 hover:text-white transition-colors">
-                    {ACE_SOCIAL_LABELS[platform] || platform}
-                  </a>
+                  <SocialLink key={platform} href={url} label={ACE_SOCIAL_LABELS[platform] || platform} icon={SOCIAL_ICONS[platform] || LINK_ICON} />
                 ))}
               </div>
             ) : (
