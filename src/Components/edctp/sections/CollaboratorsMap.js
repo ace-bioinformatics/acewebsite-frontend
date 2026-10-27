@@ -178,9 +178,12 @@ export default function CollaboratorsMap({ beneficiaries = [], collaborators = [
         maxBoundsViscosity={1.0}
         style={{ height: '100%', width: '100%' }}
       >
+        {/* Esri World Street Map: English labels everywhere, capital cities marked, oceans/lakes/rivers named.
+            (OSM's standard tiles label each country in its local language.) Note Esri's {y}/{x} order. */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='Tiles &copy; <a href="https://www.esri.com">Esri</a> &mdash; Sources: Esri, HERE, Garmin, USGS, NGA, EPA, USDA, NPS, &copy; OpenStreetMap contributors'
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+          maxZoom={19}
         />
         <FitToMarkers points={allPoints} />
 

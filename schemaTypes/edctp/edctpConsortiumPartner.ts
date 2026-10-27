@@ -11,12 +11,10 @@ export default defineType({
       name: 'group',
       title: 'Partner Group',
       type: 'string',
-      description: 'Which group this partner appears under in the Partners section.',
+      description: 'Which group this partner appears under in the Partners section. Training sites are managed separately under Training Sites.',
       options: {
         list: [
           { title: 'Beneficiary', value: 'beneficiary' },
-          // Stored value kept as `partnerSite` so existing documents stay valid; shown as Training Site.
-          { title: 'Training Site', value: 'partnerSite' },
         ],
         layout: 'radio',
       },

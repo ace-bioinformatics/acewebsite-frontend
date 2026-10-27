@@ -27,9 +27,9 @@ export default function TrainingSitesPage({ sites }) {
               {sites.map((site) => (
                 <div key={site._id} className="rounded-2xl border border-gray-200 overflow-hidden bg-white shadow-sm hover:shadow-md hover:border-idblue-500 transition-all">
                   {site.image?.url ? (
-                    <div className="relative h-44 bg-idblue-50">
+                    <div className="flex h-44 items-center justify-center bg-white border-b border-gray-100 p-6">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={site.image.url} alt={site.name} className="w-full h-full object-cover" />
+                      <img src={site.image.url} alt={site.name} className="max-h-full max-w-full object-contain" />
                     </div>
                   ) : (
                     <div className="h-44 bg-gradient-to-br from-idblue-700 to-idblue-900 flex items-center justify-center">

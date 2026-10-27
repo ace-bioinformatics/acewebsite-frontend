@@ -74,12 +74,10 @@ function PartnerGroup({ id, title, partners, t, locale }) {
   )
 }
 
-export default function PartnersSection({ partners, collaborators }) {
+export default function PartnersSection({ partners, collaborators, trainingSites = [] }) {
   const { t, locale } = useI18n()
 
-  const beneficiaries = (partners || []).filter((p) => (p.group || 'beneficiary') === 'beneficiary')
-  // `partnerSite` is the stored value for training sites (see edctpConsortiumPartner schema)
-  const trainingSites = (partners || []).filter((p) => p.group === 'partnerSite' || p.group === 'trainingSite')
+  const beneficiaries = partners || []
 
   const isEmpty = beneficiaries.length === 0 && trainingSites.length === 0 && !collaborators?.length
 

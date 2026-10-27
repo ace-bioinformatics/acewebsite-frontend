@@ -26,21 +26,35 @@ function StatBand({ stats }) {
   )
 }
 
-export default function PartnersPage({ partners, collaborators }) {
+// Training Site documents carry an image + host institution; map them onto the partner card / map pin shape.
+function toPartnerShape(sites) {
+  return (sites || []).map((s) => ({
+    _id: s._id,
+    name: s.name,
+    logo: s.image,
+    country: s.country,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    role: s.institution,
+    website: s.website,
+    description: s.description,
+  }))
+}
+
+export default function PartnersPage({ partners, collaborators, trainingSites: sites }) {
   const { t } = useI18n()
 
-  const beneficiaries = (partners || []).filter((p) => (p.group || 'beneficiary') === 'beneficiary')
-  // `partnerSite` is the stored value for training sites (see edctpConsortiumPartner schema)
-  const trainingSites = (partners || []).filter((p) => p.group === 'partnerSite' || p.group === 'trainingSite')
+  const beneficiaries = partners || []
+  const trainingSites = useMemo(() => toPartnerShape(sites), [sites])
 
   const { totalCollaborators, countryCount, continentCount } = useMemo(() => {
     const all = [...(partners || []), ...(collaborators || [])]
-    const countries = new Set(all.map((p) => p.country?.trim().toLowerCase()).filter(Boolean))
+    const countries = new Set([...all, ...trainingSites].map((p) => p.country?.trim().toLowerCase()).filter(Boolean))
     const continents = new Set(
       [...countries].map((c) => getContinent(c)).filter(Boolean)
     )
     return { totalCollaborators: all.length, countryCount: countries.size, continentCount: continents.size }
-  }, [partners, collaborators])
+  }, [partners, collaborators, trainingSites])
 
   const stats = [
     { value: totalCollaborators, label: t('partners.statCollaborators') },
@@ -62,7 +76,7 @@ export default function PartnersPage({ partners, collaborators }) {
 
       <div className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <PartnersSection partners={partners} collaborators={collaborators} />
+          <PartnersSection partners={beneficiaries} collaborators={collaborators} trainingSites={trainingSites} />
         </div>
       </div>
     </>

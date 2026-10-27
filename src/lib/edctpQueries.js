@@ -43,8 +43,8 @@ export const edctpDataCollaboratorsQuery = `*[_type == "edctpDataCollaborator"] 
   _id, name, "logo": logo{ "url": asset->url }, country, latitude, longitude, role, website, description
 }`
 
-export const edctpTrainingSitesQuery = `*[_type == "edctpTrainingSite"]{
-  _id, name, institution, country,
+export const edctpTrainingSitesQuery = `*[_type == "edctpTrainingSite"] | order(name asc){
+  _id, name, institution, country, latitude, longitude, website,
   "image": image{ "url": asset->url },
   description
 }`
