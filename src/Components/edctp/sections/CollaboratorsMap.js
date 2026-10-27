@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet'
+import { Fragment, useEffect, useMemo, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Polyline, CircleMarker, useMap, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useI18n } from '@/lib/idmI18n'
@@ -11,7 +11,8 @@ const AFRICA_ZOOM = 3
 const BADGE_W = 64
 const BADGE_H = 52
 const TAIL = 8
-const DECLUTTER_OFFSET_DEG = 1.1
+const BADGE_GAP = 6 // min px between neighbouring badges
+const LAYOUT_ITERATIONS = 200
 
 const GROUPS = [
   { key: 'beneficiaries', color: '#003366', labelKey: 'partners.beneficiaries' },
@@ -55,33 +56,81 @@ function resolveCoords(item) {
   return getCountryCoords(item.country)
 }
 
-// Multiple orgs sharing a country-centroid fallback would otherwise stack
-// exactly on top of each other — fan them out in a small circle so every
-// logo stays visible.
-function declutter(pinned) {
-  const byRoundedCoord = new Map()
-  pinned.forEach((p) => {
-    const key = `${p.coords[0].toFixed(1)},${p.coords[1].toFixed(1)}`
-    if (!byRoundedCoord.has(key)) byRoundedCoord.set(key, [])
-    byRoundedCoord.get(key).push(p)
+// Badges are a fixed size on screen, so overlap depends on zoom: lay them out
+// in pixel space and redo it on every zoom. Each badge starts at its true
+// location; overlapping pairs are pushed apart along their shallower overlap
+// axis until no two badges overlap. Displaced badges get a leader line back
+// to a dot at the true location (see DeclutteredMarkers).
+function layoutBadges(anchors) {
+  const w = BADGE_W + BADGE_GAP
+  const h = BADGE_H + TAIL + BADGE_GAP
+  const pos = anchors.map((a, i) => {
+    // Seed exact duplicates (e.g. country-centroid fallbacks) in distinct directions
+    const angle = (2 * Math.PI * i) / anchors.length
+    return { x: a.x + Math.cos(angle) * 0.5, y: a.y + Math.sin(angle) * 0.5 }
   })
 
-  const result = []
-  byRoundedCoord.forEach((group) => {
-    if (group.length === 1) {
-      result.push(group[0])
-      return
+  for (let iter = 0; iter < LAYOUT_ITERATIONS; iter++) {
+    let moved = false
+    for (let i = 0; i < pos.length; i++) {
+      for (let j = i + 1; j < pos.length; j++) {
+        const dx = pos[j].x - pos[i].x
+        const dy = pos[j].y - pos[i].y
+        const overlapX = w - Math.abs(dx)
+        const overlapY = h - Math.abs(dy)
+        if (overlapX <= 0 || overlapY <= 0) continue
+        moved = true
+        // Separate along the axis that needs the smaller push, half each way
+        if (overlapX / w < overlapY / h) {
+          const push = (overlapX / 2) * (dx >= 0 ? 1 : -1)
+          pos[i].x -= push
+          pos[j].x += push
+        } else {
+          const push = (overlapY / 2) * (dy >= 0 ? 1 : -1)
+          pos[i].y -= push
+          pos[j].y += push
+        }
+      }
     }
-    const [baseLat, baseLng] = group[0].coords
-    group.forEach((p, i) => {
-      const angle = (2 * Math.PI * i) / group.length
-      result.push({
-        ...p,
-        coords: [baseLat + DECLUTTER_OFFSET_DEG * Math.sin(angle), baseLng + DECLUTTER_OFFSET_DEG * Math.cos(angle)],
-      })
+    if (!moved) break
+  }
+  return pos
+}
+
+function DeclutteredMarkers({ pinned }) {
+  const map = useMap()
+  const [zoom, setZoom] = useState(() => map.getZoom())
+  useMapEvents({ zoomend: () => setZoom(map.getZoom()) })
+
+  const placed = useMemo(() => {
+    const anchors = pinned.map((p) => map.project(p.coords, zoom))
+    const positions = layoutBadges(anchors)
+    return pinned.map((p, i) => {
+      const display = map.unproject(positions[i], zoom)
+      const displaced = anchors[i].distanceTo(positions[i]) > 2
+      return { ...p, display: [display.lat, display.lng], displaced }
     })
+  }, [map, pinned, zoom])
+
+  return placed.map(({ item, coords, display, displaced, group }) => {
+    const key = `${group.key}-${item._id}`
+    return (
+      <Fragment key={key}>
+        {displaced && (
+          <>
+            <Polyline positions={[coords, display]} pathOptions={{ color: group.color, weight: 1.5, opacity: 0.8, dashArray: '3 3' }} interactive={false} />
+            <CircleMarker center={coords} radius={4} pathOptions={{ color: 'white', weight: 1.5, fillColor: group.color, fillOpacity: 1 }} interactive={false} />
+          </>
+        )}
+        <Marker position={display} icon={logoIcon(item, group)}>
+          <Popup>
+            <p className="font-semibold text-sm text-gray-900">{item.name}</p>
+            {item.country && <p className="text-xs text-gray-500">{item.country}</p>}
+          </Popup>
+        </Marker>
+      </Fragment>
+    )
   })
-  return result
 }
 
 function FitToMarkers({ points }) {
@@ -139,7 +188,7 @@ export default function CollaboratorsMap({ beneficiaries = [], collaborators = [
         .map((item) => ({ item, coords: resolveCoords(item), group }))
         .filter((entry) => entry.coords)
     )
-    return declutter(withCoords)
+    return withCoords
   }, [beneficiaries, collaborators, trainingSites])
 
   const allPoints = pinned.map((p) => p.coords)
@@ -191,14 +240,7 @@ export default function CollaboratorsMap({ beneficiaries = [], collaborators = [
           <GeoJSON data={partnerCountryFeatures} style={() => COUNTRY_BASE_STYLE} onEachFeature={onEachCountry} />
         )}
 
-        {pinned.map(({ item, coords, group }) => (
-          <Marker key={`${group.key}-${item._id}`} position={coords} icon={logoIcon(item, group)}>
-            <Popup>
-              <p className="font-semibold text-sm text-gray-900">{item.name}</p>
-              {item.country && <p className="text-xs text-gray-500">{item.country}</p>}
-            </Popup>
-          </Marker>
-        ))}
+        <DeclutteredMarkers pinned={pinned} />
       </MapContainer>
 
       <div className="absolute bottom-4 left-4 z-[1000] rounded-xl bg-white/95 backdrop-blur-sm shadow-lg px-4 py-3 flex flex-col gap-1.5">
